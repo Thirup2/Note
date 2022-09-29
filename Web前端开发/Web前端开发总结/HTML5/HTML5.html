@@ -486,6 +486,178 @@ Today was warm and sunny.
 </code></pre>
 <p>&#x6B64;&#x4F8B;&#x4E2D;&#x7684;&#x811A;&#x672C;&#x7A0B;&#x5E8F;&#x627E;&#x51FA;&#x6240;&#x6709;&#x5C5E;&#x4E8E;<code>otherclass</code>&#x7C7B;&#x7684;&#x5143;&#x7D20;&#x5E76;&#x5BF9;&#x5176;&#x8BBE;&#x7F6E;&#x4E86;&#x4E00;&#x4E9B;&#x6837;&#x5F0F;&#x3002;</p>
 <h2 id="4-contenteditable&#x5C5E;&#x6027;">4. <code>contenteditable</code>&#x5C5E;&#x6027;</h2>
+<p><code>contenteditable</code>&#x5C5E;&#x6027;&#x662F;HTML5&#x4E2D;&#x65B0;&#x589E;&#x52A0;&#x7684;&#x5C5E;&#x6027;&#xFF0C;&#x5176;&#x7528;&#x9014;&#x662F;&#x8BA9;&#x7528;&#x6237;&#x80FD;&#x591F;&#x4FEE;&#x6539;&#x9875;&#x9762;&#x4E0A;&#x7684;&#x5185;&#x5BB9;&#x3002;</p>
+<pre><code class="lang-html"><span class="hljs-meta">&lt;!DOCTYPE HTML&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Example<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">contenteditable</span>=<span class="hljs-string">&quot;true&quot;</span>&gt;</span>
+            It is raining right now.
+        <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre>
+<p>&#x6B64;&#x4F8B;&#x628A;<code>contenteditable</code>&#x5C5E;&#x6027;&#x7528;&#x5728;&#x4E00;&#x4E2A;<code>p</code>&#x5143;&#x7D20;&#x8EAB;&#x4E0A;&#x3002;&#x8BE5;&#x5C5E;&#x6027;&#x8BBE;&#x7F6E;&#x4E3A;<code>true</code>&#x65F6;&#x7528;&#x6237;&#x53EF;&#x4EE5;&#x7F16;&#x8F91;&#x5143;&#x7D20;&#x5185;&#x5BB9;&#xFF0C;&#x8BBE;&#x7F6E;&#x4E3A;<code>false</code>&#x65F6;&#x5219;&#x7981;&#x6B62;&#x7F16;&#x8F91;&#xFF0C;&#x5982;&#x679C;&#x672A;&#x8BBE;&#x5B9A;&#x5176;&#x503C;&#xFF0C;&#x90A3;&#x4E48;&#x5143;&#x7D20;&#x4F1A;&#x4ECE;&#x7236;&#x5143;&#x7D20;&#x5904;&#x7EE7;&#x627F;&#x8BE5;&#x5C5E;&#x6027;&#x7684;&#x503C;&#x3002;</p>
+<h2 id="5-contextmenu&#x5C5E;&#x6027;">5. <code>contextmenu</code>&#x5C5E;&#x6027;</h2>
+<p><code>contextmenu</code>&#x5C5E;&#x6027;&#x7528;&#x6765;&#x4E3A;&#x5143;&#x7D20;&#x8BBE;&#x5B9A;&#x5FEB;&#x6377;&#x83DC;&#x5355;&#x3002;&#x8FD9;&#x79CD;&#x83DC;&#x5355;&#x4F1A;&#x5728;&#x53D7;&#x5230;&#x89E6;&#x53D1;&#x7684;&#x65F6;&#x5019;&#x5F39;&#x51FA;&#x6765;&#xFF08;Windows&#x662F;&#x9F20;&#x6807;&#x53F3;&#x51FB;&#xFF09;&#x3002;</p>
+<h2 id="6-dir&#x5C5E;&#x6027;">6. <code>dir</code>&#x5C5E;&#x6027;</h2>
+<p><code>dir</code>&#x5C5E;&#x6027;&#x7528;&#x6765;&#x89C4;&#x5B9A;&#x5143;&#x7D20;&#x4E2D;&#x6587;&#x5B57;&#x7684;&#x65B9;&#x5411;&#x3002;&#x5176;&#x6709;&#x6548;&#x503C;&#x6709;&#x4E24;&#x4E2A;&#xFF1A;<strong>ltr</strong>&#xFF08;&#x7528;&#x4E8E;&#x4ECE;&#x5DE6;&#x5230;&#x53F3;&#x7684;&#x6587;&#x5B57;&#xFF09;&#x548C;<strong>rtl</strong>&#xFF08;&#x7528;&#x4E8E;&#x4ECE;&#x53F3;&#x5230;&#x5DE6;&#x7684;&#x6587;&#x5B57;&#xFF09;</p>
+<pre><code class="lang-html"><span class="hljs-meta">&lt;!DOCTYPE HTML&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Example<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">dir</span>=<span class="hljs-string">&quot;rtl&quot;</span>&gt;</span>
+            This is right-to-left
+        <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">dir</span>=<span class="hljs-string">&quot;ltr&quot;</span>&gt;</span>
+            This is left-to-right
+        <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre>
+<h2 id="7-draggable&#x5C5E;&#x6027;">7. <code>draggable</code>&#x5C5E;&#x6027;</h2>
+<p><code>draggable</code>&#x5C5E;&#x6027;&#x662F;HTML5&#x652F;&#x6301;&#x62D6;&#x653E;&#x64CD;&#x4F5C;&#x7684;&#x65B9;&#x5F0F;&#x4E4B;&#x4E00;&#xFF0C;&#x7528;&#x6765;&#x8868;&#x793A;&#x5143;&#x7D20;&#x662F;&#x5426;&#x53EF;&#x88AB;&#x62D6;&#x653E;&#x3002;</p>
+<h2 id="8-dropzone&#x5C5E;&#x6027;">8. <code>dropzone</code>&#x5C5E;&#x6027;</h2>
+<p><code>dropzone</code>&#x5C5E;&#x6027;&#x662F;HTML5&#x652F;&#x6301;&#x62D6;&#x653E;&#x64CD;&#x4F5C;&#x7684;&#x65B9;&#x5F0F;&#x4E4B;&#x4E00;&#xFF0C;&#x4E0E;&#x4E0A;&#x8FF0;<code>draggable</code>&#x5C5E;&#x6027;&#x642D;&#x914D;&#x4F7F;&#x7528;&#x3002;</p>
+<h2 id="9-hidden&#x5C5E;&#x6027;">9. <code>hidden</code>&#x5C5E;&#x6027;</h2>
+<p><code>hidden</code>&#x5C5E;&#x6027;&#x662F;&#x4E2A;&#x5E03;&#x5C14;&#x5C5E;&#x6027;&#xFF0C;&#x8868;&#x793A;&#x76F8;&#x5173;&#x5143;&#x7D20;&#x5F53;&#x524D;&#x6BCB;&#x9700;&#x5173;&#x6CE8;&#x3002;&#x6D4F;&#x89C8;&#x5668;&#x5C06;&#x9690;&#x85CF;&#x76F8;&#x5173;&#x5143;&#x7D20;&#x3002;</p>
+<pre><code class="lang-html"><span class="hljs-meta">&lt;!DOCTYPE HTML&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Example<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+            <span class="hljs-keyword">var</span> toggleHidden = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+                <span class="hljs-keyword">var</span> elem = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;toggle&quot;</span>);
+                <span class="hljs-keyword">if</span> (elem.hasAttribute(<span class="hljs-string">&quot;hidden&quot;</span>)) {
+                    elem.removeAttribute(<span class="hljs-string">&quot;hidden&quot;</span>);
+                } <span class="hljs-keyword">else</span> {
+                    elem.setAttribute(<span class="hljs-string">&quot;hidden&quot;</span>, <span class="hljs-string">&quot;hidden&quot;</span>);
+                }
+            }
+        </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">&quot;toggleHidden()&quot;</span>&gt;</span>
+            Toggle
+        <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">table</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span>Name<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span>City<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>Adam Freeman<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>London<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">tr</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;toggle&quot;</span> <span class="hljs-attr">hidden</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>Joe Smith<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>New York<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>Anne Jones<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>Paris<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">table</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre>
+<h2 id="10-id&#x5C5E;&#x6027;">10. <code>id</code>&#x5C5E;&#x6027;</h2>
+<p><code>id</code>&#x5C5E;&#x6027;&#x7528;&#x6765;&#x7ED9;&#x5143;&#x7D20;&#x5206;&#x914D;&#x4E00;&#x4E2A;&#x552F;&#x4E00;&#x7684;&#x6807;&#x8BC6;&#x7B26;&#x3002;&#x8FD9;&#x79CD;&#x6807;&#x8BC6;&#x7B26;&#x901A;&#x5E38;&#x7528;&#x6765;&#x5C06;&#x6837;&#x5F0F;&#x5E94;&#x7528;&#x5230;&#x5143;&#x7D20;&#x4E0A;&#x6216;&#x5728;JavaScript&#x7A0B;&#x5E8F;&#x4E2D;&#x7528;&#x6765;&#x9009;&#x62E9;&#x5143;&#x7D20;&#x3002;</p>
+<pre><code class="lang-html"><span class="hljs-meta">&lt;!DOCTYPE HTML&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Example<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
+        <span class="hljs-selector-id">#w3clink</span> {
+            <span class="hljs-attribute">background</span>:grey;
+            <span class="hljs-attribute">color</span>:white;
+            <span class="hljs-attribute">padding</span>:<span class="hljs-number">5px</span>;
+            <span class="hljs-attribute">border</span>:thin solid black;
+        }
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;http://apress.com&quot;</span>&gt;</span>Apress web site<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>/&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;w3clink&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;http://w3c.org&quot;</span>&gt;</span>W3C web site<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre>
+<p>&#x4E3A;&#x4E86;&#x6839;&#x636E;<code>id</code>&#x5C5E;&#x6027;&#x503C;&#x5E94;&#x7528;&#x6837;&#x5F0F;&#xFF0C;&#x9700;&#x8981;&#x5728;&#x5B9A;&#x4E49;&#x6837;&#x5F0F;&#x65F6;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x4EE5;<code>#</code>&#x53F7;&#x5F00;&#x5934;&#x540E;&#x63A5;<code>id</code>&#x5C5E;&#x6027;&#x503C;&#x5F97;&#x9009;&#x62E9;&#x5668;&#x3002;</p>
+<p><code>id</code>&#x5C5E;&#x6027;&#x8FD8;&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x5BFC;&#x822A;&#x5230;&#x6587;&#x6863;&#x4E2D;&#x7684;&#x7279;&#x5B9A;&#x4F4D;&#x7F6E;&#x3002;&#x5018;&#x82E5;&#x6709;&#x4E2A;&#x540D;&#x4E3A;<code>example.html</code>&#x7684;&#x6587;&#x6863;&#x4E2D;&#x5305;&#x542B;&#x4E00;&#x4E2A;<code>id</code>&#x5C5E;&#x6027;&#x503C;&#x4E3A;<code>myelement</code>&#x7684;&#x5143;&#x7D20;&#xFF0C;&#x90A3;&#x4E48;&#x4F7F;&#x7528;<code>example.html#myelement</code>&#x8FD9;&#x4E2A;URL&#x5373;&#x53EF;&#x76F4;&#x63A5;&#x5BFC;&#x822A;&#x81F3;&#x8BE5;&#x5143;&#x7D20;&#x3002;</p>
+<h2 id="11-lang&#x5C5E;&#x6027;">11. <code>lang</code>&#x5C5E;&#x6027;</h2>
+<p><code>lang</code>&#x5C5E;&#x6027;&#x7528;&#x4E8E;&#x8BF4;&#x660E;&#x5143;&#x7D20;&#x5185;&#x5BB9;&#x4F7F;&#x7528;&#x7684;&#x8BED;&#x8A00;&#x3002;</p>
+<pre><code class="lang-html"><span class="hljs-meta">&lt;!DOCTYPE HTML&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Example<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;</span>
+            Hello - how are you?
+        <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;zh-CN&quot;</span>&gt;</span>
+            &#x4F60;&#x597D;&#xFF0C;&#x8FD1;&#x6765;&#x5982;&#x4F55;&#xFF1F;
+        <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre>
+<p><code>lang</code>&#x5C5E;&#x6027;&#x503C;&#x5FC5;&#x987B;&#x4F7F;&#x7528;&#x6709;&#x6548;&#x7684;ISO&#x8BED;&#x8A00;&#x4EE3;&#x7801;&#x3002;</p>
+<p>&#x4F7F;&#x7528;<code>lang</code>&#x5C5E;&#x6027;&#x7684;&#x76EE;&#x7684;&#x662F;&#x8BA9;&#x6D4F;&#x89C8;&#x5668;&#x8C03;&#x6574;&#x5176;&#x8868;&#x8FBE;&#x5143;&#x7D20;&#x5185;&#x5BB9;&#x7684;&#x65B9;&#x5F0F;&#x3002;</p>
+<p><code>lang</code>&#x5C5E;&#x6027;&#x8FD8;&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x9009;&#x62E9;&#x6307;&#x5B9A;&#x8BED;&#x8A00;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x4EE5;&#x4FBF;&#x53EA;&#x663E;&#x793A;&#x7528;&#x6237;&#x6240;&#x9009;&#x8BED;&#x8A00;&#x7684;&#x5185;&#x5BB9;&#x6216;&#x5BF9;&#x5176;&#x5E94;&#x7528;&#x6837;&#x5F0F;&#x3002;</p>
+<h2 id="12-spellcheck&#x5C5E;&#x6027;">12. <code>spellcheck</code>&#x5C5E;&#x6027;</h2>
+<p><code>spellcheck</code>&#x5C5E;&#x6027;&#x7528;&#x6765;&#x8868;&#x660E;&#x6D4F;&#x89C8;&#x5668;&#x662F;&#x5426;&#x5E94;&#x8BE5;&#x5BF9;&#x5143;&#x7D20;&#x7684;&#x5185;&#x5BB9;&#x8FDB;&#x884C;&#x62FC;&#x5199;&#x68C0;&#x67E5;&#x3002;&#x8FD9;&#x4E2A;&#x5C5E;&#x6027;&#x53EA;&#x6709;&#x7528;&#x5728;&#x7528;&#x6237;&#x53EF;&#x4EE5;&#x7F16;&#x8F91;&#x7684;&#x5143;&#x7D20;&#x4E0A;&#x65F6;&#x624D;&#x6709;&#x610F;&#x4E49;&#x3002;</p>
+<pre><code class="lang-html"><span class="hljs-meta">&lt;!DOCTYPE HTML&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Example<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">textarea</span> <span class="hljs-attr">spellcheck</span>=<span class="hljs-string">&quot;true&quot;</span>&gt;</span>This is some mispelled text<span class="hljs-tag">&lt;/<span class="hljs-name">textarea</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre>
+<p><code>spellcheck</code>&#x5C5E;&#x6027;&#x53EF;&#x4EE5;&#x63A5;&#x53D7;&#x7684;&#x503C;&#x6709;&#x4E24;&#x4E2A;&#xFF1A;<code>true</code>&#x548C;<code>false</code>&#x3002;&#x81F3;&#x4E8E;&#x62FC;&#x5199;&#x68C0;&#x67E5;&#x7684;&#x5B9E;&#x73B0;&#x65B9;&#x5F0F;&#x5219;&#x56E0;&#x6D4F;&#x89C8;&#x5668;&#x800C;&#x5F02;&#x3002;</p>
+<h2 id="13-style&#x5C5E;&#x6027;">13. <code>style</code>&#x5C5E;&#x6027;</h2>
+<p><code>style</code>&#x5C5E;&#x6027;&#x7528;&#x6765;&#x76F4;&#x63A5;&#x5728;&#x5143;&#x7D20;&#x8EAB;&#x4E0A;&#x5B9A;&#x4E49;CSS&#x6837;&#x5F0F;&#x3002;</p>
+<pre><code class="lang-html"><span class="hljs-meta">&lt;!DOCTYPE HTML&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Example<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;http://apress.com&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;background: grey; color: white; padding: 10px&quot;</span>&gt;</span>
+            Visit the Apress site
+        <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre>
+<h2 id="14-tabindex&#x5C5E;&#x6027;">14. <code>tabindex</code>&#x5C5E;&#x6027;</h2>
+<p>HTML&#x9875;&#x9762;&#x4E0A;&#x7684;&#x952E;&#x76D8;&#x7126;&#x70B9;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x6309;<code>Tab</code>&#x952E;&#x5728;&#x5404;&#x5143;&#x7D20;&#x4E4B;&#x95F4;&#x5207;&#x6362;&#x3002;</p>
+<p>&#x4F7F;&#x7528;<code>tabindex</code>&#x5C5E;&#x6027;&#x53EF;&#x4EE5;&#x6539;&#x53D8;&#x9ED8;&#x8BA4;&#x7684;&#x8F6C;&#x79FB;&#x987A;&#x5E8F;&#x3002;</p>
+<pre><code class="lang-html"><span class="hljs-meta">&lt;!DOCTYPE HTML&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Example<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">form</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">label</span>&gt;</span>Name: <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;name&quot;</span> <span class="hljs-attr">tabindex</span>=<span class="hljs-string">&quot;1&quot;</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">p</span>/&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">label</span>&gt;</span>City: <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;city&quot;</span> <span class="hljs-attr">tabindex</span>=<span class="hljs-string">&quot;-1&quot;</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">p</span>/&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">label</span>&gt;</span>Country: <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;country&quot;</span> <span class="hljs-attr">tabindex</span>=<span class="hljs-string">&quot;2&quot;</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">p</span>/&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span> <span class="hljs-attr">tabindex</span>=<span class="hljs-string">&quot;3&quot;</span> /&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre>
+<p><code>tabindex</code>&#x5C5E;&#x6027;&#x7684;&#x503C;&#x4E3A;1&#x7684;&#x5143;&#x7D20;&#x4F1A;&#x7B2C;&#x4E00;&#x4E2A;&#x88AB;&#x9009;&#x4E2D;&#x3002;&#x7136;&#x540E;&#x662F;&#x503C;&#x4E3A;2&#x7684;&#x5143;&#x7D20;&#xFF0C;&#x4EE5;&#x6B64;&#x7C7B;&#x63A8;&#x3002;&#x503C;&#x4E3A;-1&#x7684;&#x5143;&#x7D20;&#x4E0D;&#x4F1A;&#x88AB;&#x9009;&#x4E2D;&#x3002;</p>
+<h2 id="15-title&#x5C5E;&#x6027;">15. <code>title</code>&#x5C5E;&#x6027;</h2>
+<p><code>title</code>&#x5C5E;&#x6027;&#x63D0;&#x4F9B;&#x4E86;&#x5143;&#x7D20;&#x7684;&#x989D;&#x5916;&#x4FE1;&#x606F;&#x3002;</p>
+<pre><code class="lang-html"><span class="hljs-meta">&lt;!DOCTYPE HTML&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Example<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">title</span>=<span class="hljs-string">&quot;Apress Publishing&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;http://apress.com&quot;</span>&gt;</span>Visit the Apress site<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre>
 
                                 
                                 </section>
@@ -529,7 +701,7 @@ Today was warm and sunny.
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"一. HTML5","level":"1.2","depth":1,"next":{"title":"二. CSS3","level":"1.3","depth":1,"path":"CSS3/CSS3.md","ref":"CSS3/CSS3.md","articles":[]},"previous":{"title":"简介","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters-small"],"pluginsConfig":{"expandable-chapters-small":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"HTML5/HTML5.md","mtime":"2022-09-28T15:13:11.162Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-09-28T15:15:34.401Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"一. HTML5","level":"1.2","depth":1,"next":{"title":"二. CSS3","level":"1.3","depth":1,"path":"CSS3/CSS3.md","ref":"CSS3/CSS3.md","articles":[]},"previous":{"title":"简介","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters-small"],"pluginsConfig":{"expandable-chapters-small":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"HTML5/HTML5.md","mtime":"2022-09-29T02:36:34.581Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-09-29T03:25:10.377Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
