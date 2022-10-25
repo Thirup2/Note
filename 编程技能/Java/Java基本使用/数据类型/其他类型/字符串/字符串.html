@@ -351,6 +351,64 @@
             
         </li>
     
+        <li class="chapter " data-level="1.6" data-path="../../../数据抽象/数据抽象.html">
+            
+                <a href="../../../数据抽象/数据抽象.html">
+            
+                    
+                    数据抽象
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../../../数据抽象/创建抽象数据类型/创建抽象数据类型.html">
+            
+                <a href="../../../数据抽象/创建抽象数据类型/创建抽象数据类型.html">
+            
+                    
+                    创建抽象数据类型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../../../数据抽象/使用抽象数据类型/使用抽象数据类型.html">
+            
+                <a href="../../../数据抽象/使用抽象数据类型/使用抽象数据类型.html">
+            
+                    
+                    使用抽象数据类型
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.3" data-path="../../../数据抽象/数据类型的设计/数据类型的设计.html">
+            
+                <a href="../../../数据抽象/数据类型的设计/数据类型的设计.html">
+            
+                    
+                    数据类型的设计
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
 
     
 
@@ -466,6 +524,61 @@
 <p>&#x4E0A;&#x8FF0;&#x7684;<code>toString</code>&#x65B9;&#x6CD5;&#x7528;&#x5F97;&#x5F88;&#x5C11;, &#x56E0;&#x4E3A;&#x5728;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x8FDE;&#x63A5;&#x4E2D;, &#x4F1A;&#x5C06;&#x5176;&#x4ED6;&#x4EFB;&#x610F;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x7684;&#x503C;&#x8F6C;&#x6362;&#x4E3A;&#x5B57;&#x7B26;&#x4E32;, &#x5982;&#x679C;&#x53EA;&#x60F3;&#x8981;&#x5C06;&#x4E00;&#x4E2A;&#x503C;&#x8F6C;&#x6362;&#x4E3A;&#x5B57;&#x7B26;&#x4E32;&#x800C;&#x4E0D;&#x8FDE;&#x63A5;&#x5176;&#x4ED6;&#x5185;&#x5BB9;, &#x5219;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x7A7A;&#x5B57;&#x7B26;&#x4E32;&#x8FDE;&#x63A5;&#x7684;&#x65B9;&#x5F0F;:</p>
 <pre><code class="lang-java"><span class="hljs-string">&quot;&quot;</span> + <span class="hljs-number">50</span> = <span class="hljs-string">&quot;50&quot;</span>;
 </code></pre>
+<h2 id="4-&#x5B57;&#x7B26;&#x4E32;api&#xFF08;&#x90E8;&#x5206;&#xFF09;">4. &#x5B57;&#x7B26;&#x4E32;API&#xFF08;&#x90E8;&#x5206;&#xFF09;</h2>
+<table>
+<thead>
+<tr>
+<th>&#x65B9;&#x6CD5;</th>
+<th>&#x6548;&#x679C;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>String()</code></td>
+<td>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x7A7A;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x53EF;&#x76F4;&#x63A5;&#x4F7F;&#x7528;<code>String s = &quot;a string&quot;;</code>&#x7684;&#x65B9;&#x5F0F;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;</td>
+</tr>
+<tr>
+<td><code>int length()</code></td>
+<td>&#x5B57;&#x7B26;&#x4E32;&#x957F;&#x5EA6;</td>
+</tr>
+<tr>
+<td><code>int charAt(int i)</code></td>
+<td>&#x7B2C;<code>i</code>&#x4E2A;&#x5B57;&#x7B26;</td>
+</tr>
+<tr>
+<td><code>int indexOf(String p)</code></td>
+<td><code>p</code>&#x7B2C;&#x4E00;&#x6B21;&#x51FA;&#x73B0;&#x7684;&#x4F4D;&#x7F6E;&#xFF08;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x5219;&#x8FD4;&#x56DE;-1&#xFF09;</td>
+</tr>
+<tr>
+<td><code>int indexOf(String p, int i)</code></td>
+<td><code>p</code>&#x5728;&#x7B2C;<code>i</code>&#x4E2A;&#x5B57;&#x7B26;&#x540E;&#x7B2C;&#x4E00;&#x6B21;&#x51FA;&#x73B0;&#x7684;&#x4F4D;&#x7F6E;&#xFF08;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x5219;&#x8FD4;&#x56DE;-1&#xFF09;</td>
+</tr>
+<tr>
+<td><code>String concat(String t)</code></td>
+<td>&#x5C06;<code>t</code>&#x9644;&#x5728;&#x8BE5;&#x5B57;&#x7B26;&#x4E32;&#x672B;&#x5C3E;&#xFF0C;&#x53EF;&#x4F7F;&#x7528;<code>+</code>&#x8FD0;&#x7B97;&#x7B26;&#x7684;&#x65B9;&#x5F0F;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;</td>
+</tr>
+<tr>
+<td><code>String substring(int i, int j)</code></td>
+<td>&#x8BE5;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x5B50;&#x5B57;&#x7B26;&#x4E32;&#xFF08;&#x7B2C;<code>i</code>&#x4E2A;&#x5B57;&#x7B26;&#x8D77;<code>j</code>&#x4E2A;&#x5B57;&#x7B26;&#xFF09;</td>
+</tr>
+<tr>
+<td><code>String[] split(String delim)</code></td>
+<td>&#x4F7F;&#x7528;<code>delim</code>&#x5206;&#x9694;&#x7B26;&#x5207;&#x5206;&#x5B57;&#x7B26;&#x4E32;</td>
+</tr>
+<tr>
+<td><code>int compareTo(String t)</code></td>
+<td>&#x6BD4;&#x8F83;&#x5B57;&#x7B26;&#x4E32;</td>
+</tr>
+<tr>
+<td><code>boolean equals(String t)</code></td>
+<td>&#x8BE5;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x503C;&#x548C;<code>t</code>&#x7684;&#x503C;&#x662F;&#x5426;&#x76F8;&#x540C;</td>
+</tr>
+<tr>
+<td><code>int hashCode()</code></td>
+<td>&#x6563;&#x5217;&#x503C;</td>
+</tr>
+</tbody>
+</table>
 
                                 
                                 </section>
@@ -509,7 +622,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"2. 字符串","level":"1.2.2.2","depth":3,"next":{"title":"语句","level":"1.3","depth":1,"path":"语句/语句.md","ref":"语句/语句.md","articles":[{"title":"一. 声明语句","level":"1.3.1","depth":2,"path":"语句/声明语句/声明语句.md","ref":"语句/声明语句/声明语句.md","articles":[]},{"title":"二. 赋值语句","level":"1.3.2","depth":2,"path":"语句/赋值语句/赋值语句.md","ref":"语句/赋值语句/赋值语句.md","articles":[]},{"title":"三. 条件语句","level":"1.3.3","depth":2,"path":"语句/条件语句/条件语句.md","ref":"语句/条件语句/条件语句.md","articles":[]},{"title":"四. 循环语句","level":"1.3.4","depth":2,"path":"语句/循环语句/循环语句.md","ref":"语句/循环语句/循环语句.md","articles":[]},{"title":"五. 跳转语句","level":"1.3.5","depth":2,"path":"语句/跳转语句/跳转语句.md","ref":"语句/跳转语句/跳转语句.md","articles":[]}]},"previous":{"title":"1. 数组","level":"1.2.2.1","depth":3,"path":"数据类型/其他类型/数组/数组.md","ref":"数据类型/其他类型/数组/数组.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters-small"],"pluginsConfig":{"expandable-chapters-small":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"数据类型/其他类型/字符串/字符串.md","mtime":"2022-10-09T12:35:45.901Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-10-09T13:27:26.930Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"2. 字符串","level":"1.2.2.2","depth":3,"next":{"title":"语句","level":"1.3","depth":1,"path":"语句/语句.md","ref":"语句/语句.md","articles":[{"title":"一. 声明语句","level":"1.3.1","depth":2,"path":"语句/声明语句/声明语句.md","ref":"语句/声明语句/声明语句.md","articles":[]},{"title":"二. 赋值语句","level":"1.3.2","depth":2,"path":"语句/赋值语句/赋值语句.md","ref":"语句/赋值语句/赋值语句.md","articles":[]},{"title":"三. 条件语句","level":"1.3.3","depth":2,"path":"语句/条件语句/条件语句.md","ref":"语句/条件语句/条件语句.md","articles":[]},{"title":"四. 循环语句","level":"1.3.4","depth":2,"path":"语句/循环语句/循环语句.md","ref":"语句/循环语句/循环语句.md","articles":[]},{"title":"五. 跳转语句","level":"1.3.5","depth":2,"path":"语句/跳转语句/跳转语句.md","ref":"语句/跳转语句/跳转语句.md","articles":[]}]},"previous":{"title":"1. 数组","level":"1.2.2.1","depth":3,"path":"数据类型/其他类型/数组/数组.md","ref":"数据类型/其他类型/数组/数组.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["expandable-chapters-small"],"pluginsConfig":{"expandable-chapters-small":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"数据类型/其他类型/字符串/字符串.md","mtime":"2022-10-22T06:53:48.186Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2022-10-25T11:21:51.919Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>
