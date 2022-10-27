@@ -1,4 +1,3 @@
-* [简介](README.md)
 * [一. HTML5](HTML5/HTML5.md)
     * [1. 总览](HTML5/总览/总览.md)
     * [2. 创建HTML文档](HTML5/创建HTML文档/创建HTML文档.md)
