@@ -1,5 +1,4 @@
-* [简介](README.md)
-* [SELECT](SELECT/SELECT.md)
+* SELECT
     * [一. 检索](SELECT/检索/检索.md)
     * [二. 过滤](SELECT/过滤/过滤.md)
     * [三. 创建计算字段](SELECT/创建计算字段/创建计算字段.md)
@@ -12,7 +11,7 @@
 * [INSERT](INSERT/INSERT.md)
 * [UPDATE](UPDATE/UPDATE.md)
 * [DELETE](DELETE/DELETE.md)
-* [其他](其他/其他.md)
+* 其他
     * [一. 创建和操纵表](其他/创建和操纵表/创建和操纵表.md)
     * [二. 使用视图](其他/使用视图/使用试图.md)
     * [三. 使用存储过程](其他/使用存储过程/使用存储过程.md)

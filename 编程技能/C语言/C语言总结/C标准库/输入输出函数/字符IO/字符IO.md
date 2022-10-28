@@ -20,6 +20,7 @@ int putchar(int character);
 
 # 二. 字符I/O宏
 `fgetc`和`fputc`都是函数
+
 `getc`、`putc`、`getchar`和`putchar`都是通过`#define`指令定义的宏
 
 # 三. 撤销字符I/O

@@ -1,2 +1,3 @@
-# Introduction
+主要内容是SQL命令的总结
 
+参考书籍：《SQL必知必会》
