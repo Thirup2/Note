@@ -12,22 +12,24 @@
 | `fstream`  | `ifstream`，`wifstream`：从文件读取数据<br />`ofstream`，`wofstream`：向文件写入数据<br />`fstream`，`wfstream`：读写文件 |
 | `sstream`  | `istringstream`，`wistringstream`：从`string`读取数据<br />`ostringstream`，`wostringstream`：向`string`写入数据<br />`stringstream`，`wstringstream`：读写`string` |
 
+- `<iostream>`：标准IO库，无法使用其中的类型创建对象，只能使用已经准备好的对象进行标准输入输出，如`char`类型的`cin`、`cout`、`cerr`等，以及`wchar_t`类型的`wcin`、`wcout`、`wcerr`等
+- `<fstream>`：文件IO库，可以使用其中的类型创建对象
+
 
 
 ## 2. 读写操作
 
-通过`>>`和`<<`运算符以及`getline`函数进行读写操作，这些操作都需要指定输入输出流的对象，常用的输入输出对象有：
+通过`>>`和`<<`运算符以及`getline`函数进行读写操作，这些操作都需要指定输入输出流的对象。
 
-- `cin`：一个`istream`对象，从标准输入读取数据
-- `cout`：一个`ostream`对象，向标准输出写入数据
-- `cerr`：一个`ostream`对象，通常用于输出程序错误消息，写入到标准错误
-- `clog`：一个`ostream`对象，通常用于输出程序运行时的一般性信息，写入到标准输出
+在标准IO库中，常用的输入输出对象有：`cin`、`cout`、`cerr`、`clog`、`wcin`、`wcout`、`wclog`、`wcerr`；
+
+在文件IO库以及`string`IO库中，需要自行通过库提供的类型及操作创建对应类型的对象。
 
 ### 1）`>>`运算符
 
-通过`>>`运算符可以从一个`istream`对象读取输入数据并保存到右侧运算对象
+通过`>>`运算符可以从一个输入流对象读取输入数据并保存到右侧运算对象
 
-运算符左侧为`istream`对象，右侧为要读取数据的变量
+运算符左侧为输入流对象，右侧为要读取数据的变量
 
 `>>`的结合律从左至右，返回其左侧运算对象，若读取了内容，则返回`true`，否则返回`false`
 
@@ -40,9 +42,9 @@ std::cin >> a >> b;
 
 ### 2) `<<`运算符
 
-通过`<<`运算符可以将右侧运算对象的值写入到左侧的`ostream`对象中
+通过`<<`运算符可以将右侧运算对象的值写入到左侧的输出流对象中
 
-运算符左侧为`ostream`对象，右侧对象提供写入内容
+运算符左侧为输出流对象，右侧对象提供写入内容
 
 `<<`的结合律从左至右，返回其左侧运算对象
 
@@ -56,11 +58,11 @@ std::cout << "a = " << a << "; b = " << b << std::endl;
 
 ### 3）`getline`函数
 
-通过`getline`函数可以一次读取一行内容到`istream`对象中（如果是`cin`则只能一次读取一个单词，遇到空白就结束）
+通过`getline`函数可以一次读取一行内容到输入流对象中（如果是其他输入流对象则只能一次读取一个单词，遇到空白就结束）
 
-`getline`函数的参数是一个输入流，一个`string`对象；
+`getline`函数的参数是一个输入流，一个`string`或`wstring`对象
 
-`getline`函数的效果是从输入流读取一行内容（如果一开始就是一个换行符，则是一个空串），然后将其保存到那个`string`对象中
+`getline`函数的效果是从输入流读取一行内容（如果一开始就是一个换行符，则是一个空串），然后将其保存到那个`string`或`wstring`对象中
 
 `getline`函数的返回值是参数中的输入流，若读取了内容，则返回`true`，若未读取内容，则返回`false`
 
@@ -88,11 +90,9 @@ out2 = print(out2);			// 错误：不能拷贝流对象
 
 ## 3. IO类型间的关系
 
-我们可以通过`iostream`中的对象`cin`、`cout`等以及`>>`、`<<`和`getline`来实现标准输入输出。
+**IO对象的具体IO类型可能不同，但都可以使用`<<`、`>>`和`getline`函数来进行读写操作。**
 
-而类型`ifstream`和`istringstream`都继承自`istream`；`ofstream`和`ostringstream`都继承自`ostream`。
-
-所有我们可以用相同的方法来实现文件读取和`string`读取，只需要使用对应的类中的对象即可。
+因为在所有的IO类型中，类型`ifstream`和`istringstream`都继承自`istream`；`ofstream`和`ostringstream`都继承自`ostream`，所以我们可以用相同的方法来实现文件读取和`string`读取，只需要使用对应的类型即可。
 
 
 
