@@ -1,3 +1,5 @@
-# Headline
+主要是对编译原理的总结。
 
-> An awesome project.
+**参考书籍**：
+
+- 《编译原理》
