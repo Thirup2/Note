@@ -90,7 +90,19 @@ template<
 | [rbegin、crbegin](https://zh.cppreference.com/w/cpp/container/vector/rbegin) | 返回指向起始的逆向迭代器 |
 | [rend、crend](https://zh.cppreference.com/w/cpp/container/vector/rend) | 返回指向末尾的逆向迭代器 |
 
-
+> **迭代器失效**：
+>
+> | 操作                | 失效    |
+> | ------------------- | ------- |
+> | 所有只读操作        | 决不    |
+> | `swap`、`std::swap` | `end()` |
+> |`clear`、`operator=`、`assign`	| 始终 |
+> |`reserve`、`shrink_to_fit` | `vector`更改容量时全部失效。否则不失效。|
+> |`erase` | 被擦除元素及之后的所有元素（包括 `end()`）。|
+> |`push_back`、`emplace_back` | `vector`更改容量时全部失效。否则只有 end()。|
+> |`insert`、`emplace` | `vector`更改容量时全部失效。否则只有在或于插入点后者（包括`end()`）。|
+> |`resize` | `vector`更改容量时全部失效。否则只有`end()`与被擦除元素。|
+> |`pop_back` | 被擦除元素及`end()`。|
 
 ### 4）容量
 
