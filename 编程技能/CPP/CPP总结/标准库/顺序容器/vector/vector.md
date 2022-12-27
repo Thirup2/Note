@@ -1,103 +1,129 @@
 # 一. 简介
 
-`vector`表示对象的集合，其中所有对象的类型都相同。
-
-`vector`是一个**类模板**，需要**实例化**才能使用，`vector`实例化的方法如下：
+## 1. 使用准备
 
 ```c++
-vector<int> ivec;				// ivec保存int类型的对象
-vector<Sales_item> Sales_vec;	 // Sales_vec保存Sales_item类型的对象
-vector<vector<string>> file;	 // file保存vector<string>类型的对象，每个元素也是一个集合，保存string类型的对象
+#include <vector>       // vector类头文件
+using std::vector;      // vector类型说明符
+using std::swap;        // swap函数
 ```
 
 
 
-# 二. 使用准备
+## 2. 性能
+
+- 随机访问：常数$O(1)$
+- 在末尾插入或移除元素：均摊常数$O(1)$
+- 插入或移除元素：与到 vector 结尾的距离成线性$O(n)$
+
+
+
+# 二. vector类
+
+## 1. 类定义
 
 ```c++
-#include <vector>		// vector类头文件
-using std::vector;		// vector类型说明符
+template<
+	class T,
+	class Allocator = std::allocator<T>
+> class vector;
 ```
 
+**模板形参**：
 
-
-# 三. 定义和初始化
-
-`vector`对象的定义及初始化方法如下：
-
-- `T`：一种类型
-
-| 方式                           | 效果                                                         |
-| ------------------------------ | ------------------------------------------------------------ |
-| `vector<T> v1`                 | 默认初始化，`v1`是一个空`vector`                             |
-| `vector<T> v2(v1)`             | 将`v1`拷贝到`v2`                                             |
-| `vector<T> v2 = v1`            | 将`v1`拷贝到`v2`                                             |
-| `vector<T> v3(n, val)`         | 用`n`个`val`初始化`v3`                                       |
-| `vector<T> v4(n)`              | 用`n`个重复执行了值初始化的对象初始化`v4`(即每个元素执行默认初始化) |
-| `vector<T> v5{a, b, c...}`     | 用列表初始值初始化`v5`                                       |
-| `vector<T> v5 = {a, b, c...}`  | 用列表初始值初始化`v5`                                       |
-| `vector<T> v6(T* beg, T* end)` | 主要适用于通过数组初始化`vector`对象，首先类型要相同，其次用于初始化的元素是从`beg`指向的元素（包含）到`end`指向的元素（不包含）。在使用时需要确保两个指针都 |
-
-**注意**：
-
-使用列表初始化的时候，若需要初始化的对象不是数值类型，但第一个参数提供了一个非负整数，且列表总共只有不多于两个参数，此时列表初始化将被视为构造初始化（若只有一个非负整数的参数，则该参数提供元素个数，元素值进行默认初始化）。其他情况将产生错误。
+- `T`：实例化的元素类型
+- `Allocator`：用于获取/释放内存及构造/析构内存中元素的分配器。
 
 
 
-# 四. 操作
+## 2. 成员类型
 
-下表列出了`vector`类型支持的一些操作：
-
-- `v`：一个`vector<T>`对象
-
-| 操作                             | 效果                                                         |
-| -------------------------------- | ------------------------------------------------------------ |
-| `v.empty()`                      | 返回`bool`值，若`v`中不含有任何元素，返回`true`，否则返回`false` |
-| `v.size()`                       | 返回`vector<T>::size_type`类型，返回`v`中元素的个数          |
-| `v.push_back(t)`                 | 操作：向`v`的尾端添加一个值为`t`的元素                       |
-| `v.begin()`                      | 返回`vector<T>::iterator`或`vector<T>::const_iterator`类型，返回指向`v`第一个元素的迭代器 |
-| `v.end()`                        | 返回`vector<T>::iterator`或`vector<T>::const_iterator`类型，返回`v`的尾后迭代器 |
-| `v[n]`                           | 返回`v`中第`n`个位置上元素的引用，位置`n`从0开始             |
-| `v1 = v2`                        | 用`v2`为`v1`赋值                                             |
-| `v1 = {a, b, c...}`              | 用列表为`v1`赋值                                             |
-| `v1 == v2`<br />`v1 != v2`       | 返回`bool`值，当且仅当它们的元素数量相同且对应位置的元素值都相同时`v1`和`v2`相等，返回`true`，否则返回`false` |
-| `<`<br />`<=`<br />`>`<br />`>=` | 以字典顺序进行比较。<br />1. 只有当元素的值可以比较时，`vector`对象才能被比较。<br />2. 如果两个`vector`对象的容量不同，但是在相同位置上的元素值都一样，则元素较少的`vector`对象小于元素较多的`vector`对象；若元素的值有区别，则`vector`对象的大小关系由第一对相异的元素值的大小关系决定 |
+| 成员类型                 | 定义                                                         |
+| ------------------------ | ------------------------------------------------------------ |
+| `value_type`             | `T`（模板形参提供的类型）：表征实例化后的`vector`元素类型    |
+| `allocator_type`         | `Allocator_type`（模板形参提供的分配器类型）                 |
+| `size_type`              | 无符号整数类型（通常是`std::size_t`）：表征元素个数          |
+| `difference_type`        | 有符号整数类型（通常是`std::ptrdiff_t`）：指向`vector<T>`类型指针或迭代器的差值类型 |
+| `reference`              | `value_type&`：元素的引用类型                                |
+| `const_reference`        | `const value_type&`：元素的常量引用类型                      |
+| `pointer`                | `std::allocator_traits<Allocator>::pointer`：指向`value_type`的指针类型 |
+| `const_pointer`          | `std::allocator_traits<Allocator>::const_pointer`：指向`const value_type`的指针类型 |
+| `iterator`               | 指向`value_type`的迭代器类型                                 |
+| `const_iterator`         | 指向`const value_type`的迭代器类型                           |
+| `reverse_iterator`       | `std::reverse_iterator<iterator>`                            |
+| `const_reverse_iterator` | `std::reverse_iterator<const_iterator>`                      |
 
 
 
-# 五. 处理元素
+## 3. 成员函数
 
-`vector`类型的对象同样可以通过**下标访问**、**范围for**和**迭代器**来处理`vector`对象中的元素。
+### 1）基础函数
 
-## 1. 下标访问
-
-**注意**：不能通过下标来添加元素，也就是说不能对越界下标进行操作。
-
-
-
-## 2. 范围for循环
-
-```c++
-vector<int> ival(10, 5);		// ival包含10个值为5的int对象
-for (auto &c : ival) {
-    c = 2;
-}							  // 将ival中每个元素更改为2
-```
-
-**注意**：
-
-1. 当不需要更改元素值时，不要使用引用类型
-2. 可以使用`auto`来声明循环控制变量
-3. 使用范围`for`语句不要更改`vector`的元素个数
+| 函数                                                         | 注解             |
+| ------------------------------------------------------------ | ---------------- |
+| [(构造函数)](https://zh.cppreference.com/w/cpp/container/vector/vector) | 构造`vector`     |
+| [(析构函数)](https://zh.cppreference.com/w/cpp/container/vector/%7Evector) | 析构`vector`     |
+| [operator=](https://zh.cppreference.com/w/cpp/container/vector/operator%3D) | 赋值给容器       |
+| [assign](https://zh.cppreference.com/w/cpp/container/vector/assign) | 将值赋给容器     |
+| [get_allocator](https://zh.cppreference.com/w/cpp/container/vector/get_allocator) | 返回相关的分配器 |
 
 
 
-## 3. 迭代器
+### 2）元素访问
 
-```c++
-vector<int> ival(10, 5);
-for (auto beg = ival.begin(), end = ival.end(); beg != end; beg++) {
-    cout << *beg << endl;
-}
-```
+| 函数                                                         | 注解                             |
+| ------------------------------------------------------------ | -------------------------------- |
+| [at](https://zh.cppreference.com/w/cpp/container/vector/at)  | 访问指定的元素，同时进行越界检查 |
+| [operator[]](https://zh.cppreference.com/w/cpp/container/vector/operator_at) | 访问指定的元素                   |
+| [front](https://zh.cppreference.com/w/cpp/container/vector/front) | 访问第一个元素                   |
+| [back](https://zh.cppreference.com/w/cpp/container/vector/back) | 访问最后一个元素                 |
+| [data](https://zh.cppreference.com/w/cpp/container/vector/data) | 直接访问底层数组                 |
 
+
+
+### 3）迭代器
+
+| 函数                                                         | 注解                     |
+| ------------------------------------------------------------ | ------------------------ |
+| [begin、cbegin](https://zh.cppreference.com/w/cpp/container/vector/begin) | 返回指向起始的迭代器     |
+| [end、cend](https://zh.cppreference.com/w/cpp/container/vector/end) | 返回指向末尾的迭代器     |
+| [rbegin、crbegin](https://zh.cppreference.com/w/cpp/container/vector/rbegin) | 返回指向起始的逆向迭代器 |
+| [rend、crend](https://zh.cppreference.com/w/cpp/container/vector/rend) | 返回指向末尾的逆向迭代器 |
+
+
+
+### 4）容量
+
+| 函数                                                         | 注解                               |
+| ------------------------------------------------------------ | ---------------------------------- |
+| [empty](https://zh.cppreference.com/w/cpp/container/vector/empty) | 检查容器是否为空                   |
+| [size](https://zh.cppreference.com/w/cpp/container/vector/size) | 返回容纳的元素数                   |
+| [max_size](https://zh.cppreference.com/w/cpp/container/vector/max_size) | 返回可容纳的最大元素数             |
+| [reserve](https://zh.cppreference.com/w/cpp/container/vector/reserve) | 预留存储空间                       |
+| [capacity](https://zh.cppreference.com/w/cpp/container/vector/capacity) | 返回当前存储空间能够容纳的元素数   |
+| [shrink_to_fit](https://zh.cppreference.com/w/cpp/container/vector/shrink_to_fit) | 通过释放未使用的内存减少内存的使用 |
+
+
+
+### 5）修改器
+
+| 函数                                                         | 注解                       |
+| ------------------------------------------------------------ | -------------------------- |
+| [clear](https://zh.cppreference.com/w/cpp/container/vector/clear) | 清除内容                   |
+| [insert](https://zh.cppreference.com/w/cpp/container/vector/insert) | 插入元素                   |
+| [emplace](https://zh.cppreference.com/w/cpp/container/vector/emplace) | 原位构造元素               |
+| [erase](https://zh.cppreference.com/w/cpp/container/vector/erase) | 擦除元素                   |
+| [push_back](https://zh.cppreference.com/w/cpp/container/vector/push_back) | 将元素添加到容器末尾       |
+| [emplace_back](https://zh.cppreference.com/w/cpp/container/vector/emplace_back) | 在容器末尾就地构造元素     |
+| [pop_back](https://zh.cppreference.com/w/cpp/container/vector/pop_back) | 移除末元素                 |
+| [resize](https://zh.cppreference.com/w/cpp/container/vector/resize) | 改变容器中可存储元素的个数 |
+| [swap](https://zh.cppreference.com/w/cpp/container/vector/swap) | 交换内容                   |
+
+
+
+## 4. 非成员函数
+
+| 函数                                                         | 注解                           |
+| ------------------------------------------------------------ | ------------------------------ |
+| [operator==<br />operator!=<br />operator\<<br />operator\<=<br />operator\><br />operator\>=](https://zh.cppreference.com/w/cpp/container/vector/operator_cmp) | 按照字典顺序比较 vector 中的值 |
+| [std::swap](https://zh.cppreference.com/w/cpp/container/vector/swap2) | 特化`std::swap`算法            |
