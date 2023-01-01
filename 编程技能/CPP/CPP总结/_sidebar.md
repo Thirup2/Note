@@ -52,6 +52,7 @@
         * [容器类型](标准库/顺序容器/容器类型/容器类型.md)
         * [vector](标准库/顺序容器/vector/vector.md)
         * [deque](标准库/顺序容器/deque/deque.md)
+        * [list](标准库/顺序容器/list/list.md)
         * [string](标准库/顺序容器/string/string.md)
         * [迭代器](标准库/顺序容器/迭代器/迭代器.md)
 
