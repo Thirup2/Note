@@ -53,6 +53,8 @@
         * [vector](标准库/顺序容器/vector/vector.md)
         * [deque](标准库/顺序容器/deque/deque.md)
         * [list](标准库/顺序容器/list/list.md)
+        * [forward_list](标准库/顺序容器/forward_list/forward_list.md)
+        * [array](标准库/顺序容器/array/array.md)
         * [string](标准库/顺序容器/string/string.md)
         * [迭代器](标准库/顺序容器/迭代器/迭代器.md)
 
