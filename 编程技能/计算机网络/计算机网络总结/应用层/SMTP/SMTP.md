@@ -35,6 +35,48 @@ SMTP 有几个需要注意的地方：
 - SMTP 使用 TCP 进行可靠的数据传输服务，并且是持续连接方式。
 - SMTP 默认端口号使用 25 号端口
 
+# 二. 与 HTTP 的对比
 
-# 二. SMTP 报文
+**相同点**：
+
+- 这两个协议都用于从一台主机向另一台主机传送文件：HTTP 从 Web 服务器向 Web 客户传送文件（对象）；SMTP 从一个邮件服务器向另一个邮件服务器传送文件（电子邮件报文）。
+- 当进行文件传送时，持续的 HTTP 和 SMTP 都使用持续连接。
+
+**区别**：
+
+- HTTP 主要是一个**拉协议**（pull protocol）；而 SMTP 基本上是一个**推协议**（push protocol）
+- SMTP 要求每个报文（包括它们的体）采用 7 比特 ASCII 码格式。HTTP 数据则不受这种限制
+- 对于一个既包含文本又包含图形的文档，HTTP 把每个对象封装到它自己的 HTTP 响应报文中，而 SMTP 则把所有报文对象放在一个报文之中。
+
+
+
+# 三. SMTP 报文
+
+SMTP 的报文主要有两部分，一是包含环境信息的首部行，另一部分是报文体，这两个部分用空行进行分隔，如下面这个示例所示：
+
+```smtp
+From: alice@crepes.fr
+To: bob@hamburger.edu
+Subject: Searching for the meaning of life.
+
+...
+```
+
+总结如下：
+
+- `\br`：空格
+- `\cr`：回车符
+- `\lf`：换行符
+
+```smtp
+<首部行:>\br<值>\cr\lf
+...
+<首部行:>\br<值>\cr\lf
+\cr\lf
+(data data data ...)
+```
+
+
+
+# 四. 邮件访问协议
 
