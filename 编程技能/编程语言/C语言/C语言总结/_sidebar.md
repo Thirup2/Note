@@ -6,6 +6,9 @@
 
 <font face="黑体" color="LightSeaGreen">第二部分：基础语法</font>
 
+- [一. 数据](基础语法/数据/数据.md)
+  - [1. 基本数据类型](基础语法/数据/基本数据类型/基本数据类型.md)
+
 <font face="黑体" color="LightSeaGreen">第三部分：标准库</font>
 
 <font face="黑体" color="LightSeaGreen">第四部分：特性</font>
