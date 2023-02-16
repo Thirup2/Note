@@ -19,3 +19,10 @@
 - 《C陷阱与缺陷》
 - 《C专家编程》
 
+以及以下标准文档：
+
+- ISO/IEC 9899:1990 Programming languages — C
+
+- ISO/IEC 9899:1999 Programming languages — C
+
+- ISO/IEC 9899:2011 Information technology — Programming languages — C
