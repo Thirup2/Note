@@ -26,3 +26,8 @@
 - ISO/IEC 9899:1999 Programming languages — C
 
 - ISO/IEC 9899:2011 Information technology — Programming languages — C
+
+以及参考的网站：
+
+- https://zh.cppreference.com/
+- https://www.open-std.org/JTC1/SC22/WG14/www/projects#9899
