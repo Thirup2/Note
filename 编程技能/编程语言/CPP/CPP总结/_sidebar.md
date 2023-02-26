@@ -1,6 +1,7 @@
 <font face="黑体" color="LightSeaGreen">第一部分：C++ 简介</font>
 
-- [C++基本编程结构](C++简介/C++基本编程结构.md)
+- [一. C++简史](C++简介/C++简史.md)
+- [二. 思维导图](C++简介/思维导图.md)
 
 <font face="黑体" color="LightSeaGreen">第二部分：基础语法</font>
 
