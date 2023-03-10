@@ -62,6 +62,11 @@ using std::string;
 | `s1=s2`                                            | 用`s2`的副本代替`s1`中原来的字符                             |
 | `s1==s2`<br />`s1!=s2`                             | 如果`s1`和`s2`中所含的字符完全一样，则它们相等；`string`对象的相等性判断对字母的大小写敏感 |
 | `<`，`<=`，`>`，`>=`                               | 利用字符在字典中的顺序进行比较，且对字母的大小写敏感         |
+| `s.begin()`                                        | 返回指向第一个元素的迭代器，`std::string::iterator`或`std::string::const_iterator`类型 |
+| `s.end()`                                          | 返回字符串的尾后迭代器，`std::string::iterator`或`std::string::const_iterator`类型 |
+| `s.cbegin()`                                       | 返回指向第一个元素的迭代器，`std::string::const_iterator`类型 |
+| `s.cend()`                                         | 返回字符串的尾后迭代器，`std::string::const_iterator`类型    |
+| `s.c_str()`                                        | 返回`s`对应的 C 风格字符串，`const char *`类型               |
 
 
 
