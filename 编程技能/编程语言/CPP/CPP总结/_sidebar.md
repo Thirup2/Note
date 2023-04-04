@@ -68,7 +68,9 @@
 
 - [标头文件汇总](标准库/标头文件汇总.md)
 - IO 库
-  - [简介](标准库/IO库/简介.md)
+  - [IO类](标准库/IO库/IO类.md)
+  - [文件IO](标准库/IO库/文件IO.md)
+  - [string IO](标准库/IO库/stringIO.md)
 - 顺序容器
   - [string](标准库/顺序容器/string.md)
   - [vector](标准库/顺序容器/vector.md)
