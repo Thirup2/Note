@@ -17,7 +17,7 @@
 
 > 一般来说，我们可以只使用`string`类型就能完成这一步，但需要我们自己去实现一些功能，如将字符串转换为整数，浮点数等函数，这可能会比较复杂，但使用 string 流就比较简单。
 
-而当我们使用`ostringstream`时，我们可以将一个`string`对象（可能是非空的）拷贝给`ostringstream`对象，然后将各种数据写入到`ostringstream`中，我们可以直接调用`str()`输出`ostringstream`的内容，也可以将其拷贝给另一个需要的`string`对象。
+而当我们使用`ostringstream`时，**不用给`ostringstream`对象拷贝`string`对象**，然后将各种数据写入到`ostringstream`中，我们可以直接调用`str()`输出`ostringstream`的内容，也可以将其拷贝给一个需要的`string`对象。
 
 >  和输入流相同，string 输出流的许多功能也可以自己实现，但是也是可能比较复杂，如将一个整型变量的值写入到`string`对象中等等
 
