@@ -71,11 +71,17 @@
   - [IO类](标准库/IO库/IO类.md)
   - [文件IO](标准库/IO库/文件IO.md)
   - [string IO](标准库/IO库/stringIO.md)
-- 顺序容器
-  - [string](标准库/顺序容器/string.md)
-  - [vector](标准库/顺序容器/vector.md)
+- 顺序容器 
+  - 简单上手
+    - [string](标准库/顺序容器/简单上手/string.md)
+    - [vector](标准库/顺序容器/简单上手/vector.md)
+  - [库简介](标准库/顺序容器/库简介.md)
+  - [通用操作](标准库/顺序容器/通用操作.md)
 - 迭代器
   - [简介](标准库/迭代器/简介.md)
+  - [操作](标准库/迭代器/操作.md)
+  - [迭代器范围](标准库/迭代器/迭代器范围.md)
+  - [迭代器失效](标准库/迭代器/迭代器失效.md)
 
 
 <font face="黑体" color="LightSeaGreen">第四部分：特性</font>
