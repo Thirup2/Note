@@ -49,6 +49,14 @@
       * [使用 button 元素](HTML5/表单/使用button元素/使用button元素.md)
       * [使用表单外的元素](HTML5/表单/使用表单外的元素/使用表单外的元素.md)
     * 定制input元素
+      * [用 input 元素输入文字](HTML5/定制input元素/用input元素输入文字/用input元素输入文字.md)
+      * [用 input 元素输入密码](HTML5/定制input元素/用input元素输入密码/用input元素输入密码.md)
+      * [用 input 元素生成按钮](HTML5/定制input元素/用input元素生成按钮/用input元素生成按钮.md)
+      * [用 input 元素为输入数据把关](HTML5/定制input元素/用input元素为输入数据把关/用input元素为输入数据把关.md)
+      * [用 input 元素获取搜索用词](HTML5/定制input元素/用input元素获取搜索用词/用input元素获取搜索用词.md)
+      * [用 input 元素生成隐藏的数据项](HTML5/定制input元素/用input元素生成隐藏的数据项/用input元素生成隐藏的数据项.md)
+      * [用 input 元素生成图像按钮和分区响应图](HTML5/定制input元素/用input元素生成图像按钮和分区响应图/用input元素生成图像按钮和分区响应图.md)
+      * [用 input 元素上传文件](HTML5/定制input元素/用input元素上传文件/用input元素上传文件.md)
     * 嵌入内容
 * [二. CSS3](CSS3/CSS3.md)
 * [三. JavaScript](JavaScript/JavaScript.md)
