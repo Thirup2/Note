@@ -419,3 +419,90 @@
 而`url`则时灵时不灵。有些浏览器会在用户输入的值前加上一个`http://`了事；有些浏览器会要求用户输入一个以`http://`开头的值，但不会检查后面的部分；还有一些浏览器把用户输入的任何值都拿去提交。
 
 而对于`tel`，浏览器的支持则是最差的。
+
+
+
+# 七. 用 input 元素获取时间和日期
+
+HTML5 中增加了一些`input`元素的新类型，供用户输入日期和时间。下表介绍了这些类型的`input`元素：
+
+| type属性值       | 说明                                   | 示例                       |
+| ---------------- | -------------------------------------- | -------------------------- |
+| `datetime`       | 获取世界时日期和时间，包括时区信息     | `2011-07-19T16:49:39.491Z` |
+| `datetime-local` | 获取本地日期和时间（不含时区信息）     | `2011-07-19T16:49:39.419`  |
+| `date`           | 获取本地日期（不含时间和时区信息）     | `2011-07-20`               |
+| `month`          | 获取年月信息（不含日、时间和时区信息） | `2011-08`                  |
+| `time`           | 获取时间                               | `17:49:44.746`             |
+| `week`           | 获取当前星期                           | `2011-W30`                 |
+
+上表所包含类型的`input`元素都具有下面的额外属性：
+
+| 属性       | 说明                                                         | 是否为HTML5新增 |
+| ---------- | ------------------------------------------------------------ | --------------- |
+| `list`     | 指定为文本框提供建议值的`datalist`元素，其值为`datalist`元素的`id`值 | 是              |
+| `min`      | 设定可接受的最小值（也是下调按钮（如果有的话）的下限）以便进行输入验证 | 是              |
+| `max`      | 设定可接受的最大值（也是上调按钮（如果有的话）的上限）以便进行输入验证 | 是              |
+| `readonly` | 用来将文本框设为只读以阻止用户编辑内容                       | 否              |
+| `required` | 表示用户必须提供一个值，否则无法通过输入验证。               | 是              |
+| `step`     | 指定上下调节值的步长                                         | 是              |
+| `value`    | 指定元素的初始值                                             | 否              |
+
+日期和时间是出了名的难缠的问题。规范中的日期格式来自时间戳规定得非常严格的 RFC 3339。这与实际使用中的（也是用户料想的）许多地方性日期格式大相径庭。例如，很少有人会知道`datetime`格式中的 T 表示时间段的开始，以及其中的 Z 表示 Zulu 时区。
+
+下面的代码示范了`date`型`input`元素的用法：
+
+```html
+<form method="post" action="http://titan:8080/form">
+	<p>
+		<label for="name">
+			Name: <input value="Adam" id="name" name="name"/>
+		</label>
+	</p>
+	<p>
+		<label for="password">
+			Password: <input type="password" placeholder="Min 6 characters" id="password" name="password"/>
+		</label>
+	</p>
+	<p>
+		<label for="fave">
+			Fruit: <input value="Apples" id="fave" name="fave"/>
+		</label>
+	</p>
+	<p>
+		<label for="lastbuy">
+			When did you last buy: <input type="date" id="lastbuy" name="lastbuy"/>
+		</label>
+	</p>
+	<input type="submit" value="Submit Vote"/>
+</form>
+```
+
+其渲染效果如下：
+
+****
+
+<form method="post" action="http://titan:8080/form">
+	<p>
+		<label for="name">
+			Name: <input value="Adam" id="name" name="name"/>
+		</label>
+	</p>
+	<p>
+		<label for="password">
+			Password: <input type="password" placeholder="Min 6 characters" id="password" name="password"/>
+		</label>
+	</p>
+	<p>
+		<label for="fave">
+			Fruit: <input value="Apples" id="fave" name="fave"/>
+		</label>
+	</p>
+	<p>
+		<label for="lastbuy">
+			When did you last buy: <input type="date" id="lastbuy" name="lastbuy"/>
+		</label>
+	</p>
+	<input type="submit" value="Submit Vote"/>
+</form>
+
+****
