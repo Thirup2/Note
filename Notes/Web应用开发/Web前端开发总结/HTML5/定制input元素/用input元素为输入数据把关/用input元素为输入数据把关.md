@@ -506,3 +506,69 @@ HTML5 中增加了一些`input`元素的新类型，供用户输入日期和时�
 </form>
 
 ****
+
+
+
+# 八. type="color"
+
+`color`型`input`元素只能用来选择颜色。这种类型的`input`元素还支持`list`属性。
+
+这种`input`元素中的颜色值以 7 个字符的格式表示：以`#`开头，接下来是三个两位十六进制数，它们分别表示红绿蓝三种原色的值（如`#FF1234`）。CSS 中的颜色名（如`red`和`black`）不能用在这里。
+
+下面的代码示范了这种`input`元素的用法：
+
+```html
+<form method="post" action="http://titan:8080/form">
+	<p>
+		<label for="name">
+			Name: <input value="Adam" id="name" name="name"/>
+		</label>
+	</p>
+	<p>
+		<label for="password">
+			Password: <input type="password" placeholder="Min 6 characters" id="password" name="password"/>
+		</label>
+	</p>
+	<p>
+		<label for="fave">
+			Favorite Fruit: <input type="text" id="fave" name="fave"/>
+		</label>
+	</p>
+	<p>
+		<label for="color">
+			Color: <input type="color" id="color" name="color"/>
+		</label>
+	</p>
+	<input type="submit" value="Submit Vote"/>
+</form>
+```
+
+其渲染效果如下：
+
+****
+
+<form method="post" action="http://titan:8080/form">
+	<p>
+		<label for="name">
+			Name: <input value="Adam" id="name" name="name"/>
+		</label>
+	</p>
+	<p>
+		<label for="password">
+			Password: <input type="password" placeholder="Min 6 characters" id="password" name="password"/>
+		</label>
+	</p>
+	<p>
+		<label for="fave">
+			Favorite Fruit: <input type="text" id="fave" name="fave"/>
+		</label>
+	</p>
+	<p>
+		<label for="color">
+			Color: <input type="color" id="color" name="color"/>
+		</label>
+	</p>
+	<input type="submit" value="Submit Vote"/>
+</form>
+
+****

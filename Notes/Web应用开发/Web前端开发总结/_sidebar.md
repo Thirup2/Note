@@ -57,6 +57,10 @@
       * [用 input 元素生成隐藏的数据项](HTML5/定制input元素/用input元素生成隐藏的数据项/用input元素生成隐藏的数据项.md)
       * [用 input 元素生成图像按钮和分区响应图](HTML5/定制input元素/用input元素生成图像按钮和分区响应图/用input元素生成图像按钮和分区响应图.md)
       * [用 input 元素上传文件](HTML5/定制input元素/用input元素上传文件/用input元素上传文件.md)
+    * 其他表单元素及输入验证
+      * [使用其他表单元素](HTML5/其他表单元素及输入验证/使用其他表单元素/使用其他表单元素.md)
+      * [使用输入验证](HTML5/其他表单元素及输入验证/使用输入验证/使用输入验证.md)
+      * [禁用输入验证](HTML5/其他表单元素及输入验证/禁用输入验证/禁用输入验证.md)
     * 嵌入内容
 * [二. CSS3](CSS3/CSS3.md)
 * [三. JavaScript](JavaScript/JavaScript.md)
