@@ -43,10 +43,10 @@
 	<nav>
 		<ul>
 			<li>
-				<a href="/HTML5/嵌入内容/嵌入另一张HTML文档/html/fruits.html" target="myframe">Fruits I Like</a>
+				<a href="HTML5/嵌入内容/嵌入另一张HTML文档/html/fruits.html" target="myframe">Fruits I Like</a>
 			</li>
 			<li>
-				<a href="/HTML5/嵌入内容/嵌入另一张HTML文档/html/activities.html" target="myframe">Activities I Like</a>
+				<a href="HTML5/嵌入内容/嵌入另一张HTML文档/html/activities.html" target="myframe">Activities I Like</a>
 			</li>
 		</ul>
 	</nav>
