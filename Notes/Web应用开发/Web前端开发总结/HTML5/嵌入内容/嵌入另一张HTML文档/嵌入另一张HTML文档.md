@@ -51,7 +51,7 @@
 		</ul>
 	</nav>
 </header>
-<iframe name="myframe" width="300" height="100" src="/HTML5/嵌入内容/嵌入另一张HTML文档/html/fruits.html">
+<iframe name="myframe" width="300" height="100" src="HTML5/嵌入内容/嵌入另一张HTML文档/html/fruits.html">
 </iframe>
 
 

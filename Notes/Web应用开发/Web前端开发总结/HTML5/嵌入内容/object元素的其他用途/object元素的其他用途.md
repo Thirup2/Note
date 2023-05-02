@@ -11,8 +11,9 @@
 
 ****
 
-<object data="/HTML5/嵌入内容/object元素的其他用途/images/triathlon.png" type="image/png">
+<object data="HTML5/嵌入内容/object元素的其他用途/images/triathlon.png" type="image/png">
 </object>
+
 
 ****
 
@@ -36,13 +37,14 @@
 
 ****
 
-<object data="/HTML5/嵌入内容/object元素的其他用途/images/triathlon.png" type="image/png" usemap="#mymap">
+<object data="HTML5/嵌入内容/object元素的其他用途/images/triathlon.png" type="image/png" usemap="#mymap">
 </object>
 <map name="mymap">
 <area href="swimpage.html" shape="rect" coords="3,5,68,62" alt="Swimming"/>
 <area href="cyclepage.html" shape="rect" coords="70,5,130,62" alt="Running"/>
 <area href="otherpage.html" shape="default" alt="default"/>
 </map>
+
 
 ****
 
@@ -83,10 +85,10 @@
 	<nav>
 		<ul>
 			<li>
-				<a href="/HTML5/嵌入内容/object元素的其他用途/html/fruits.html" target="frame">Fruits I Like</a>
+				<a href="HTML5/嵌入内容/object元素的其他用途/html/fruits.html" target="frame">Fruits I Like</a>
 			</li>
 			<li>
-				<a href="/HTML5/嵌入内容/object元素的其他用途/html/activities.html" target="frame">Activities I Like</a>
+				<a href="HTML5/嵌入内容/object元素的其他用途/html/activities.html" target="frame">Activities I Like</a>
 			</li>
 		</ul>
 	</nav>
