@@ -1,129 +1,156 @@
 <!DOCTYPE html>
-<html lang="zh">
-
+<html lang="zh-CN">
 <head>
+    <meta charset="UTF-8">
     <title>瞬のノート</title>
-    <meta charset="utf-8">
     <link rel="icon" href="imgs/logo/icon.png">
     <base target="_blank">
-    <link rel="stylesheet" href="css/note.css" type="text/css">
+    <link rel="stylesheet" href="css/guide.css" type="text/css">
+    <link rel="stylesheet" href="css/backgroud.css" type="text/css">
+    <link rel="stylesheet" href="css/content.css" type="text/css">
+    <script src="js/preview.js"></script>
 </head>
-
 <body>
-    <main>
-    <h1>欢迎来到我的笔记网站！！！</h1>
-    <hr>
-    <br/>本网站从建立开始到现在，经过了多次更新。<br/>起初并没有任何想要建立一个用于保存笔记的网站的想法，因为原本的打算是将所有笔记或者博客都放在我的博客中，但是对于笔记来说，很多都是用一个博客表达不了的，几乎都需要用书籍的方式来写，但这样的话很明显就无法完美的将笔记保存到博客中了。<br/>综上原因，现在的文章分为两部分：<br/>
-    <ol>
-        <li>以短文形式就能够完全容纳的一些文章，如问题的解决方案，操作的实践过程等等，这些文章都将被保存在我的博客系统中，博客使用<code>hexo</code>进行构建，点击
+    <div class="truebody">
+        <h1 class="title">瞬のノート</h1>
+
+        <nav>
+            <ul>
+                <li><a href="#">首页</a></li>
+                <li>
+                    笔记
+                    <ul class="top">
+                        <li>
+                            计算机基础
+                            <ul>
+                                <li>
+                                    编程语言
+                                    <ul>
+                                        <li>
+                                            C语言
+                                            <ul>
+                                                <li>
+                                                    <a href="Notes/编程技能/编程语言/C语言/C语言总结/index.html">C语言总结</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            C++
+                                            <ul>
+                                                <li><a href="Notes/编程技能/编程语言/CPP/CPP总结/index.html">C++总结</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    数据结构与算法
+                                    <ul>
+                                        <li><a href="Notes/编程技能/数据结构与算法/数据结构与算法总结/index.html">数据结构与算法总结</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    计算机系统
+                                    <ul>
+                                        <li>
+                                            <a href="Notes/编程技能/计算机系统/操作系统是什么？/index.html">操作系统是什么？</a>
+                                        </li>
+                                        <li><a href="Notes/编程技能/计算机系统/汇编语言总结/index.html">汇编语言总结</a>
+                                        </li>
+                                        <!-- <li><a href="编程技能/计算机系统/计算机系统概览/index.html">计算机系统概览</a></li>
+                                        <li><a href="编程技能/计算机系统/计算机组成原理总结/index.html">计算机组成原理总结</a></li>
+                                        <li><a href="编程技能/计算机系统/计算机操作系统总结/index.html">计算机操作系统总结</a></li> -->
+                                    </ul>
+                                </li>
+                                <li>
+                                    计算机网络
+                                    <ul>
+                                        <li>
+                                            <a href="Notes/编程技能/计算机网络/计算机网络连接过程/index.html">计算机网络连接过程</a>
+                                        </li>
+                                        <!-- <li><a href="编程技能/计算机网络/计算机网络总结/index.html">计算机网络总结</a></li> -->
+                                    </ul>
+                                </li>
+                                <li>
+                                    编译原理
+                                    <ul>
+                                        <li><a href="Notes/编程技能/编译原理/编译原理总结/index.html">编译原理总结</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    数据库
+                                    <ul>
+                                        <li><a href="Notes/编程技能/数据库/SQL命令总结/index.html">SQL命令总结</a></li>
+                                        <li><a href="Notes/编程技能/数据库/数据库总结/index.html">数据库总结</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    设计模式与架构
+                                    <ul>
+                                        <li><a href="Notes/编程技能/设计模式/设计模式总结/index.html">设计模式总结</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            计算机应用
+                            <ul>
+                                <li>
+                                    Web应用开发
+                                    <ul>
+                                        <li><a href="Notes/Web应用开发/Web前端开发总结/index.html">Web前端开发总结</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    Linux应用开发
+                                    <ul>
+                                        <li>
+                                            <a href="Notes/Linux应用开发/Linux使用基础总结/index.html">Linux使用基础总结</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    Windows开发
+                                    <ul>
+                                        <li>
+                                            <a href="Notes/Windows应用开发/Windows程序设计总结/index.html">Windows程序设计总结</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!--                            <li>-->
+                                <!--                                Android开发-->
+                                <!--                            </li>-->
+                                <!--                            <li>-->
+                                <!--                                游戏开发-->
+                                <!--                            </li>-->
+                                <!--                            <li>-->
+                                <!--                                嵌入式开发-->
+                                <!--                            </li>-->
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <main>
+            <h1>欢迎来到我的笔记网站！！！</h1>
+            <hr>
+            <br/>本网站从建立开始到现在，经过了多次更新。<br/>起初并没有任何想要建立一个用于保存笔记的网站的想法，因为原本的打算是将所有笔记或者博客都放在我的博客中，但是对于笔记来说，很多都是用一个博客表达不了的，几乎都需要用书籍的方式来写，但这样的话很明显就无法完美的将笔记保存到博客中了。<br/>综上原因，现在的文章分为两部分：<br/>
+            1. 以短文形式就能够完全容纳的一些文章，如问题的解决方案，操作的实践过程等等，这些文章都将被保存在我的博客系统中，博客使用<code>hexo</code>进行构建，点击
             <a href="https://blog.syunn.cn/">瞬のブログ</a>
-            即可进入我的博客；
-        </li>
-        <li>主要包括一些用于构建知识体系的内容，里面也包含有短文，更多的是以书籍的形式呈现，这些文章都在当前这个笔记网站中，这些文章都使用<code>docsify</code>进行构建，通过<strong>下方链接</strong>即可快速定位到相关的文章。
-        </li>
-    </ol>
-    <b>以下是这些学习笔记的目录，请从目录前往：</b>
-    <br>
+            即可进入我的博客；<br>
+            2. 主要包括一些用于构建知识体系的内容，里面也包含有短文，更多的是以书籍的形式呈现，这些文章都在当前这个笔记网站中，这些文章都使用<code>docsify</code>进行构建，通过<strong>上方导航</strong>即可快速定位到相关的文章。
+        </main>
 
-    <h2>计算机基础</h2>
-    <hr>
-    <ul>
-        <li>
-            <b>编程语言</b>
-            <ul>
-                <li>
-                    <b>C语言</b>
-                    <ul>
-                        <li><a href="Notes/编程技能/编程语言/C语言/C语言总结/index.html">C语言总结</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <b>C++</b>
-                    <ul>
-                        <li><a href="Notes/编程技能/编程语言/CPP/CPP总结/index.html">C++总结</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <b>数据结构与算法</b>
-            <ul>
-                <li><a href="Notes/编程技能/数据结构与算法/数据结构与算法总结/index.html">数据结构与算法总结</a></li>
-            </ul>
-        </li>
-        <li>
-            <b>计算机系统</b>
-            <ul>
-                <li><a href="Notes/编程技能/计算机系统/操作系统是什么？/index.html">操作系统是什么？</a></li>
-                <li><a href="Notes/编程技能/计算机系统/汇编语言总结/index.html">汇编语言总结</a></li>
-                <!-- <li><a href="编程技能/计算机系统/计算机系统概览/index.html">计算机系统概览</a></li>
-                <li><a href="编程技能/计算机系统/计算机组成原理总结/index.html">计算机组成原理总结</a></li>
-                <li><a href="编程技能/计算机系统/计算机操作系统总结/index.html">计算机操作系统总结</a></li> -->
-            </ul>
-        </li>
-        <li>
-            <b>计算机网络</b>
-            <ul>
-                <li><a href="Notes/编程技能/计算机网络/计算机网络连接过程/index.html">计算机网络连接过程</a></li>
-                <!-- <li><a href="编程技能/计算机网络/计算机网络总结/index.html">计算机网络总结</a></li> -->
-            </ul>
-        </li>
-        <li>
-            <b>编译原理</b>
-            <ul>
-                <li><a href="Notes/编程技能/编译原理/编译原理总结/index.html">编译原理总结</a></li>
-            </ul>
-        </li>
-        <li>
-            <b>数据库</b>
-            <ul>
-                <li><a href="Notes/编程技能/数据库/SQL命令总结/index.html">SQL命令总结</a></li>
-                <li><a href="Notes/编程技能/数据库/数据库总结/index.html">数据库总结</a></li>
-            </ul>
-        </li>
-        <li>
-            <b>设计模式与架构</b>
-            <ul>
-                <li><a href="Notes/编程技能/设计模式/设计模式总结/index.html">设计模式总结</a></li>
-            </ul>
-        </li>
-    </ul>
-    <br>
+        <footer>
+            <p>版权信息</p>
+        </footer>
 
-    <h2>Web应用开发</h2>
-    <hr>
-    <ul>
-        <li><a href="Notes/Web应用开发/Web前端开发总结/index.html">Web前端开发总结</a></li>
-    </ul>
-    <br>
-
-    <h2>Linux应用开发</h2>
-    <hr>
-    <ul>
-        <li><a href="Notes/Linux应用开发/Linux使用基础总结/index.html">Linux使用基础总结</a></li>
-    </ul>
-    <br>
-
-    <h2>Windows开发</h2>
-    <hr>
-    <ul>
-        <li><a href="Notes/Windows应用开发/Windows程序设计总结/index.html">Windows程序设计总结</a></li>
-    </ul>
-    <br>
-
-    <!-- <h2>Android开发</h2>
-    <hr>
-    <br>
-
-    <h2>游戏开发</h2>
-    <hr>
-    <br>
-
-    <h2>嵌入式开发</h2>
-    <hr>
-    <br> -->
-    </main>
+    </div>
 </body>
-
 </html>
-
