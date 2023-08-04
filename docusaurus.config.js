@@ -6,20 +6,21 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'My Site',
-  tagline: 'Dinosaurs are cool',
-  favicon: 'img/favicon.ico',
+  title: '瞬のノート',
+  tagline: 'Learning Sharing Improving',
+  favicon: 'img/icon.png',
 
   // Set the production url of your site here
-  url: 'https://your-docusaurus-test-site.com',
+  url: 'https://note.syunn.cn',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  organizationName: 'Thirup2', // Usually your GitHub org/user name.
+  projectName: 'Note', // Usually your repo name.
+  trailingSlash: false,
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -28,8 +29,8 @@ const config = {
   // metadata like html lang. For example, if your site is Chinese, you may want
   // to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
+    defaultLocale: 'zh-CN',
+    locales: ['zh-CN'],
   },
 
   presets: [
@@ -38,19 +39,19 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
+          routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-        },
+        blog: false,
+        // blog: {
+        //   showReadingTime: true,
+        //   // Please change this to your repo.
+        //   // Remove this to remove the "edit this page" links.
+        //   editUrl:
+        //     'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+        // },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
@@ -58,34 +59,68 @@ const config = {
     ],
   ],
 
+  themes: ['@docusaurus/theme-search-algolia'],
+
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      tableOfContents: {
+        minHeadingLevel: 2,
+        maxHeadingLevel: 4,
+      },
+      docs: {
+        sidebar: {
+          hideable: true,
+          autoCollapseCategories: true,
+        },
+      },
       // Replace with your project's social card
-      image: 'img/docusaurus-social-card.jpg',
+      image: 'img/icon.png',
       navbar: {
-        title: 'My Site',
+        title: '瞬のノート',
         logo: {
           alt: 'My Site Logo',
-          src: 'img/logo.svg',
+          src: 'img/icon.png',
         },
         items: [
           {
-            type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
+            type: 'dropdown',
+            label: '计算机基础',
             position: 'left',
-            label: 'Tutorial',
+            items: [
+              {
+                type: 'docSidebar',
+                sidebarId: 'PL',
+                label: '编程语言',
+              },
+              {
+                type: 'docSidebar',
+                sidebarId: 'DSA',
+                label: '数据结构与算法',
+              }
+            ],
           },
-          {to: '/blog', label: 'Blog', position: 'left'},
           {
-            href: 'https://github.com/facebook/docusaurus',
-            label: 'GitHub',
+            type: 'dropdown',
+            label: 'Web 应用',
+            position: 'left',
+            items: [
+              {
+                type: 'docSidebar',
+                sidebarId: 'Web_Language',
+                label: '基本开发语言'
+              },
+            ],
+          },
+
+          {
+            href: 'https://github.com/Thirup2/Note',
+            label: 'Github',
             position: 'right',
           },
         ],
       },
       footer: {
-        style: 'dark',
         links: [
           {
             title: 'Docs',
@@ -122,16 +157,29 @@ const config = {
               },
               {
                 label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
+                href: 'https://github.com/Thirup2',
               },
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © 2022 - ${new Date().getFullYear()} | <a href="https://note.syunn.cn">NOTE.SYUNN.CN</a> | Built with Docusaurus<br /><a href="https://icp.gov.moe/?keyword=20233201" target="_blank" style="display: inline-block; vertical-align: middle;"><img src="/img/moeicp.ico" alt="moeicp.ico" style="display: inline-block; height: 1.3em; width: auto; vertical-align: middle;" />萌ICP备20233201号</a>`,
       },
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
+      },
+      algolia: {
+        appId: '',
+        apiKey: '',
+        indexName: '',
+        contextualSearch: true,
+        externalUrlRegex: '',
+        replaceSearchResultPathname: {
+          from: '',
+          to: '',
+        },
+        searchParameters: {},
+        searchPagePath: '',
       },
     }),
 };
