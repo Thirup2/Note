@@ -3,6 +3,8 @@
 
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const math = require('remark-math');
+const katex = require('rehype-katex');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -39,6 +41,8 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
+          remarkPlugins: [math],
+          rehypePlugins: [katex],
           routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
@@ -57,6 +61,16 @@ const config = {
         },
       }),
     ],
+  ],
+  
+  stylesheets: [
+    {
+      href: 'https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css',
+      type: 'text/css',
+      integrity:
+        'sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM',
+      crossorigin: 'anonymous',
+    },
   ],
 
   themeConfig:
@@ -83,34 +97,46 @@ const config = {
         items: [
           {
             type: 'dropdown',
-            label: '计算机基础',
             position: 'left',
+            label: '编程语言',
             items: [
               {
                 type: 'docSidebar',
-                sidebarId: 'PL',
-                label: '编程语言',
+                sidebarId: 'C_Summary',
+                label: 'C 语言',
               },
               {
                 type: 'docSidebar',
-                sidebarId: 'DSA',
-                label: '数据结构与算法',
+                sidebarId: 'CPP_Summary',
+                label: 'C++',
               }
             ],
           },
           {
             type: 'dropdown',
-            label: 'Web 应用',
             position: 'left',
+            label: '数据结构与算法',
+            items: [
+              {
+                type: 'docSidebar',
+                sidebarId: 'Basic_DSA',
+                label: '数据结构与算法基础',
+              },
+            ],
+          },
+          {
+            type: 'dropdown',
+            position: 'left',
+            label: 'Web 应用',
             items: [
               {
                 type: 'docSidebar',
                 sidebarId: 'Web_Language',
-                label: '基本开发语言'
+                label: '基本开发语言',
               },
             ],
           },
-
+          
           {
             href: 'https://github.com/Thirup2/Note',
             label: 'Github',
@@ -121,28 +147,71 @@ const config = {
       footer: {
         links: [
           {
-            title: 'Community',
+            title: 'My Sites',
             items: [
               {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+                label: '瞬のサイト',
+                href: 'https://syunn.cn',
               },
               {
-                label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
+                label: '瞬のブログ',
+                href: 'https://blog.syunn.cn',
               },
               {
-                label: 'Twitter',
-                href: 'https://twitter.com/docusaurus',
+                label: '瞬のノート',
+                href: 'https://note.syunn.cn',
+              },
+            ],
+          },
+          // {
+          //   title: 'Projects',
+          //   items: [
+          //     {
+          //       label: 'CharsConvert',
+          //       href: '#',
+          //     },
+          //     {
+          //       label: 'ACNM',
+          //       href: '#',
+          //     },
+          //   ],
+          // },
+          {
+            title: 'Social',
+            items: [
+              {
+                label: 'Github',
+                href: 'https://github.com/Thirup2',
               },
             ],
           },
           {
-            title: 'More',
+            title: 'Contact',
             items: [
               {
-                label: 'GitHub',
-                href: 'https://github.com/Thirup2',
+                label: 'Email Me',
+                href: 'mailto:admin@syunn.cn',
+              },
+              {
+                label: 'Telegram',
+                href: 'https://t.me/SyunnT'
+              },
+            ],
+          },
+          {
+            title: 'Support',
+            items: [
+              {
+                label: 'Docusaurus',
+                href: 'https://github.com/facebook/docusaurus',
+              },
+              {
+                label: 'Node.js',
+                href: 'https://nodejs.org/en',
+              },
+              {
+                label: 'React',
+                href: 'https://react.dev/',
               },
             ],
           },

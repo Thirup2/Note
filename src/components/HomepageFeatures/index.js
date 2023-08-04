@@ -4,32 +4,29 @@ import styles from './styles.module.css';
 
 const FeatureList = [
   {
-    title: 'Easy to Use',
+    title: '面向基础',
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        本网站包含了所有计算机基础相关的内容，从编程语言开始，到数据结构、计算机系统、计算机网络以及数据库、编译原理等内容都可以在本站找到。
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
+    title: '知识体系',
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        本站每一个笔记都是一整个知识体系，并非仅仅只是对某些特定内容的讨论。所以你可以将本站当作一个包含许多知识手册的网站来进行浏览。
       </>
     ),
   },
   {
-    title: 'Powered by React',
+    title: '应用开发',
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        除了大部分都是面向基础的笔记之外，还有一部分是各类应用程序开发相关的笔记，如 Web 前端应用、Linux 应用、Windows 应用等。
       </>
     ),
   },
