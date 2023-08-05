@@ -73,6 +73,8 @@ const config = {
     },
   ],
 
+  themes: ['@docusaurus/theme-live-codeblock'],
+
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
@@ -90,6 +92,7 @@ const config = {
       image: 'img/icon.png',
       navbar: {
         title: '瞬のノート',
+        hideOnScroll: true,
         logo: {
           alt: 'My Site Logo',
           src: 'img/icon.png',
@@ -221,6 +224,17 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
+        magicComments: [
+          {
+            className: 'theme-code-block-highlighted-line',
+            line: 'highlight-next-line',
+            block: { start: 'highlight-start', end: 'highlight-end' },
+          },
+          {
+            className: 'code-block-error-line',
+            line: 'This will error',
+          },
+        ],
       },
     }),
 };
