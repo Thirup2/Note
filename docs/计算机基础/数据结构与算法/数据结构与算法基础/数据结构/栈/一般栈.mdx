@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-hide_title: true
+hide_title: false
 slug: /Basic_DSA/Stack/Common_Stack
 ---
 
@@ -48,7 +48,40 @@ $n$ 个不同元素进栈，出栈元素不同排列的个数为 ${1\over {n+1}}
 
 ### 1. 顺序结构
 
-栈的顺序结构和顺序表一样可以用两种实现方式，一是静态实现，二是动态分配内存的方式实现。具体实现代码参考[线性表顺序结构实现](../../../Basic_DSA/Linear_List/Common_List#1-%E9%A1%BA%E5%BA%8F%E7%BB%93%E6%9E%84)。
+栈的顺序结构和顺序表一样可以用两种实现方式，一是静态实现，二是动态分配内存的方式实现。类型定义代码如下：
+
+<Tabs>
+
+<TabItem value="StaticStack" label="静态实现" default>
+
+```c
+#define MAXSIZE 10
+struct stack
+{
+    ElemType data[MAXSIZE];
+    int top;
+};
+typedef struct stack SeqStack;
+```
+
+</TabItem>
+
+<TabItem value="DynamicStack" label="动态实现">
+
+```c
+#define INITSIZE 10
+struct stack
+{
+    ElemType *data;
+    int capacity;
+    int top;
+};
+typedef struct stack SeqStack;
+```
+
+</TabItem>
+
+</Tabs>
 
 顺序栈的关键点在于把数组的哪一端作为栈底，哪一端作为栈顶。我们知道不论是静态还是动态的数组，它们的增长方向一般都是向后增长（当然如果将数组逻辑上头尾相连也可以反向增长），所以我们选择将数组第一个元素所在的一端作为栈底，与之相反的一端作为栈顶。我们需要一个指向栈顶的指针，以方便插入和删除，在顺序表中，这个值通常还可以代表栈的长度。
 
@@ -59,6 +92,17 @@ $n$ 个不同元素进栈，出栈元素不同排列的个数为 ${1\over {n+1}}
 在 4 种链表中，我们应该选用哪一种才是最适合栈这种数据结构应该首先进行如下分析：
 
 我们从最简单的链表开始考虑，即只有一个头指针且不含头结点的单链表，由于栈只需要在头部进行操作，所以实际上这种单链表结构就已经足够表示栈结构了，我们只需要将头指针当作栈顶指针即可。而且并不需要头结点，因为所有的操作都在头部执行，如果添加一个头结点，每次执行头部操作的时候都还要跨越一个头结点，比较麻烦。
+
+具体的实现如下：
+
+```c
+struct node
+{
+    ElemType data;
+    struct node *next;
+};
+typedef struct node Node, *LinkStack;
+```
 
 
 
