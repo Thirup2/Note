@@ -105,14 +105,14 @@ const config = {
             items: [
               {
                 type: 'docSidebar',
-                sidebarId: 'C_Summary',
+                sidebarId: 'C_Language',
                 label: 'C 语言',
               },
               {
                 type: 'docSidebar',
-                sidebarId: 'CPP_Summary',
+                sidebarId: 'CPP_Language',
                 label: 'C++',
-              }
+              },
             ],
           },
           {
@@ -122,8 +122,8 @@ const config = {
             items: [
               {
                 type: 'docSidebar',
-                sidebarId: 'Basic_DSA',
-                label: '数据结构与算法基础',
+                sidebarId: 'DSA_in_C',
+                label: '数据结构与算法——C语言版',
               },
             ],
           },
@@ -134,8 +134,18 @@ const config = {
             items: [
               {
                 type: 'docSidebar',
-                sidebarId: 'Web_Language',
-                label: '基本开发语言',
+                sidebarId: 'HTML',
+                label: 'HTML',
+              },
+              {
+                type: 'docSidebar',
+                sidebarId: 'CSS',
+                label: 'CSS',
+              },
+              {
+                type: 'docSidebar',
+                sidebarId: 'JavaScript',
+                label: 'JavaScript',
               },
             ],
           },
@@ -222,7 +232,7 @@ const config = {
         copyright: `Copyright © 2022 - ${new Date().getFullYear()} | <a href="https://note.syunn.cn">NOTE.SYUNN.CN</a> | Built with Docusaurus<br /><a href="https://icp.gov.moe/?keyword=20233201" target="_blank" style="display: inline-block; vertical-align: middle;"><img src="/img/moeicp.ico" alt="moeicp.ico" style="display: inline-block; height: 1.3em; width: auto; vertical-align: middle;" />萌ICP备20233201号</a>`,
       },
       prism: {
-        theme: lightCodeTheme,
+        theme: require('prism-react-renderer/themes/github'),
         darkTheme: darkCodeTheme,
         magicComments: [
           {
@@ -232,7 +242,8 @@ const config = {
           },
           {
             className: 'code-block-error-line',
-            line: 'This will error',
+            line: 'error-next-line',
+            block: { start: 'error-start', end: 'error-end'},
           },
         ],
       },
