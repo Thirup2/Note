@@ -101,7 +101,7 @@ const config = {
           {
             type: 'dropdown',
             position: 'left',
-            label: '编程语言',
+            label: 'PL',
             items: [
               {
                 type: 'docSidebar',
@@ -118,7 +118,7 @@ const config = {
           {
             type: 'dropdown',
             position: 'left',
-            label: '数据结构与算法',
+            label: 'DSA',
             items: [
               {
                 type: 'docSidebar',
@@ -130,7 +130,7 @@ const config = {
           {
             type: 'dropdown',
             position: 'left',
-            label: 'Web 应用',
+            label: 'Web',
             items: [
               {
                 type: 'docSidebar',
