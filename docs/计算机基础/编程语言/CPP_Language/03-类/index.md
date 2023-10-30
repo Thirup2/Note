@@ -1,5 +1,4 @@
 ---
-slug: /CPP_Language/Class/Intro
 title: 类
 ---
 
