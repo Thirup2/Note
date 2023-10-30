@@ -1,0 +1,76 @@
+---
+title: 迭代器
+---
+
+## 一、类内迭代器
+
+### 1. 简介
+
+在`string`和`vector`以及其他几种容器中都可以使用迭代器。简单来说，迭代器与这些类的关系就类似于指针与数组的关系。
+
+每个容器都有两个成员函数：`begin()`和`end()`，它们分别返回指向第一个元素的迭代器和指向最后一个元素的后一位置的迭代器（尾后迭代器）。
+
+成员函数返回的迭代器的类型定义在类中，我们需要指定具体的迭代器类型如：`vector<T>::iterator`、`string::iterator`等，或者直接使用`auto`也可以。
+
+
+
+### 2. 获取迭代器
+
+通过类内定义的成员函数获取具体类型的首迭代器和尾后迭代器：
+
+```c++
+vector<int> ivec = {1, 2, 3};
+string str("this is a string");
+
+vector<int>::iterator ivec_be = ivec.begin();
+vector<int>::iterator ivec_en = ivec.end();
+
+string::iterator str_be = str.begin();
+string::iterator str_en = str.end();
+```
+
+`begin`和`end`返回的迭代器的具体类型并不一定是非常量的迭代器，如果它们返回的迭代器指向的对象的具体类型是一个常量，则会返回一个`const_iterator`类型的迭代器，此时用于保存其返回结果的迭代器变量类型需要根据情况进行修改，或者使用`auto`自动推断。
+
+如果希望无论怎样都返回常量迭代器，则使用`cbegin`和`cend`函数。
+
+
+
+### 3. 迭代器操作
+
+- `*iter`：类似于指针解引用。返回迭代器`iter`所指元素的引用
+- `iter->mem`：类似于指针的类成员访问。接引用`iter`并获取该元素的名为`mem`的成员，等价于`(*iter).mem`
+- `++iter`：类似于指针向数组后方移动一个元素。令`iter`指向容器中的下一个元素
+- `--iter`：类似于指针向数组前方移动一个元素。令`iter`指向容器中的上一个元素
+- `iter1 == iter2`/`iter != iter2`：判断两个迭代器是否相等（不相等），如果两个迭代器指向的是同一个元素或者它们是同一个容器的尾后迭代器，则相等；否则则不等。
+
+:::info vector 和 string 迭代器支持的运算
+
+- `iter + n`：运算结果是一个迭代器，该迭代器指向原迭代器向尾部方向移动`n`个元素的位置
+- `iter - n`：运算结果是一个迭代器，该迭代器指向原迭代器向首部方向移动`n`个元素的位置
+- `iter1 += n`：将迭代器向尾部方向移动`n`个元素
+- `iter1 -= n`：将迭代器向首部方向移动`n`个元素
+- `iter1 - iter2`：得到`iter1`与`iter2`的距离，其值的类型为`vector<T>::difference_type`或`string::difference_type`，也是前四个运算中`n`所使用的类型
+- `<`、`<=`、`>`、`>=`：迭代器的大小判断，当同一个容器中某迭代器所指位置在另一个迭代器所指位置之前，则指前者小于后者。参与运算的两个迭代器必须指向同一个容器中的元素或者尾元素的下一位置。
+
+:::
+
+
+
+### 4. 迭代器的使用
+
+案例如下：
+
+```c++
+// text 是一个容器类型对象，其元素有序
+// 在 text 中查找 sought
+auto beg = text.begin(), end = text.end();
+auto mid = text.begin() + (end - beg)/2;
+while(mid != end && *mid != sought) {
+    if (sought < *mid)
+        end = mid;
+    else
+        beg = mid + 1;
+    mid = beg + (end - beg)/2;
+}
+```
+
