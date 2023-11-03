@@ -49,8 +49,13 @@ vector<vector<string>> file;
 - `vector<T> v4(n)`：`v4`包含了`n`个重复地执行了值初始化的对象，如果元素类型要求必须明确提供初始值或不支持默认初始化，则不能使用该方法。
 - `vector<T> v5{a, b, c...}`：容器类型的字面值初始化方式，列表初始化，包含了初始值个数的元素，每个元素被赋予相应的初始值
 - `vector<T> v5 = {a, b, c...}`：等价于`v5{a, b, c...}`
+- `vector<T> v6(iter1, iter2)`：使用同一个容器中的按前后顺序给出的两个迭代器或同一个数组中按前后顺序给出的两个指针进行初始化，具体范围是`[iter1, iter2)`。
 
-:::caution 关于列表初始化
+:::caution 注意
+
+<Tabs>
+
+<TabItem value="list_initialize" label="关于列表初始化">
 
 需要注意的是，列表初始化在类定义时也是构造函数的一种，其调用逻辑实际上和直接初始化相同。
 
@@ -63,6 +68,30 @@ vector<string> str_vec1{2, "hi"};	// str_vec 包含 2 个 "hi"
 // error-next-line
 vector<string> str_vec2{2, 5};		// 错误：无法匹配任何初始化方式
 ```
+
+</TabItem>
+
+<TabItem value="Iter_initialize" label="关于使用迭代器或指针的初始化">
+
+使用另一个相同类型的`vector<T>`的迭代器或者相同元素类型的数组中的指针可以对一个`vector<T>`类型的对象进行初始化。
+
+需要注意的是使用的迭代器或指针必须指向同一个容器，并且参数1必须指向参数2所指元素之前的元素，此时所拷贝的元素为`[iter1, iter2)`；或者两个参数指向同一个位置，此时不拷贝元素，容器初始化为空。
+
+具体示例如下：
+
+```c++
+vector<int> ivec1{1, 3, 5, 7, 9};
+int iarr1[] = {0, 2, 4, 6, 8};
+
+vector<int> ivec2(ivec1.begin(), ivec1.end());			// 完全拷贝
+vector<int> ivec3(begin(iarr1), end(iarr1));			// 完全拷贝
+vector<int> ivec4(ivec1.begin() + 2, ivec1.end() - 2);	// 部分拷贝，只拷贝了 5
+vector<int> ivec5(iarr1 + 1, iarr1 + 4);				// 部分拷贝，只拷贝了 2, 4, 6
+```
+
+</TabItem>
+
+</Tabs>
 
 :::
 
