@@ -2,7 +2,7 @@
 
 **引用**为对象起了另外一种名字，通过将声明符写成`&d`的形式来定义引用类型，其中`d`是引用的名字：
 
-```c++
+```cpp
 int ival = 1024;
 int &refVal = ival;		// refVal 指向 ival（是 ival 的另一个名字）
 // error-next-line
@@ -21,21 +21,21 @@ int &refVal2;			// 错误：引用必须被初始化
 
 - 由于引用只是一个别名，所以对一个引用进行的所有操作都是在与之绑定的对象上进行的，例如：
 
-  ```c++
+  ```cpp
   refVal = 2;			// 把 2 赋给 refVal 指向的对象，此处即是赋给了 ival
   int ii = refVal;	// 与 ii = ival 执行结果一样
   ```
 
 - 由于引用本身不是一个对象，所以不能定义引用的引用：
 
-  ```c++
+  ```cpp
   int &refVal3 = refVal;		// refVal3 是绑定到了 refVal 绑定的对象上，而不是绑定到了 refVal 上
   int i = refVal3;			// i 被初始化为 ival 的值
   ```
 
 - 引用的类型要和与之绑定的对象的类型严格匹配（特殊情况除外）。而且，引用只能绑定在对象上，而不能与字面值或某个表达式的计算结果绑定在一起：
 
-  ```c++
+  ```cpp
   // error-next-line
   int &refVal4 = 10;		// 错误：引用类型的初始值必须是一个对象
   double dval = 3.14;
@@ -49,7 +49,7 @@ int &refVal2;			// 错误：引用必须被初始化
 
 ### 1. 对指针的引用
 
-```c++
+```cpp
 int i = 42;
 int *p;
 

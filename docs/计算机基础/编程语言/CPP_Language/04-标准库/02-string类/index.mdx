@@ -67,7 +67,7 @@ title: string类
 
 其中最后一种初始化方式没有与之等价的拷贝初始化，但实际上也可以这样做，即显式地创建一个临时对象用于拷贝：
 
-```c++
+```cpp
 string s5 = string(10, 'c');
 ```
 
@@ -122,7 +122,7 @@ string s5 = string(10, 'c');
 
 **字面值与 string 对象相加**：当`string`对象与字符字面值或字符串字面值相加时，会将字符字面值或字符串字面值转换成`string`对象，然后执行两个`string`对象的加法。而两个字符字面值和字符串字面值则没有加法操作，同时由于加法的结合律是从左往右，所以如果在一串加法表达式中，不要将两个字符字面值或字符串字面值放在最前面。例如：
 
-```c++
+```cpp
 string s1 = "Hello", s2 = "World";
 string s3 = s1 + ' ' + s2;					// 正确
 string s4 = "Hey, " + s1 + ' ' + "World!";	// 正确
@@ -160,7 +160,7 @@ string s5 = "Hello" + " " + s2;				// 错误
 
       `string`支持使用范围 for 语句对其字符进行遍历：
 
-      ```c++
+      ```cpp
       string str("some string");
       
       for (char c : str)
@@ -169,7 +169,7 @@ string s5 = "Hello" + " " + s2;				// 错误
 
       `string`内置使用迭代器在每一次循环为`c`赋值，但此时是新建了一个`char`类型对象，所以改变`c`的内容并不会影响到`str`中的内容，如果要使用范围 for 语句修改`str`中的内容，则将循环控制量声明为引用：
 
-      ```c++
+      ```cpp
       string str("some string");
       
       for (char &c : str)
@@ -185,14 +185,14 @@ string s5 = "Hello" + " " + s2;				// 错误
 
       **使用下标进行迭代**：
 
-      ```c++
+      ```cpp
       for (string::size_type index = 0; index != s.size() && !isspace(s[index]); ++index)
           s[index] = toupper(s[index]);
       ```
 
       **使用下标进行随机访问**：
 
-      ```c++
+      ```cpp
       const string hexdigits = "0123456789ABCDEF";
       string tenth = "13";
       

@@ -2,20 +2,20 @@
 
 通过`const`关键字我们可以声明并定义一种值不能改变的变量，即：
 
-```c++
+```cpp
 const int bufSize = 512;
 ```
 
 这样`bufSize`就被定义成了一个常量。任何试图为`bufSize`赋值的行为都将引发错误：
 
-```c++
+```cpp
 // error-next-line
 bufSize = 512;		// 错误：试图向 const 对象写值
 ```
 
 和引用类似，由于`const`对象一旦创建后其值就不能再改变，所以`const`对象必须初始化。初始值可以是任意复杂的表达式：
 
-```c++
+```cpp
 const int i = get_size();
 const int j = 42;
 // error-next-line
@@ -30,11 +30,11 @@ const int k;		// 错误：k 未经初始化
 
 但有时`const`变量的初始值并非常量表达式，即无法在编译阶段就获取其值，同时又有必要在文件间共享，这种情况下，我们不希望编译器为每个文件分别生成独立的变量。此时在`const`变量定义处添加`extern`关键字，可以使其变为外部链接属性，然后在每一个用到该变量的地方都用`extern`进行声明，表示此处是一个纯声明而非定义同时表示此处声明的`const`变量定义在别处，使编译器去别处查找定义。简单来说，就是对于`const`变量不管是声明还是定义都添加`extern`关键字：
 
-```c++ title="file1.cc"
+```cpp title="file1.cc"
 extern const int bufSize = fcn();		// 声明并定义，同时具有外部链接属性
 ```
 
-```c++ title="file2.cc"
+```cpp title="file2.cc"
 extern const int bufSize;			// 仅声明，同时表示定义在别处
 ```
 
@@ -46,7 +46,7 @@ extern const int bufSize;			// 仅声明，同时表示定义在别处
 
 一个常量引用的初始化可以用任意表达式作为初始值，只要该表达式的结果能够转换成引用的类型即可，例如：
 
-```c++
+```cpp
 const int i1 = 1024;
 int i2 = 42;
 
@@ -68,7 +68,7 @@ const int &r4 = 42;		// 正确
 
 由于指针指向的对象是一个实体，指针本身也是一个实体，所以我们可以分别指定哪一个实体是常量或都是常量：
 
-```c++
+```cpp
 int a = 1024;
 
 int *p1 = &a;				// 普通指针
@@ -113,7 +113,7 @@ const int *const p4 = &a;	// 指向常量的常量指针
 
 `constexpr`和`const`的用法基本一致：
 
-```c++
+```cpp
 constexpr int mf = 20;
 constexpr int limit = mf + 1;
 constexpr int sz = size();		// 只有当 size 是一个 constexpr 函数时才正确
@@ -123,13 +123,13 @@ constexpr int sz = size();		// 只有当 size 是一个 constexpr 函数时才�
 
 需要注意`constexpr`用在指针上和`const`用在指针上是有区别的，`constexpr`只用于说明指针是一个常量，所以：
 
-```c++
+```cpp
 constexpr int *pi = nullptr;
 ```
 
 表示的是`pi`是一个指针类型的常量表达式，而非其所指对象的，如果要将其指向对象设置为常量（对该指针而言），则像下面这样：
 
-```c++
+```cpp
 constexpr const int *pi = &i;
 ```
 

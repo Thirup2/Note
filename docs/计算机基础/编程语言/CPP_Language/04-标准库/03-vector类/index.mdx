@@ -26,7 +26,7 @@ title: vector类
 
 `vector`是一个类模板，在实例化之前元素类型为未定义状态，所以要定义一个`vector`对象，首先需要进行类模板的**实例化**。
 
-```c++
+```cpp
 vector<int> ivec;
 vector<string> str_vec;
 vector<vector<string>> file;
@@ -61,7 +61,7 @@ vector<vector<string>> file;
 
 当我们使用列表初始化的时候，我们放在列表中的初始值会优先用来进行列表初始化，但如果我们提供的值无法进行列表初始化，则会尝试调用另外的直接初始化方式，如果都不行，则会报错，具体如下例所示：
 
-```c++
+```cpp
 vector<int> ivec1(10, 5);			// ivec1 包含 10 个 5
 vector<int> ivec2{10, 5};			// ivec2 包含 10 和 5
 vector<string> str_vec1{2, "hi"};	// str_vec 包含 2 个 "hi"
@@ -79,7 +79,7 @@ vector<string> str_vec2{2, 5};		// 错误：无法匹配任何初始化方式
 
 具体示例如下：
 
-```c++
+```cpp
 vector<int> ivec1{1, 3, 5, 7, 9};
 int iarr1[] = {0, 2, 4, 6, 8};
 
