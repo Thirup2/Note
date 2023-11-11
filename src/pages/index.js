@@ -17,7 +17,7 @@ function HomepageHeader() {
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
-            to="/C_Language/Intro">
+            to="/计算机基础/编程语言/CPP_Language/index/">
             开始阅读
           </Link>
         </div>
