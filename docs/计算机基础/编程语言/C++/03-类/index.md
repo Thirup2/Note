@@ -1,5 +1,7 @@
 ---
 title: 类
+description: C++ 类的语法简介，本页为临时总结，暂未完成
+keywords: [C++,类]
 ---
 
 ## 一、简介
