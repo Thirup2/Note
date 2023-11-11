@@ -101,11 +101,11 @@ const config = {
             position: 'left',
             label: 'PL',
             items: [
-              {
-                type: 'docSidebar',
-                sidebarId: 'C_Language',
-                label: 'C 语言',
-              },
+              // {
+              //   type: 'docSidebar',
+              //   sidebarId: 'C_Language',
+              //   label: 'C 语言',
+              // },
               {
                 type: 'docSidebar',
                 sidebarId: 'CPP_Language',
@@ -121,32 +121,32 @@ const config = {
               {
                 type: 'docSidebar',
                 sidebarId: 'DSA_in_C',
-                label: '数据结构与算法——C语言版',
+                label: 'DSA-C语言实现',
               },
             ],
           },
-          {
-            type: 'dropdown',
-            position: 'left',
-            label: 'Web',
-            items: [
-              {
-                type: 'docSidebar',
-                sidebarId: 'HTML',
-                label: 'HTML',
-              },
-              {
-                type: 'docSidebar',
-                sidebarId: 'CSS',
-                label: 'CSS',
-              },
-              {
-                type: 'docSidebar',
-                sidebarId: 'JavaScript',
-                label: 'JavaScript',
-              },
-            ],
-          },
+          // {
+          //   type: 'dropdown',
+          //   position: 'left',
+          //   label: 'Web',
+          //   items: [
+          //     {
+          //       type: 'docSidebar',
+          //       sidebarId: 'HTML',
+          //       label: 'HTML',
+          //     },
+          //     {
+          //       type: 'docSidebar',
+          //       sidebarId: 'CSS',
+          //       label: 'CSS',
+          //     },
+          //     {
+          //       type: 'docSidebar',
+          //       sidebarId: 'JavaScript',
+          //       label: 'JavaScript',
+          //     },
+          //   ],
+          // },
           
           {
             href: 'https://github.com/Thirup2/Note',
