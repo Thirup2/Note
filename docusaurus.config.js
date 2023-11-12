@@ -6,7 +6,7 @@ const katex = require('rehype-katex');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: '瞬のノート - 瞬的学习笔记',
+  title: '瞬のノート',
   tagline: 'Learning Sharing Improving',
   favicon: 'img/icon.png',
 
