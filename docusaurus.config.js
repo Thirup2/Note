@@ -201,7 +201,7 @@ const config = {
             items: [
               {
                 label: 'Email Me',
-                href: 'mailto:admin@syunn.cn',
+                href: 'mailto:master@syunn.cn',
               },
               {
                 label: 'Telegram',
