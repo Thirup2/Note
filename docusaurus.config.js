@@ -99,7 +99,7 @@ const config = {
           {
             type: 'dropdown',
             position: 'left',
-            label: 'PL',
+            label: '编程语言',
             items: [
               // {
               //   type: 'docSidebar',
@@ -116,37 +116,27 @@ const config = {
           {
             type: 'dropdown',
             position: 'left',
-            label: 'DSA',
+            label: '数据结构与算法',
             items: [
               {
                 type: 'docSidebar',
                 sidebarId: 'DSA_in_C',
-                label: 'DSA-C语言实现',
+                label: '数据结构与算法-C语言实现',
               },
             ],
           },
-          // {
-          //   type: 'dropdown',
-          //   position: 'left',
-          //   label: 'Web',
-          //   items: [
-          //     {
-          //       type: 'docSidebar',
-          //       sidebarId: 'HTML',
-          //       label: 'HTML',
-          //     },
-          //     {
-          //       type: 'docSidebar',
-          //       sidebarId: 'CSS',
-          //       label: 'CSS',
-          //     },
-          //     {
-          //       type: 'docSidebar',
-          //       sidebarId: 'JavaScript',
-          //       label: 'JavaScript',
-          //     },
-          //   ],
-          // },
+          {
+            type: 'dropdown',
+            position: 'left',
+            label: 'Web',
+            items: [
+              {
+                type: 'docSidebar',
+                sidebarId: 'Web_Basic',
+                label: 'Web 基础',
+              },
+            ],
+          },
           
           {
             href: 'https://github.com/Thirup2/Note',
