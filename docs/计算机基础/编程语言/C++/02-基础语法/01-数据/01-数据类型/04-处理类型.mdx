@@ -1,0 +1,185 @@
+## 一、类型别名
+
+**类型别名**是一个名字，它是某种类型的同义词。对于复杂类型，定义其类型别名显得很有用。
+
+有两种方法可以定义类型别名：
+
+- `typedef`：`typedef + (原类型) + (类型别名)`（类型别名放在标识符应该在的位置）
+
+  ```cpp
+  typedef double wages;		// wages 是 double 的同义词
+  typedef int *PTI;			// PTI 是 int* 的同义词
+  typedef int[10](*PTArray);	// PTArray 是 int[10](*) 的同义词
+  ```
+
+- `using`：`using + (类型别名) = (原类型)`
+
+  ```cpp
+  using wages = double;
+  using PTI = int*;
+  using PTArray = int[10](*);
+  ```
+
+:::info 如何写出变量的类型
+
+对于变量类型的写法，实际上将其声明语句中的变量标识符去掉即是该变量的类型。例如指向 10 `int` 元素数组的指针`int[10] (*PTArray)`，其变量标识符是`PTArray`，那么其类型就是`int[10](*)`
+
+:::
+
+:::info 类型别名与宏定义的区别
+
+我们可以使用宏定义实现类似类型别名的效果，例如：
+
+```cpp
+#define wages double;
+#define PTI int*;
+```
+
+但其效果与类型别名是有根本区别的。宏定义说到底是一个字符替换，将使用到`wages`的地方替换成`double`，将使用`PTI`的地方替换成`int*`。
+
+对于下面这条声明语句，类型别名和宏定义有根本的不同：
+
+```cpp
+PTI a, b;
+```
+
+当`PTI`是一个类型别名是，那么`a`、`b`都应该是`int*`类型的变量。而如果`PTI`是一个宏定义，那么`a`是`int*`类型的变量，而`b`则是`int`类型的变量了。因为`PTI`只是遭到替换，而不是一种对每一个声明符都生效的类型。
+
+:::
+
+:::info const 和指针类型别名
+
+如果我们定义了一个指针的类型别名，例如：
+
+```cpp
+using PTI = int*;
+```
+
+如果我们在使用这个类型的同时使用`const`进行修饰：
+
+```cpp
+const PTI p = nullptr;
+```
+
+此时的`const`修饰的则是指针本身，而不是其指向的对象。还是那个原因，因为`PTI`并非被进行字符替换，而是一种新的类型，其根本是一种指针类型。
+
+:::
+
+
+
+## 二、auto 类型说明符
+
+`auto`可以用来替换任何类型说明符，编译器将根据初始值推断其代表的具体是什么类型。由于初始值是一个推断要素，所以使用`auto`定义的变量必须有初始值。
+
+`auto`在判断变量类型很困难时以及变量类型较长需要简化时可以使用。
+
+**推断原则**：
+
+- 通过初始值推断变量类型
+
+  ```cpp
+  auto item = val1 + val2;	// 根据 val1 + val2 的结果推断其类型。例如当 val1 为 int 值，而 val2 为 double 值时，那么 item 为double 类型
+  ```
+
+- 使用`auto`的声明语句也可以有多个声明符，但`auto`必须代表同一种类型
+
+  ```cpp
+  auto i = 0, *p = &i;		// i 是 int 类型，p 是 int* 类型。auto 代表的都是 int
+  // error-next-line
+  auto sz = 0, pi = 3.14;		// 错误：sz 首先被推断为 int，而 pi 被推断为 double，二者不匹配
+  ```
+
+- 初始值为引用时，编译器以引用对象的类型作为`auto`的类型
+
+  ```cpp
+  int i = 0, &r = i;
+  // highlight-next-line
+  auto a = r;				// a 是 int 类型
+  ```
+
+  如果希望用`auto`声明一个引用类型，则显式使用`&`符号：
+
+  ```cpp
+  auto &ref = i;		// ref 是一个 int& 类型
+  ```
+
+- `auto`一般会忽略顶层`const`，而保留底层`const`。
+
+  ```cpp
+  int i = 0;
+  const int ci = i, &cr = ci;
+  // highlight-start
+  auto b = ci;		// b 为 int，不保留顶层 const
+  auto c = cr;		// c 为 int，不保留顶层 const
+  auto d = &i;		// d 为 int*，不存在 const 属性
+  auto e = &ci;		// e 为 const int*，保留 &ci 的底层 const 属性
+  // highlight-end
+  ```
+
+  如果希望推断出的`auto`具有顶层`const`属性，则显式声明：
+
+  ```cpp
+  const auto f = &i;	// f 为 int *const 类型，具有顶层 const 属性
+  ```
+
+  当引用的初始值具有顶层 const 时，不会被忽略：
+
+  ```cpp
+  auto &refc = ci;		// refc 是 const int& 类型
+  ```
+
+
+
+## 三、decltype 类型指示符
+
+如果希望通过表达式的类型推断出要定义的变量的类型，但不想用这个表达式的值初始化变量，则可以使用`decltype`，它的作用是选择并返回操作数的数据类型，但并不计算表达式的值。
+
+**推断原则**：
+
+- 当表达式是一个变量（包括引用）或者右值表达式时，则严格推断其类型，包括 const 和引用
+
+  ```cpp
+  const int ci = 0, &cj = ci;
+  // highlight-start
+  decltype(ci) x = 0;		// x 是 const int 类型
+  decltype(cj) y = x;		// y 是 const int& 类型
+  // highlight-end
+  ```
+
+- 当表达式是一个右值表达式时，`decltype`返回表达式结果对应的类型
+
+  ```cpp
+  int i = 42, *p = &i, &r = i;
+  // highlight-start
+  decltype(r + 0) b;		// b 是 int 类型
+  decltype(*p) c = i;		// 解引用操作符 * 将得到一个引用类型，故 c 为 int& 类型
+  decltype(&i) d = &i;	// 取地址操作符 & 将得到一个指针类型，故 d 为 int* 类型
+  decltype(f()) sum = x;	// 表达式为函数调用时得到函数的返回类型，故 sum 为 f() 函数的返回类型
+  // highlight-end
+  ```
+
+- 当表达式是一个左值且并非一个变量或引用时，返回表达式结果类型的引用
+
+  ```cpp
+  int i = 42;
+  // highlight-next-line
+  decltype(++i) refi = i;	// ++i 是一个左值，故 refi 是一个 int& 类型
+  ```
+
+  如果在变量两侧加上括号，则该变量不再是一个变量，而是一个左值表达式，故将会得到引用类型
+
+  ```cpp
+  decltype((i)) ref = i;	// (i) 是一个左值表达式而非变量，故 ref 是一个 int& 类型
+  ```
+
+:::info decltype 中的表达式不进行计算
+
+`decltype`中的表达式并不进行实际的计算，只用来推断类型，例如：
+
+```cpp
+decltype(++i) refi = i;
+```
+
+这条语句并不会导致`i`的值被改变。
+
+:::
