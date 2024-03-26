@@ -32,11 +32,12 @@ using std::u32string;
 
 ### 1. 类型
 
-| 类型                          | 用处                                                       |
-| ----------------------------- | ---------------------------------------------------------- |
-| `std::string::size_type`      | 用于标记字符串长度的类型。`str.size()`返回该类型的值       |
-| `std::string::iterator`       | 字符串迭代器类型。`str.begin()`、`str.end()`返回该类型的值 |
-| `std::string::const_iterator` | 只读迭代器。`str.cbegin()`、`str.cend()`返回该类型的值     |
+| 类型                                           | 用处                                                       |
+| ---------------------------------------------- | ---------------------------------------------------------- |
+| `std::string::size_type`                       | 用于标记字符串长度的类型。`str.size()`返回该类型的值       |
+| `std::string::iterator`                        | 字符串迭代器类型。`str.begin()`、`str.end()`返回该类型的值 |
+| `std::string::const_iterator`                  | 只读迭代器。`str.cbegin()`、`str.cend()`返回该类型的值     |
+| `std::string::const_iterator::difference_type` | 迭代器之差类型。两迭代器相减返回该值                       |
 
 
 
