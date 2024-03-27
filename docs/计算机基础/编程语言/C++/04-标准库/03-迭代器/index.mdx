@@ -21,7 +21,17 @@ title: 迭代器
 
 ### 2. 数组类型
 
+可以通过`iterator`标准库中的函数得到类似于首位迭代器和尾后迭代器的指针：
 
+```cpp
+#include <iterator>
+using std::begin;
+using std::end;
+
+int arr[10];
+int *beg = begin(arr);
+int *end = end(arr);
+```
 
 ****
 

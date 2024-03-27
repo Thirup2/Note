@@ -9,7 +9,7 @@
   ```cpp
   typedef double wages;		// wages 是 double 的同义词
   typedef int *PTI;			// PTI 是 int* 的同义词
-  typedef int[10](*PTArray);	// PTArray 是 int[10](*) 的同义词
+  typedef int(*PTArray)[10];	// PTArray 是 int(*)[10] 的同义词
   ```
 
 - `using`：`using + (类型别名) = (原类型)`
@@ -17,12 +17,12 @@
   ```cpp
   using wages = double;
   using PTI = int*;
-  using PTArray = int[10](*);
+  using PTArray = int(*)[10];
   ```
 
 :::info 如何写出变量的类型
 
-对于变量类型的写法，实际上将其声明语句中的变量标识符去掉即是该变量的类型。例如指向 10 `int` 元素数组的指针`int[10] (*PTArray)`，其变量标识符是`PTArray`，那么其类型就是`int[10](*)`
+对于变量类型的写法，实际上将其声明语句中的变量标识符去掉即是该变量的类型。例如指向 10 `int` 元素数组的指针`int (*PTArray)[10]`，其变量标识符是`PTArray`，那么其类型就是`int(*)[10]`
 
 :::
 
