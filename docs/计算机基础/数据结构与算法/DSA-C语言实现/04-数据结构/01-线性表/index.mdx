@@ -38,7 +38,42 @@ $$
 
 
 
-## 二、物理结构
+## 二、接口
+
+提供以下头文件作为线性表的接口：
+
+```cpp title="list.h"
+#ifndef LIST_H_
+#define LIST_H_
+
+#include "elem_type.h"
+#include "status.h"
+#include <stdbool.h>
+
+struct list_def;		// 定义在别处
+typedef struct list_def * list;
+typedef const struct list_def * const_list;
+typedef unsigned size_type;		// 表示线性表尺寸和位置的类型
+
+// 定义在别处
+list InitList(void);												// 创建一个默认初始化的线性表，默认初始化规则自行定义
+size_type ListLength(const_list li);								// 返回线性表 li 的表长
+size_type LocateElem(const_list li, const_elem_type elem);			// 按值查找元素，返回元素在线性表中的位置
+const_elem_type GetElem(const_list li, size_type pos);				// 返回 li 中 pos 位置的元素
+status ListInsert(list li, size_type pos, const_elem_type elem);	// 在 li 的 pos 位置后插入元素 elem
+status ListDelete(list li, size_type pos, elem_type elem);			// 删除 li 中 pos 位置的元素，并将其值拷贝至 elem
+void PrintList(const_list li);										// 打印线性表 li
+bool ListEmpty(const_list li);										// 判断线性表是否为空
+void DestroyList(list li);											// 销毁线性表
+
+#endif
+```
+
+以上接口只提供了最简单的一些接口，你还可以添加其他的更易用的接口，例如更多的初始化方式，更多的插入删除方式，以及更多的查询方式等等。
+
+
+
+## 三、实现
 
 线性表的物理结构有两种，一是使用类似于数组的实现方式，称为顺序表；二是使用链式存储，称为链表，下面将分别介绍。
 
@@ -140,7 +175,7 @@ typedef struct node
 
 
 
-## 三、算法分析
+## 四、算法分析
 
 ### 1. 初始化（链表）
 
