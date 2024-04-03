@@ -1,0 +1,64 @@
+## 一、内容
+
+```
+static_cast<type>(expr)
+dynamic_cast<type>(expr)
+const_cast<type>(expr)
+reinterpret_cast<type>(expr)
+
+type(expr)		// C++ 构造式类型转换
+(type)expr		// C 风格类型转换
+```
+
+
+
+## 二、命名的强制类型转换
+
+### 1. static_cast
+
+任何具有明确定义的类型转换，只要不包含底层 const，都可以使用`static_cast`。
+
+具有两个要点：
+
+- 转换必须具有明确定义：例如`int`到`double`、`bool`到`int`等。而`string`到`double`则是未定义的，故无法进行转换
+- 转换与被转换的类型不能包含底层`const`
+
+
+
+### 2. const_cast
+
+`const_cast`只能改变运算对象的底层 const，可以将一个不具有底层 const 的对象转换为具有底层 const 的对象，或者是相反的过程，但不能改变除了底层 const 之外的其他部分。
+
+虽然`const_cast`可以给对象添加底层 const 属性，但一般不会使用这个用法，即去掉对象的底层 const 属性。`const_cast`常常用于有函数重载的上下文中。
+
+
+
+### 3. reinterpret_cast
+
+`reinterpret_cast`在位模式上较低层次地重新解释运算对象，即将一种类型直接当成另一种类型使用，但实际上的内容并没有发生改变。
+
+通常用于转换不同的指针类型：
+
+```cpp
+int *ip;
+char *pc = reinterpret_cast<char *>(ip);
+```
+
+在上面的例子中，`ip`是指向`int`的指针，而`pc`是指向`char`的指针，但实际上由于`pc`和`ip`指向同一个地方，所以`pc`所指的也是一个`int`，但可以当作指向`char`的指针进行使用。在使用时一定要非常小心，例如：
+
+```cpp
+string str(pc);
+```
+
+我们意图用`pc`这个字符指针初始化`str`这个`string`，但实际上`pc`所指的内容并非一个 C 风格字符串，这种操作就可能导致异常的运行时行为。
+
+
+
+## 三、旧式的强制类型转换
+
+以下两种强制类型转换也是可用的：
+
+- `type (expr)`：这是 C++ 函数形式的强制类型转换，可以理解成就是调用了一个函数，返回一个临时对象，这个临时对象用`expr`进行初始化，也即从`expr`原本的类型到`type`类型的转换
+- `(type) expr`：这是 C 风格的强制类型转换，将`expr`转换成`type`类型。
+
+旧式的强制类型转换可以完成包括`static_cast`、`const_cast`以及`reinterpret_cast`在内的所有功能，在使用时需要格外小心。
