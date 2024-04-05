@@ -2,49 +2,467 @@
 title: HTML
 ---
 
-## 一、元素与标签
+## 一、使用元素
 
-在 HTML 文档中，内容是由元素构成的，而元素则由标签进行标识。
+### 1. 简单介绍
 
-分为双标签和单标签，例如：
+`HTML`文档由**元素**构成，而一个元素由**标签**和**内容**构成。
 
-- `<p>这是一个双标签</p>`：其中`p`元素则由`<p>`和`</p>`两个标签组成
-- `<br>`：这就是一个单标签元素，该元素可以实现换行功能。单标签也可以写成`<br/>`以及`<br />`的形式
+例如`<code>apple</code>`其中`<code>`、`</code>`就是标签，这个元素由两个标签组成，分别是**起始标签**和**结束标签**，而`apple`就是内容，它们共同构成了一个元素。
+
+在`HTML`中，元素是一种用来向浏览器说明文档内容的工具。其效果体现在内容之上。不同的元素有不同的确切含义。例如，前述`code`元素代表的是计算机代码片段。
+
+`HTML`定义了各种各样的元素，他们在`HTML`文档中起着各不相同的作用。
 
 
 
-## 二、文档基本结构
+### 2. 空元素
 
-一个最简单的文档也应该包含以下内容：
+有些元素内容为空时没有意义，但它们仍然是有效的 HTML 代码：
 
 ```html
-<!DOCTYPE html>
-<html lang="en">
-    
-	<head>
-    	<title>Title</title>
-	</head>
-    
-	<body>
-	</body>
-    
+<code></code>
+```
+
+空元素可以用一个标签来表示，称为**自闭合标签**，即
+
+```html
+<code/>
+```
+
+
+
+### 3. 虚元素
+
+有些元素只能使用一个标签表示，在其中放置任何内容都不符合 HTML 规范。这类元素称为**虚元素**。例如`br`、`hr`。例如：
+
+```html
+I like apples and oranges.
+<hr />
+Today was warm and sunny.
+```
+
+**渲染效果**：
+
+![01](/imgs/Web应用开发/Web基础/01.png)
+
+`hr`元素的默认效果就是显示为一条横线。
+
+:::info 虚元素的写法
+
+虚元素可以写成`<hr>`、`<hr/>`、`<hr />`这几种样式。在 HTML5 中，上述几种形式都可以使用，没有特别的要求。而如果为了提高 HTML 文档的兼容性而使用 XHTML 的话，则需要使用`<hr/>`或`<hr />`这两种形式，即**和虚元素必须包含关闭标签**。
+
+:::
+
+
+
+## 二、使用元素属性
+
+元素可以使用**属性**进行配置，例如：
+
+```html
+I like <a href="/apples.html">apples</a> and oranges.
+```
+
+其中`href`就是`a`元素的一个属性，用来配置超链接的目的地址。
+
+有一些属性可以用于所有 HTML 元素，即通用属性。除此之外，还有用来提供元素特有配置信息的专有属性，例如`href`就是`a`元素的专有属性。
+
+属性值可以用双引号界定，也可以使用单引号。而如果属性值本身含有引号，那么两种引号都要用到，要么以`"'含引号的'属性值"`的形式，要么以`'"含引号的"属性值'`
+
+一个元素可以应用多个属性，这些属性间以一个或几个空格分隔即可，例如：
+
+```html
+I like <a class="link" href="/apple.html" id="firstlink">apples</a> and oranges.
+```
+
+这些属性的顺序未作要求，全局属性和元素专有属性可随意交错。
+
+### 1. 布尔属性
+
+有些属性属于**布尔属性**，这种属性只有两种状态，所以这种属性不需要设定一个值，只需将属性名添加到元素中即可，例如：
+
+```html
+Enter your name: <input disabled />
+```
+
+其中，`disabled`就是一个布尔属性，只要添加到元素中，就相当于将该属性设定为`true`。
+
+可以向布尔属性指定**true**、**空字符串**或**属性名称字符串**作为其值可以实现相同的效果：
+
+```html
+Enter your name: <input disabled="true" />
+Enter your name: <input disabled="" />
+Enter your name: <input disabled="disabled" />
+```
+
+
+
+### 2. 自定义属性
+
+用户可以自定义属性，这种属性必须以`data-`开头：
+
+```html
+Enter your name: <input disabled data-creator="adam" data-purpose="collection" />
+```
+
+其中`data-creator`和`data-purpose`就是自定义属性，之所以在这类属性名称之前添加`data-`是为了避免和 HTML 未来版本中可能增加的属性名冲突。
+
+在没有其他成分介入时，自定义属性没有任何作用，但自定义属性和 CSS、JavaScript 结合起来很有用。
+
+
+
+## 三、HTML 文档基本结构
+
+元素和属性不会孤立存在，它们承载于 HTML 文档。一个 HTML 文档通常以`.html`作为后缀。
+
+用于处理 HTML 文档的软件被称为**用户代理**，浏览器是最流行的用户代理，但并不是唯一的一种。
+
+一个 HTML 文档有一些固定的结构，这些结构将在下面依次介绍。
+
+### 1. 外层结构
+
+HTML 文档的外层结构由两个元素确定：`DOCTYPE`和`html`，如下所示：
+
+```html
+<!DOCTYPE HTML>
+<html>
+    <!-- elements go here -->
 </html>
 ```
 
-- `<!DOCTYPE html>`：这一行用来声明文档类型是 HTML，以及其版本为 HTML5（因为只有这个版本能这样声明）
-- `<html lang="en">...</html>`：这一对标签表示文档的开头和结尾，所有的内容都应该在这对标签内。其中需要用`lang`属性声明文档使用的语言。
-- `<head>...</head>`：这一对标签用于添加说明文档本身的信息，其中至少有一个`title`元素
-- `<title>...</title>`：这一对标签用于添加文档的标题，会显示在页面标签栏上
-- `<body>...</body>`：这一对标签中的内容即网页所显示的内容，几乎所有内容都应该写在这对标签中
+- `<!DOCTYPE HTML>`是每个 HTML 文档的第一个标签，用于标记文档的类型是 HTML。
+- `<html>`、`</html>`标签对即`html`元素，它告诉浏览器：在这个标签对中的内容按照 HTML 处理。
 
-:::info 关于乱码
 
-如果只包含以上基本结构在浏览器中渲染你的文档时，如果你的内容出现了乱码情况，请在`<head></head>`部分添加以下内容：
 
-```HTML
-<meta charset="UTF-8">
+### 2. 元数据
+
+元数据即用来描述这个 HTML 文档本身的数据，它们放在`<head>`、`</head>`标签对中：
+
+```html
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <!-- metadata goes here -->
+        <title>Example</title>
+    </head>
+</html>
 ```
 
-其中`UTF-8`可以是其他编码，但需要和你的源文件采用的编码一致。
+这个例子演示了最少的元数据，只有一个`title`元素，用于表示整个文档的标题，通常在浏览器的标签上会显示这个标题。
 
-:::
+另外，需要注意的是`head`元素需要放在`html`元素中。
+
+
+
+### 3. 内容
+
+HTML 文档的内容部分放在`<body></body>`标签对中，这个标签对放在`html`中，`head`元素之后，和`head`元素是同级的关系：
+
+```html
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Example</title>
+    </head>
+    <body>
+        <!-- content and elements go here -->
+        I like <code>apples</code>and oranges.
+    </body>
+</html>
+```
+
+
+
+### 4. 元素关系
+
+HTML 文档中元素之间有明确的关系。
+
+- 包含另一个元素的元素是被包含元素的**父元素**。例如：`head`元素是`title`元素的父元素，而`html`元素是`head`和`body`二者的父元素
+- 而和上一条定义相反，被包含元素是包含该元素的元素的**子元素**。
+- 子元素还可以包含其他元素。子元素，子元素的子元素，以及再往下，都是最顶层这个子元素的父元素的**后代元素**。
+- 而具有同一个父元素的几个元素互为**兄弟元素**。
+
+
+
+### 5. 元素类型
+
+HTML5 规范将元素分为三大类：**元数据元素**、**流元素**和**短语元素**。
+
+- 元数据元素用来构建 HTML 文档的基本结构，以及就如何处理文档向浏览器提供信息和指示，通常放在`head`元素中
+- 流元素和短语元素用来确定一个元素合法的父元素和子元素范围。短语元素是 HTML 的基本成分。而流元素是短语元素的超集，即所有的短语元素都是流元素，而并非所有的流元素都是短语元素。
+- 还有一些元素无法归入上述三种类型，这些元素要么没有什么特别的含义，要么只能用在一些非常有限的情况下。如`li`元素，它只能有三种父元素：`ol`、`ul`、`menu`
+
+
+
+## 四、HTML 实体
+
+有些字符在 HTML 文档中不会被识别为内容的一部分，例如构成标签的`<`、`>`符号。
+
+有时需要在文档内容中用到这些字符，但不想让它们被当作 HTML 处理，为此应该使用 HTML 实体：
+
+| 字符                 | 实体名称  | 实体编号  |
+| -------------------- | --------- | --------- |
+| `<`                  | `&lt;`    | `&#60;`   |
+| `>`                  | `&gt;`    | `&#62;`   |
+| `&`                  | `&amp;`   | `&#38;`   |
+| <code>&euro;</code>  | `&euro;`  | `&#8364;` |
+| <code>&pound;</code> | `&pound;` | `&#163;`  |
+| <code>&sect;</code>  | `&sect;`  | `&#167;`  |
+| <code>&copy;</code>  | `&copy;`  | `&#169;`  |
+| <code>&reg;</code>   | `&reg;`   | `&#174;`  |
+| <code>&trade;</code> | `&trade;` | `&#8482;` |
+
+每个字符都有一个实体编号，可以用来在文档内容中代表该字符。而特别常用的特殊字符还有对应的实体名称，上表就列出了常用的特殊字符。
+
+
+
+## 五、HTML5 全局属性
+
+如前所述，全局属性可以用于任何元素。
+
+### 1. accesskey 属性
+
+`accesskey`属性可以设定一个或几个用来选择页面上元素的快捷键，例如：
+
+```html
+<!doctype html>
+<html>
+<head>
+    <title>Example</title>
+</head>
+<body>
+    <form>
+        Name: <input type="text" name="name" accesskey="n" /><p/>
+        Password: <input type="password" name="password" accesskey="p" /><p/>
+        <input type="submit" value="Log In" accesskey="s" />
+    </form>
+</body>
+</html>
+```
+
+**渲染效果**：
+
+![02](/imgs/Web应用开发/Web基础/02.png)
+
+在 Windows 系统上同时按下【Alt】键和`accesskey`属性值对应的键，即可选中该`accesskey`所在的元素。例如，如果同时按下【Alt】+【n】，那么将会选中第一个文本框，效果如下：
+
+![03](/imgs/Web应用开发/Web基础/03.png)
+
+
+
+### 2. class 属性
+
+`class`属性用来将元素归类。这样做通常是为了能够找出文档中的某一类元素或为某一类元素应用 CSS 样式。
+
+一个元素可以应用多个`class`值，一个`class`值可以应用于多个元素：
+
+```html
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Example</title>
+    </head>
+    <body>
+        <a class="class1 class2" href="http://apress.com">Apress web site</a><p/>
+        <a class="class2 otherclass" href="http://w3c.org">W3C web site</a>
+    </body>
+</html>
+```
+
+`class`属性为元素提供额外的识别和选中的途径，所以仅仅只是添加`class`属性并不会影响元素本身的显示，只有和 CSS 和 JavaScript 一起使用才会有特殊的效果。
+
+
+
+### 3. contenteditable 属性（布尔属性）
+
+该属性可以让用户能够修改页面上的内容：
+
+```html
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Example</title>
+    </head>
+    <body>
+        <p contenteditable>It is raining right now</p>
+    </body>
+</html>
+```
+
+**渲染效果**：
+
+![04](/imgs/Web应用开发/Web基础/04.png)
+
+在上面的例子中，我将单词`raining`在页面中删除了。
+
+
+
+### 4. contextmenu 属性
+
+`contextmenu`属性用来为元素设定快捷菜单。这种菜单会在受到触发时弹出。
+
+暂无示例。
+
+
+
+### 5. dir 属性
+
+`dir`属性用来规定元素中文字的方向。其有效值有两个：`ltr`（用于从左到右的文字）和`rtl`（用于从右到左的文字）。
+
+```html
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Example</title>
+    </head>
+    <body>
+        <p dir="rtl">This is right-to-left</p>
+        <p dir="ltr">This is left-to-right</p>
+    </body>
+</html>
+```
+
+**渲染效果**
+
+![05](/imgs/Web应用开发/Web基础/05.png)
+
+
+
+### 6. draggable 属性
+
+`draggable`属性用来表示元素是否可被拖放。
+
+
+
+### 7. dropzone 属性
+
+`dropzone`属性与`draggable`属性搭配使用。
+
+
+
+### 8. hidden 属性（布尔属性）
+
+添加了`hidden`属性的元素在浏览器中不会显示出来，也不会占用任何空间位置。
+
+
+
+### 9. id 属性
+
+和`class`属性类似，`id`属性也是用来为元素提供识别和选中的途径。
+
+不过和`class`元素不同的是，一个元素只能有一个`id`值，并且一个`id`值只能用于一个元素。另外`id`元素的值还可以作为文档内 URL 进行导航。
+
+
+
+### 10. lang 属性
+
+`lang`属性用于说明元素内容使用的语言，通常在`<html>`标签上使用用于表示整个文档使用的语言，当然也可以用于其他的元素。
+
+`lang`属性值必须使用有效的 ISO 语言代码。
+
+示例如下：
+
+```html
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Example</title>
+    </head>
+    <body>
+        <p lang="en">Hello - how are you?</p>
+        <p lang="ja">こんにちは - 大丈夫？</p>
+        <p lang="zh">你好 - 今天过得如何？</p>
+    </body>
+</html>
+```
+
+
+
+### 11. spellcheck 属性
+
+`spellcheck`属性用来指示浏览器是否应该对元素的内容进行拼写检查。这个属性只有用在用户可以编辑的元素上时才有意义。
+
+例如`<input type="text">`、`<textarea>`等元素就可以使用这样的属性。
+
+`spellcheck`有两个值：`true`和`false`，选择为`true`时表示启用拼写检查。
+
+
+
+### 12. style 属性
+
+`style`属性用来直接在元素身上定义 CSS 样式，例如：
+
+```html
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Example</title>
+    </head>
+    <body>
+        <a href="http://apress.com" style="background: grey; color:white; padding:10px">
+            Visit the Apress site
+        </a>
+    </body>
+</html>
+```
+
+`style`的属性值是 CSS 语法规定的内容，样式和样式之间用分号隔开，一个样式由样式名和样式值组成，用冒号进行分隔。
+
+**渲染效果**：
+
+![06](/imgs/Web应用开发/Web基础/06.png)
+
+
+
+### 13. tabindex 属性
+
+HTML 页面上的键盘焦点可以通过按【Tab】键在各元素之间切换，用`tabindex`属性可以改变默认的转移顺序，例如：
+
+```html
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Example</title>
+    </head>
+    <body>
+        <form>
+            <label>Name: <input type="text" name="name" tabindex="1" /></label><p/>
+            <label>City: <input type="text" name="city" tabindex="-1" /></label><p/>
+            <label>Country: <input type="text" name="country" tabindex="2" /></label><p/>
+            <input type="submit" tabindex="3" />
+        </form>
+    </body>
+</html>
+```
+
+正常情况下当光标聚焦在其中一个文本框时，按下【Tab】键将会转移到下一个文本框。
+
+而对于上面的例子，按下【Tab】键将首先选中第一个文本框，然后再次按下将移动到第二个文本框，最后是提交按钮。而`tabindex`属性值设置为`-1`的文本框则永远不会在用户按下【Tab】键后被选中。
+
+
+
+### 14. title 属性
+
+`title`属性提供了元素的额外信息，浏览器通常用这些东西显示工具提示，例如：
+
+```html
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Example</title>
+    </head>
+    <body>
+        <a title="Apress Publishing" href="http://apress.com"> Visit the Apress site</a>
+    </body>
+</html>
+```
+
+**渲染效果**：
+
+![07](/imgs/Web应用开发/Web基础/07.png)
+
+当鼠标放在设置了`title`属性的元素上时，就会显示如上图所示的小框。
+
+> 注：实际上我的鼠标应该是停留在这个超链接文本上的，只不过因为截图效果原因鼠标不会显示在截图中。
