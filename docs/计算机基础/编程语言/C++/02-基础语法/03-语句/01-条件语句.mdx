@@ -1,0 +1,187 @@
+## 一、if 语句
+
+### 1. 纯 if 语句
+
+```cpp
+if (condition)
+    statement;
+```
+
+**控制流**：当`condition`为`true`时，执行`statement;`，执行完成后退出`if`语句。若`condition`为`false`，则跳过整个`if`语句。
+
+
+
+### 2. else
+
+```cpp
+if (condition)
+    statement1;
+else
+    statement2;
+```
+
+**控制流**：当`condition`为`true`时，执行`statement1;`；否则执行`statement2;`。执行完成后退出整个`if`语句
+
+
+
+### 3. else if
+
+```cpp
+if (condition1)
+    statement1;
+else if (condition2)
+    statement2;
+else if (condition3)
+    statement3;
+// ...
+else
+    statementx;
+```
+
+**控制流**：条件控制从上往下依次进行计算，即先算`condition1`，若值为`false`，再计算`condition2`，直到某个条件为`true`，即进入该分支执行其处理语句。若没有任何条件为`true`，则进入最后一个`else`的`statementx`执行。若可以保证前置所有分支已经覆盖了所有可能的情况，则可以去掉最后的`else`分支。
+
+
+
+### 4. 嵌套 if 语句
+
+在嵌套 if 语句时需要注意的是 **悬垂 else** 的匹配问题。
+
+当一个`if`语句嵌套在另一个`if`语句内部时，很可能`if`分支会多于`else`分支。而少的`else`与哪一个`if`语句进行匹配称作悬垂 else 问题。
+
+就 C++ 而言，它规定`else`与离它最近的尚未匹配的`if`匹配。
+
+例如：
+
+```cpp
+if (grade < 60)
+    lettergrade = scores[0];
+else
+    lettergrade = scores[(grade - 50)/10];
+	if (grade != 100)
+        if(grade % 10 > 7)
+            lettergrade += '+';
+		else if (grade % 10 < 3)
+            lettergrade += '-';
+```
+
+从缩进上来看很清楚这段程序想要做什么，但缩进只有人才看得懂，机器是看不懂的，实际上这段程序存在着问题。
+
+我们修改一下正确的缩进，就很容易能够发现问题了：
+
+```cpp
+if (grade < 60)
+    lettergrade = scores[0];
+else
+    lettergrade = scores[(grade - 50)/10];
+if (grade != 100) 
+    if(grade % 10 > 7) 
+        lettergrade += '+'; 
+	else if (grade % 10 < 3)
+    	lettergrade += '-';
+```
+
+我们希望第二个`if`语句也是第 3 行中`else`分支的一部分，但在第 4 行中就已经出现分号从而结束了这个分支，导致第二个`if`语句和这个`else`分支成为了同级的语句。
+
+只要使用花括号块将`else`分支中的内容全部合成一条复合语句就可以了：
+
+```cpp
+if (grade < 60)
+    lettergrade = scores[0];
+else {
+    lettergrade = scores[(grade - 50)/10];
+    if (grade != 100) 
+        if(grade % 10 > 7) 
+            lettergrade += '+';
+    	else if (grade % 10 < 3)
+            lettergrade += '-';
+}
+```
+
+而且如果你还是有点分不清最后的`else if`分支是和前面哪一个`if`语句匹配，不妨再多添加几个花括号：
+
+```cpp
+if (grade < 60)
+    lettergrade = scores[0];
+else {
+    lettergrade = scores[(grade - 50)/10];
+    if (grade != 100) {
+        if(grade % 10 > 7) 
+            lettergrade += '+';
+    	else if (grade % 10 < 3)
+            lettergrade += '-';
+    }
+}
+```
+
+
+
+## 二、switch 语句
+
+`switch`语句实现和`if`语句类型的效果。
+
+```cpp
+switch (expr) {
+    case case1:
+		statements1;
+	case case2:
+		statements2;
+	// ...
+	default:
+		statementsx;
+}
+```
+
+**控制流**：首先计算`expr`的值，要求必须是整型或者能够转换成整数类型。判断计算出来的和哪一个`case`相匹配（注意`case`标签必须是整型常量表达式），如果遇到了匹配的`case`，就进入该`case`，否则进入`default`。处理语句可以是一条简单语句或者一条复合语句，也可以是多条并列简单或复合语句，并没有特殊的要求。需要注意的是，执行完当前`case`的处理语句之后，并不会退出分支，将会依次继续执行其下方所有`case`的处理语句，直到遇到跳转语句或执行完所有后续`case`的处理语句后退出`switch`。`default`语句可以省略，此时如果没有任何`case`和`expr`的求值结果相匹配，则退出`switch`语句。
+
+:::caution 别忘了跳转
+
+需要格外注意的就是`switch`语句并非执行完`case`后的处理语句后就退出，所以如果你想像使用`if`语句一样使用`switch`的话，需要在每个`case`的处理语句最后添加一个`break`语句用来退出`switch`。
+
+```cpp
+switch (expr) {
+    case case1:
+        statements1;
+        break;
+    case case2:
+        statements2;
+        break;
+    // ...
+    default:
+        statementsx;
+}
+```
+
+最后的`case`可以不用添加`break`语句，在上面的例子中`default`就是最后一个`case`，所以我没有添加`break`。当然即使加上也没有影响。
+
+:::
+
+### switch 内部的变量定义
+
+由于整个`switch`中所有`case`中的语句处在同一作用域中，所以排在前面的`case`中定义的变量可以在排在后面的`case`中使用，但需要遵循下面的规则：不能跳过有初始值的变量的初始化行为。
+
+例如：
+
+```cpp
+switch (expr) {
+    case true:
+        // error-start
+        string file_name;		// 错误：有初始值，空串
+        int jval= 0;			// 错误：有初始值，0
+        // error-end
+        int ival;
+        break;
+    case false:
+        ival = next_num();		// 正确
+        if (file_name.empty())	// 错误：使用了一个未初始化的变量
+            // ...
+}
+```
+
+在`true`这个`case`中，我们初始化了几个变量，但实际上它们的初始化过程很有可能被跳过。
+
+而在`false`这个`case`中，`file_name`、`jval`、`ival`都是可见的，但如果是直接跳转到该`case`，那么这些变量都是未初始化的，但实际上在`true`这个`case`，`file_name`和`jval`这两个变量又进行了初始化，基于这种矛盾，C++ 不允许这样做，这个`switch`语句被判定为错误。所以且不说在`false`这个`case`中使用了`file_name.empty()`会导致出错，在`true`中定义`file_name`和`jval`这两个变量时就已经出错了。
+
+而如果只有`ival`一个变量存在，则不存在已初始化和未初始化这样的矛盾，所以不会出问题。
+
+如果希望消除掉这样的问题，那么可以在`true`中添加一个花括号，将变量的初始化语句放到这个花括号中，就不会出现这样的问题了。因为这样这个变量的作用域也和`switch`内部的作用域分离开了。但相对的，也只能在添加的花括号中才能使用这些变量了。
+
