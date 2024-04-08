@@ -2,3 +2,138 @@
 title: JavaScript
 ---
 
+## 一、使用 JavaScript
+
+JavaScript 是一个脚本语言，和一般的高级语言不同，高级语言处在编程语言中的第 3 层，而脚本语言则是处在编程语言中的第 4 层。
+
+在 HTML 中使用 JavaScript 需要注意的一点就是，浏览器会按照从上到下的顺序解析 HTML 文档，一旦解析到了 JavaScript 的部分，就会直接开始执行，而不是等除了 JavaScript 之外的 HTML 都解析完成之后才开始执行 JavaScript。
+
+在 HTML 中使用 JavaScript 有两种方法，他们的使用方法都是在 HTML 中插入`script`元素：
+
+### 1. 内嵌脚本
+
+用 JavaScript 作为`script`元素的内容即内嵌脚本：
+
+```html
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Example</title>
+    </head>
+    <body>
+        <!-- highlight-start -->
+        <script type="text/javascript">
+            document.writeln("Hello");
+        </script>
+        <!-- highlight-end -->
+        World!
+    </body>
+</html>
+```
+
+当浏览器解析到`script`元素时，就会直接执行其中的内容，`document.writeln("Hello");`的效果就是在页面中添加一个流内容，即文本“Hello”。
+
+**渲染效果**：
+
+![13](/imgs/Web应用开发/Web基础/13.png)
+
+
+
+### 2. 外部脚本
+
+在`script`内不填入具体的脚本内容，而通过添加`src`属性并绑定外部脚本文件名作为该属性值即可添加外部脚本：
+
+<Tabs>
+
+<TabItem value="html" label="index.html">
+
+```html
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Example</title>
+</head>
+<body>
+    <script src="script.js"></script>
+    World!
+</body>
+</html>
+```
+
+</TabItem>
+
+<TabItem value="js" label="script.js">
+
+```js
+document.writeln("Hello");
+```
+
+</TabItem>
+
+</Tabs>
+
+其渲染效果和上例相同，此处不再重复展出。
+
+
+
+## 二、语句
+
+JavaScript 的基本单位是语句。一条语句代表着一条命令，通常以分号结尾或直接换行。如果都添加分号，那么就可以在同一行书写几条语句。
+
+示例如下：
+
+```js
+document.writeln("This is a statement");
+document.writeln("This is also a statement");
+```
+
+等价于：
+
+```js
+document.writeln("This is a statement"); document.writeln("This is also a statement")
+```
+
+等价于
+
+```js
+document.writeln("This is a statement")
+document.writeln("This is also a statement")
+```
+
+
+
+## 三、函数
+
+如果想要在某处同一编写脚本，但不希望他们在同一处被运行，可以通过编写函数的方法进行。
+
+定义一个函数需要四个部分：`function`关键字，函数名，参数列表，函数体。
+
+示例如下：
+
+```js
+function myFunc(name, weather) {
+    document.writen("Hello " + name + ".");
+    document.writen("It is " + weather + " today");
+};
+```
+
+其中`function`关键字表明接下来的名字`myFunc`是一个函数。参数列表是由`()`包裹的几个由逗号`,`隔开的变量名，表示该函数接受两个参数，名字分别是`name`和`weather`。接下来的由`{}`包裹着的内容就是函数体，是调用这个函数时将会执行的内容。
+
+需要注意的是参数列表：当参数列表为空时，`()`需要保留，里面可以没有内容；参数不需要类型，函数也不需要返回类型，因为 JavaScript 是一个弱类型的语言。
+
+调用一个函数需要两个部分：函数名和参数列表对应的实参，例如上方函数的调用方法应该是：
+
+```js
+myFunc("Adam", "sunny");
+```
+
+**函数返回值**：
+
+定义函数时并不需要函数的返回类型，但函数实际上可以返回一个值，和其他高级编程语言一样，通过`return`语句来返回值。
+
+而函数调用表达式的求值结果也就是函数所返回的值。
+
+
+
+## 四、变量和类型
+
