@@ -74,3 +74,48 @@ inline const string & shorterString(const string &s1, const string &s2)
 
 
 ## 三、constexpr 函数
+
+`constexpr`函数是指返回常量表达式的函数，一个`constexpr`函数的函数调用可以当做一个常量表达式使用。
+
+定义一个`constexpr`函数需要满足以下条件：
+
+- 函数的返回类型以及所有形参的类型都得是字面值类型，函数声明和定义前需要添加`constexpr`关键字
+- 函数体中必须有且只有一条`return`语句
+- `constexpr`函数体内可以包含其他语句，只要这些语句在运行时不执行任何操作就行，例如空语句、类型别名、`using`声明。
+
+示例：
+
+```cpp
+constexpr int new_sz() { return 42; }
+```
+
+这样的一个函数调用可以被当做常量表达式进行使用：
+
+```cpp
+constexpr int foo = new_sz();
+```
+
+
+
+### 1. 不一定返回常量
+
+`constexpr`函数的返回值不一定返回一个常量，例如：
+
+```cpp
+constexpr size_t scale (size_t cnt)
+{
+    return new_sz() * cnt;
+}
+```
+
+当传入的`cnt`实参是一个常量表达式时，该函数返回一个常量表达式；而当传入的`cnt`实参不是一个常量表达式，那么该函数也就返回一个非常量表达式。
+
+由于这个函数满足上述所说的要求，所以并没有任何错误。但如果在一个需要常量表达式的地方调用了这个函数并提供了一个非常量表达式实参，那么编译器将会发出错误信息。
+
+
+
+### 2. constexpr 函数也是内联函数
+
+`constexpr`函数被隐式地指定为内联函数，也就是说，在每一个用到`constexpr`函数的地方都需要能知道它的实现，否则就会失去它的内联性。
+
+所以，通常将一个`constexpr`函数和内联函数一样定义在头文件中。
