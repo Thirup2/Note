@@ -1,0 +1,56 @@
+## 一、非成员函数
+
+我们除了定义包括成员函数在内的类的各种成员之外，通常还需要一些类外的函数，它们也算是这个类的接口部分，但其定义域却在类外，例如：
+
+```cpp
+class type {
+    int data = 0;
+public:
+    int getData() { return data; };
+};
+
+std::ostream & print(std::ostream &out, const type &item);
+```
+
+其中`print`函数就是一个非成员函数，它也是`type`这个类的接口。
+
+
+
+## 二、函数友元
+
+上例中的`print`函数，我们希望它能打印出一个`type`对象并返回用于输出的输出流对象。
+
+如果可能的话，我们自然希望能直接访问`type`对象中的`data`成员，例如：
+
+```cpp
+std::ostream & print(std::ostream &out, const type &item)
+{
+    return out << item.data;
+}
+```
+
+但这暂时是不可行的，因为`data`成员在`type`类型中是`private`的，而`print`函数位于类外无法访问类内`private`的成员，所以暂时只能通过`getData()`函数来间接的进行访问。
+
+我们可以将这个函数添加为类的友元来使其能够向类内成员一样访问其中的其他成员。
+
+向类内添加友元的方法就是在非成员函数前添加`friend`关键字并写在类定义中：
+
+```cpp
+class type {
+    int data = 0;
+public:
+    int getData() { return data; };
+    friend std::ostream & print(std::ostream &out, const type &item);
+};
+
+std::ostream & print(std::ostream &out, const type &item);
+```
+
+这样`print`函数就成了`type`类型的友元，这样就可以直接访问`type`类型对象的`data`成员了。
+
+
+
+## 五、注意事项
+
+- 友元虽然添加在类内，但它并不是类成员，所以不受其中的访问控制约束。
+- 友元声明并非真正的声明，特别是非成员函数，如果要使用这个函数，必须在类外对函数专门进行声明

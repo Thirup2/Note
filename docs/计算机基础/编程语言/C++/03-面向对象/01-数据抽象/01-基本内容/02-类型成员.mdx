@@ -1,0 +1,33 @@
+实际上，一个类型成员就是一个类型别名的声明：
+
+```cpp
+class type {
+public:
+    typedef std::string::size_type pos;
+private:
+    pos cursor = 0;
+    pos height = 0, width = 0;
+    std::string contents;
+};
+```
+
+其中`pos`就是一个类型成员，以此类推，使用`using`进行的类型别名定义也可以是一个类型成员。
+
+另外，由于`class`或`struct`定义的类也是一个类型，所以实际上一个类类型的声明或定义也可以是一个类型成员，但和类型别名不同的是，一个类类型的声明或定义更应该放在`private`中：
+
+```cpp
+class type {
+    class Impl;
+    Impl *pImpl;
+};
+```
+
+:::info 类型成员在使用前声明
+
+类型成员应该在使用前进行声明。
+
+对于仅进行了声明的类型成员，例如类类型的前置声明，则后续按照其限制条件使用；
+
+对于定义了的类型成员，例如类型别名，则可以完全地使用该类型。
+
+:::

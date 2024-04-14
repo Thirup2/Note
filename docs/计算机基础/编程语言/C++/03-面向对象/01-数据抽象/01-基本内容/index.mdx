@@ -1,0 +1,190 @@
+---
+title: 基本内容
+---
+
+## 一、类的声明与定义
+
+### 1. 声明
+
+和其他类型一样，类类型也可以单独进行声明和定义。如下所示的形式就是一个类类型的声明：
+
+```cpp
+class type;
+struct type;
+```
+
+这样就声明了一个类类型`type`，这种声明有时被称作**前向声明**。在它的声明之后定义之前是一个**不完全类型**，只能在以下的情景使用：
+
+- 定义指向这种类型的指针或引用
+- 声明（但不能定义）以不完全类型作为参数或者返回类型的函数
+
+
+
+### 2. 定义
+
+在声明后加上花括号就可以定义一个类类型了，例如：
+
+```cpp
+class type {
+    // ...
+};
+
+struct type {
+    // ...
+};
+```
+
+在类的定义中可以包含的内容有：
+
+- 数据成员：定义这个类型所包含的数据，对类类型使用`sizeof`运算符得到的结果就是数据成员（不包括静态数据成员）所占的空间
+- 类型成员：在类中定义的类型，只有类内可以使用（或者类外使用作用域运算符）
+- 成员函数：声明在类中的函数
+- 友元：声明并定义在类外，但可以访问类内`private`成员
+
+:::info 别忘了类定义后的分号
+
+类定义体后面的分号是必需的。因为`class type { }`这一部分既是类定义也是一个类型说明符，可以直接在后面添加标识符来创建该类型的对象，所以必须添加分号来表示结束。
+
+:::
+
+
+
+## 二、使用类类型
+
+### 1. 类类型
+
+每个类定义了唯一的类型，对于两个类来说，即使它们的内容完全相同，这两个类也是两个不同的类型，例如：
+
+```cpp
+struct First {
+    int memi;
+    int getMem();
+};
+
+struct Second {
+    int memi;
+    int getMem();
+};
+
+First obj1;
+// error-next-line
+Second obj2 = obj1;		// 错误：obj1 和 obj2 类型不同
+```
+
+
+
+### 2. 使用类类型
+
+在类类型定义时，`class type { }`可以当做类型说明符使用，如果在定义完成后，`class type`和`type`都可以当做类型说明符使用，既可以按如下所示的格式使用类类型：
+
+```cpp
+class type {
+    // ...
+} item1;
+
+class type item2;
+type item3;
+```
+
+其中`class type item2;`的形式实际上是来自于 C 语言。
+
+
+
+## 三、访问控制
+
+在类定义中可以使用**访问说明符**来控制每个成员对用户是否可见：
+
+- `public`：声明在`public`说明符之后下一个说明符之前的内容对用户可见
+- `private`：声明在`private`说明符之后下一个说明符之前的内容对用户隐藏
+
+例如：
+
+```cpp
+class type
+{
+private:
+    int memi;
+public:
+    int getMem();
+};
+```
+
+其中如果用户创建了一个该类型的对象，那么只能调用`getMem()`这个成员函数，而不能直接访问`memi`这个数据成员。
+
+:::info struct 与 class 的区别
+
+可以看到无论是`struct`还是`class`都可以用于定义类类型，并且看上去没什么区别。
+
+实际上它们之间的唯一区别就在于默认访问权限不同，如果一个类类型定义如下：
+
+```cpp
+class type {
+    int memi;
+public:
+    int getMem();
+};
+
+// 或者
+
+struct type {
+    int memi;
+public:
+    int getMem();
+};
+```
+
+其中`memi`这个数据成员没有任何访问说明符进行控制，但对于`class`，这个成员默认是`private`的，而对于`struct`，这个成员则默认是`public`的。
+
+:::
+
+
+
+## 四、在类外定义成员
+
+类内的子类类型以及成员函数都可以只进行声明，而定义在类外。
+
+当这些成员在类外定义时，需要使用作用域运算符来表示定义的是该类内的成员，否则定义的将是另一个与之不相关的内容：
+
+<Tabs>
+
+<TabItem value="dec" label="声明">
+
+```cpp
+class type {
+    class Impl;
+    Impl *pImpl;
+public:
+    type();
+    std::string content() const;
+    // ...
+};
+```
+
+</TabItem>
+
+<TabItem value="def" label="定义">
+
+```cpp
+class type::Impl {
+    std::string str("Hello World");
+};
+type::type() = default;
+std::string content() const
+{
+    return str;
+}
+```
+
+</TabItem>
+
+</Tabs>
+
+可以看到在声明中的`class Impl`、`type()`、`std::string content() const`这三个部分在类外定义的时候都在前面添加了`type::`作用域运算符。
+
+对于定义在类外的内容，以下几个部分需要添加作用域运算符：
+
+- 子类类型名
+- 成员函数名
+- 成员函数返回类型如果是类内定义的类型，也需要使用作用域运算符
+
+而对于子类类型的定义内容，成员函数的函数体内容，如果它们也是类内定义的类型或成员，则无需添加作用域运算符。

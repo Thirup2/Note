@@ -1,0 +1,69 @@
+## 一、内容
+
+数据成员可以是任何已存在的类型，包括在类中刚声明的类型：
+
+```cpp
+class type {
+public:
+    typedef unsigned size_type;
+    class Impl;
+private:
+    int data;
+    size_type size;
+    Impl *pImpl;
+    type *ptype;
+public:
+    // ...
+};
+```
+
+其中`data`的类型为已存在的类型；`size`的类型是刚定义的类型；`pImpl`的类型是刚声明但未定义的类型。甚至也可以是指向类本身的指针或引用，例如`ptype`；
+
+需要注意的是，如果包含只声明了但未定义的类型，则在编译单元中必须包含这个类型的定义，否则无法编译成功。
+
+
+
+## 二、类内初始值
+
+数据成员在类内定义时可以给它一个初始值，这个初始值称为**类内初始值**。这个初始值在编译器合成的默认构造函数中会用到，例如：
+
+```cpp
+class type {
+    int width = 80;
+    int hight = 24;
+public:
+    // ...
+};
+```
+
+如果我们创建一个`type`类型的对象并执行默认初始化，例如：
+
+```cpp
+type item;
+```
+
+那么`item`中所包含的数据成员就会被初始化为`width = 80`、`hight = 24`；
+
+> 类内初始值必须以`=`或花括号表示。
+
+
+
+## 三、可变数据成员
+
+当我们声明一个`const`的类类型对象时，它的所有数据成员也将变成`const`的，如果有些数据成员我们仍然希望在成员函数中进行修改，则需要将其声明为**可变数据成员**。
+
+具体方法是在变量的声明中加入`mutable`关键字：
+
+```cpp
+class type {
+    int data = 0;
+    mutable double rate = 0.15;
+public:
+    void changeRate(double newRate) const { rate = newRate; };
+};
+
+const type item;
+item.changeRate(0.2);
+```
+
+正常来说，如果不添加`mutable`关键字，在`changeRate`函数中是无法改变`rate`成员的值的，而添加了`mutable`关键字而声明为可变数据成员之后，该成员将永远不会是`const`，即使它是`const`对象的成员。因此，一个`const`成员函数可以改变一个可变成员的值。
