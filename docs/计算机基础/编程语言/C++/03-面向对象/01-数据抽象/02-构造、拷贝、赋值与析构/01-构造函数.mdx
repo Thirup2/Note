@@ -14,6 +14,14 @@ public:
 
 如果不声明和定义任何构造函数，那么编译器将会合成默认构造函数。
 
+需要注意的是如果创建对象时使用默认构造函数，不需要添加`()`，否则会变成一个类类型函数的声明语句：
+
+```cpp
+type item();
+```
+
+如上，定义了一个返回`type`类型的函数`item`，而不是`type`类型的对象。
+
 
 
 ## 二、合成的默认构造函数
@@ -45,3 +53,146 @@ Sales_data(const std::string &s, unsigned n, double p):
 
 当某个数据成员被构造函数初始值列表忽略时，它将与合成默认构造函数相同的方式隐式初始化。
 
+### 初始值列表的作用
+
+如果没有在构造函数的初始值列表中显式地初始化成员，则该成员将在构造函数体之前执行默认初始化。
+
+你可以在函数体内为成员赋值以达到类似的效果：
+
+```cpp
+Sales_data::Sales_data(const string &s, unsigned cnt, double price)
+{
+    bookNo = s;
+    units_sold = cnt;
+    revenue = cnt * price;
+}
+```
+
+然而需要特别注意，这样的构造函数体内的内容并非初始化操作，而是赋值操作。
+
+**缺点**：
+
+- 一个构造函数会先根据初始值列表进行初始化，然后执行函数体内的内容，函数体可以为空。当没有初始值列表时，会先执行默认初始化，然后执行函数体。对于上面的例子而言，相当于先进行了默认初始化，然后再依次给他们赋值，很显然多了很多冗余操作。
+- 另外由于函数体内的操作是赋值而非初始化，那么对于有些类型这样的操作就是错误的，例如成员是`const`或者引用时，是必须进行初始化的。当成员属于某种类类型且该类没有定义默认构造函数时，也必须将这个成员初始化。
+
+### 成员初始化的顺序
+
+初始值列表中的成员可以以任何顺序出现，但它们的执行顺序却不一定按照初始值列表中列出的顺序。
+
+成员的初始化顺序与它们在类定义中的出现顺序一致，初始值列表中初始值的前后位置关系不会影响实际的初始化顺序。
+
+如果一个成员是用另一个成员来初始化的，那么这两个成员的初始化顺序就很关键了：
+
+```cpp
+class X {
+    int i;
+    int j;
+public:
+    // error-next-line
+    X(int val): j(val), i(j) { }		// i 先被初始化，但它的初始值 j 还未初始化，故 i 被初始化为垃圾值
+};
+```
+
+
+
+## 四、委托构造函数
+
+如果我们有一个类如下所示：
+
+```cpp
+class Sales_data {
+    std::string str;
+	unsigned num;
+    double price;
+public:
+    Sales_data();
+    Sales_data(std::string s);
+    Sales_data(std::string s, unsigned cnt, double rate);
+}
+```
+
+在上面我们声明了三个构造函数，它们可以像下面这样实现：
+
+```cpp
+Sales_data::Sales_data(): 
+	str(""), num(0), price(0) { }
+Sales_data::Sales_data(std::string s):
+	str(s), num(0), price(0) { }
+Sales_data::Sales_data(std::string s, unsigned cnt, double rate):
+	str(s), num(cnt), price(rate) { }
+```
+
+但实际上它们都进行了类似的初始化，为每一个成员都提供了初始值，这样的初始值列表可以换成**委托构造函数**的形式：
+
+```cpp
+Sales_data::Sales_data():
+	Sales_data("", 0, 0) { }
+Sales_data::Sales_data(std::string s):
+	Sales_data(s, 0, 0) { }
+Sales_data::Sales_data(std::string s, unsigned cnt, double rate):
+	str(s), num(cnt), price(rate) { }
+```
+
+使用这样的形式更简洁便利，并且如果受委托的构造函数（如上例中第三个函数）的函数体中还定义了内容，并且另外两个构造函数也需要相同的函数体，那么委托构造函数就只需要定义一次该函数体即可，委托构造函数会先执行被委托的构造函数执行完初始值列表和函数体后才回到委托构造函数的函数体执行。
+
+
+
+## 五、类类型转换
+
+只接受一个参数的构造函数定义了一个其他类型向该类类型的转换规则。例如：
+
+```cpp
+class type {
+    int a = 0;
+    int b = 0;
+public:
+    type(int n): a(n), b(n) { }
+    add(const type &obj) {
+        a += obj.a;
+        b += obj.b;
+    }
+};
+```
+
+这样我们就有了一个从`int`类型向`type`类型的转换规则了，并且还是**隐式转换**。在一个需要`type`类型的地方，都可以使用一个`int`类型代替：
+
+```cpp
+type obj(10);
+obj.add(10);
+```
+
+`add`函数接受一个`type`类型，而我们只填入了一个`int`类型的字面值，它可以转换为`type`类型。
+
+当然，定义了隐式转换的类型也可以进行显式类型转换。
+
+### 只允许一步隐式类类型转换
+
+如果我们定义了由`type1`到`type2`的隐式转换，并定义了`type2`到`type3`的隐式转换，也不能直接由`type1`隐式转换为`type3`，如果想实现这个过程，必须将`type1`到`type2`的转换或`type2`到`type3`的转换改写成隐式转换的形式。
+
+### 抑制隐式转换
+
+实际上我们并不想要一个`int`到`type`类型的隐式转换，我们可以通过将构造函数声明为`explicit`的来加以阻止：
+
+```cpp
+class type {
+    // ...
+    explicit type(int n): a(n), b(n) { }
+    // ...
+};
+```
+
+这样从`int`到`type`就无法进行隐式转换了。
+
+注：`explicit`关键字只在类内构造函数声明时使用，不能在其他地方重复。
+
+### explicit 构造函数的使用
+
+一个声明为`explicit`的构造函数只能用于直接初始化，而不能用于拷贝形式的初始化，例如：
+
+```cpp
+type item(n);
+// error-next-line
+type item = n;		// 错误
+```
+
+之所以会发生错误，是因为拷贝初始化接受的是一个`type`类型的对象，所以会发生`n`向该类型的隐式转换，所以会出错。

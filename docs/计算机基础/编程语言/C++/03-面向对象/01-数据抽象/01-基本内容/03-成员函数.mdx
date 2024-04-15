@@ -62,6 +62,32 @@ int type::getData() const
 
 `const`关键字的位置无论是声明还是定义都必须有，因为它影响了默认参数`this`的类型，如果声明和定义不相同，那将是两个重载函数。
 
+### 基于 const 的重载
+
+由于添加和不添加`const`是两个不同的函数，所以这样的两个同名成员函数也可以重载，例如希望接受非`const`时返回非`const`，接受`const`时返回`const`这种情况下，可以像下面这样定义两个函数：
+
+```cpp
+class Screen {
+public:
+    Screen &display(std::ostream &os) {
+        do_display(os);
+        return *this;
+    }
+    const Screen &display(std::ostream &os) const
+    {
+        do_display(os);
+        return *this;
+    }
+private:
+    void do_display(std::ostream &os) const
+    {
+        os << contents;
+    }
+};
+```
+
+这类基于`const`的重载通常只在类型上有所区别，但在执行的操作上基本是统一的，所以让它们的操作统一出现在一处是最好的选择。在上例中则是定义了一个`private`的函数`do_display`。
+
 
 
 ## 四、成员函数与内联

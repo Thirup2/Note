@@ -1,0 +1,145 @@
+## 一、声明静态成员
+
+类的静态成员是属于类本身的，而不是与类的各个对象向关联。例如，一个银行账户类可能需要一个数据成员来表示当前的基准利率。而这个利率不应该与每个对象所绑定，而应该与这个类型本身所绑定。
+
+我们通过在成员的声明之前加上关键字`static`使得其与类关联在一起。和其他成员一样，静态成员可以是`public`或`private`的。静态数据成员的类型可以是常量、引用、指针、类类型等。而静态成员函数也不与任何对象绑定在一起，所以它们不会默认传入`this`指针，也就不存在声明为`const`成员函数的说法。
+
+例如：
+
+```cpp
+class Account {
+public:
+    void calculate() { amount += amount * interestRate; }
+    static double rate() { return interestRate; }
+    static void rate(double);
+private:
+    std::string owner;
+    double amount;
+    static double interestRate;
+    static double initRate();
+};
+```
+
+
+
+## 二、定义静态成员
+
+和其他成员相同，静态成员可以定义在类内，例如上面的第一个`rate()`函数。
+
+相同的，它也可以定义在类外，需要注意的是，`static`关键字只能出现在类内静态成员的声明处：
+
+```cpp
+void Account::rate(double newRate)
+{
+    interestRate = newRate;
+}
+```
+
+
+
+## 三、初始化
+
+静态数据成员不属于类的任何一个对象，所以他们并不由类的构造函数初始化。
+
+通常情况下，静态数据成员的初始化应该和其他非内联函数的定义放在同一个文件中，例如：
+
+```cpp
+double Account::interestRate = initRate();
+```
+
+但也可以为静态成员提供`const`整数类型的类内初始值，不过要求静态成员必须是字面值常量类型的`constexpr`，例如：
+
+```cpp
+class Account {
+	// ...
+    static constexpr int period = 30;
+    // ...
+};
+```
+
+并且，即使一个常量静态数据成员在类内部被初始化了，通常情况下也应该在类的外部定义一下该成员：
+
+```cpp
+class Account {
+    // ...
+    static constexpr int period = 30;
+    // ...
+};
+constexpr int Account::period;
+```
+
+
+
+## 四、使用静态成员
+
+### 1. 类名调用
+
+我们可以使用作用域运算符直接访问静态成员：
+
+```cpp
+double r = Account::rate();
+```
+
+
+
+### 2. 类对象调用
+
+虽然静态成员不属于类的某个对象，但是我们仍然能使用类的对象、引用或者指针来访问静态成员：
+
+```cpp
+Account ac1;
+Account *ac2 = &ac1;
+
+// highlight-start
+r = ac1.rate();
+r = ac2->rate();
+// highlight-end
+```
+
+
+
+### 3. 成员函数调用
+
+成员函数仍然和之前一样，不需要通过作用域运算符就能直接使用静态成员：
+
+```cpp
+class Account {
+public:
+    // highlight-next-line
+    void calculate() { amount += amount * interestRate; }
+private:
+    static double interestRate;
+    // ...
+};
+```
+
+
+
+## 五、静态成员的特殊用法
+
+- 静态数据成员的类型可以是不完全类型
+
+  ```cpp
+  class Bar {
+  public:
+      // ...
+  private:
+      // highlight-next-line
+      static Bar mem1;
+      Bar *mem2;
+      // error-next-line
+      Bar mem3;
+  };
+  ```
+
+- 静态成员可以用作默认实参
+
+  ```cpp
+  class Screen {
+  public:
+      Screen &clear(char = bkground);
+  private:
+      static const char bkground;
+  };
+  ```
+
