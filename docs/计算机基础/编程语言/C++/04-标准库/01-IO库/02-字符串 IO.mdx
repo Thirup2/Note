@@ -1,0 +1,95 @@
+## 一、使用字符串 IO
+
+`sstream`头文件定义了三个类型，这些类型可以向`string`写入数据，从`string`读取数据。
+
+`istringstream`从`string`读取数据，`ostringstream`向`string`写入数据，而`stringstream`既可从`string`读数据也可向`string`写数据。
+
+除了通用的操作外，`sstream`还支持以下操作：
+
+| 操作                                                         | 效果                                   |
+| ------------------------------------------------------------ | -------------------------------------- |
+| `sstream strm;`（`sstream`是一个字符串 IO 类型，`strm`是一个字符串 IO 类型的对象） | `strm`是一个未绑定的`stringstream`对象 |
+| `sstream strm(s)`                                            | `strm`保存`string s`的一个拷贝         |
+| `strm.str()`                                                 | 返回`strm`所保存的`string`的拷贝       |
+| `strm.str(s)`                                                | 将`string s`拷贝到`strm`中。返回`void` |
+
+
+
+## 二、工作原理
+
+每一个`sstream`类型的对象都包含了一个`string`类型的成员，如果执行默认初始化，则该`string`对象为空串。如果提供一个`string`类型的参数，该成员就将被初始化为该参数的值。
+
+我们可以通过成员函数`str()`来获取到这个`string`类型的字符串。而携带一个`string`类型参数的`str(s)`成员函数则可以将这个`sstream`对象中的`string`数据成员替换为新参数`s`的值。
+
+通过`<<`和`>>`操作符，我们可以将内容写入到`sstream`对象中的`string`成员或从该成员中读取内容。
+
+:::info string IO 的初始值是拷贝而非链接
+
+需要注意的是，初始化一个`sstream`类型的对象时提供的参数是被拷贝到这个流对象中而非流对象链接到了这个参数，从这个`sstream`对象读取值以及向该对象写入内容并不会导致原字符串发生任何改变。
+
+:::
+
+
+
+## 三、用途
+
+### 1. ostringstream
+
+字符串输出流在将一种类型转换成`string`类型时很有用：
+
+```cpp
+class two {
+    int x;
+    int y;
+public:
+    const std::string toString() const
+    {
+        // highlight-start
+        std::ostringstream result;
+        result << "(" << x << ", " << y << ")";
+        return result.str();
+        // highlight-end
+    }
+};
+```
+
+试想一下如果不使用`ostringstream`进行构造一个`string`对象，应该怎么做。很显然，我们需要将`x`和`y`两个整数成员先转换成`string`对象，然后再将它们合成一个`string`对象，再进行返回。
+
+对这种用途进行延伸，可以得到更多其他的用途。
+
+
+
+### 2. istringstream
+
+字符串输入流的用途不如字符串输出流那样常用，但也肯定是有的。
+
+试想以下这样的情况，我们首先需要从文件或标准输入中一行一行地读取数据，每一行中以一个名字开头，后面跟着至少 1 个电话号码，由于每一行的电话号码数量不确定，所以不能按照 1 个名字，1 个号码这样的顺序从文件或标准输入中依次读取，只能一次读取一行内容到一个`string`对象中。
+
+接下来，我们就需要用`istringstream`对象，首先用刚读取的一行初始化这个对象，然后再从这个对象获取输入到具体的对象中，例如先读取一个名字保存在一个`string`对象中，再读取多个号码保存到一个`vector<string>`对象中。
+
+```cpp
+struct PersonInfo {
+    string name;
+    vector<string> phones;
+};
+
+string line, word;
+vector<PersonInfo> people;
+while(getline(cin, line)) {
+    PersonInfo info;
+    // highlight-start
+    istringstream record(line);
+    record >> info.name;
+    while (record >> word) {
+        info.phones.push_back(word);
+    }
+    // highlight-end
+    people.push_back(info);
+}
+```
+
+
+
+## 四、注意事项
+
+- 当一个字符串输入流对象中的`string`成员中的数据被全部读出后，也会触发`eof`信号
