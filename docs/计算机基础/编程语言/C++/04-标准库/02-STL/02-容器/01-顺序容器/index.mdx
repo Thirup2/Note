@@ -25,77 +25,7 @@ title: 顺序容器
 
 
 
-## 二、顺序容器操作
-
-- 定义和初始化（<Highlight color="#25c2a0">array 不支持</Highlight>）
-
-  | 操作          | 效果                                                         |
-  | ------------- | ------------------------------------------------------------ |
-  | `C seq(n)`    | `seq`包含`n`个元素，这些元素进行了值初始化。（<Highlight color="#25c2a0">string 不支持</Highlight>） |
-  | `C seq(n, t)` | `seq`包含`n`个初始化为值`t`的元素                            |
-
-- 赋值（<Highlight color="#25c2a0">array 不支持</Highlight>）
-
-  | 操作               | 效果                                                         |
-  | ------------------ | ------------------------------------------------------------ |
-  | `seq.assign(b, e)` | 将`seq`中的元素替换为迭代器`b`和`e`所表示范围内的元素。迭代器`b`和`e`不能指向`seq`中的元素 |
-  | `seq.assign(il)`   | 将`seq`中的元素替换为初始化列表（`initializer_list`）`il`中的元素 |
-  | `seq.assign(n, t)` | 将`seq`中的元素替换为`n`个值为`t`的元素                      |
-
-- 插入元素（<Highlight color="#25c2a0">array 不支持</Highlight>）
-
-  | 操作                                           | 效果                                                         |
-  | ---------------------------------------------- | ------------------------------------------------------------ |
-  | `c.push_back(t)`<br />`c.emplace_back(args)`   | 在`c`的尾部创建一个值为`t`或由`args`创建的元素。返回`void`（<Highlight color="#25c2a0">forward_list 不支持</Highlight>） |
-  | `c.push_front(t)`<br />`c.emplace_front(args)` | 在`c`的头部创建一个值为`t`或由`args`创建的元素。返账`void`（<Highlight color="#25c2a0">vector 和 string 不支持</Highlight>） |
-  | `c.insert(p, t)`<br />`c.emplace(p, args)`     | 在迭代器`p`指向的元素之前创建一个值为`t`或由`args`创建的元素<br />返回指向新添加的元素的迭代器 |
-  | `c.insert(p, n, t)`                            | 在迭代器`p`指向的元素之前插入`n`个值为`t`的元素。<br />返回指向新添加的第一个元素的迭代器；若`n`为 0，返回`p` |
-  | `c.insert(p, b, e)`                            | 将迭代器`b`和`e`指定范围内的元素插入到迭代器`p`指向的元素之前。`b`和`e`不能指向`c`中的元素。<br />返回指向新添加的第一个元素的迭代器；若范围为空，则返回`p` |
-  | `c.insert(p, il)`                              | `il`是一个`initializer_list`的元素值列表。将这些给定值插入到迭代器`p`指向的元素之前。<br />返回指向新添加的第一个元素的迭代器，若列表为空，则返回`p` |
-
-  注：`forward_list`有自己的专有版本的`insert`和`emplace`，不使用上表中的`insert`和`emplace`
-
-- 访问元素
-
-  | 操作        | 效果                                                         |
-  | ----------- | ------------------------------------------------------------ |
-  | `c.back()`  | 返回`c`中尾元素的引用。若`c`为空，函数行为未定义（<Highlight color="#25c2a0">forward_list 不支持</Highlight>） |
-  | `c.front()` | 返回`c`中首元素的引用。若`c`为空，函数行为未定义             |
-  | `c[n]`      | 返回`c`中下标为`n`的元素的引用。下标越界时行为未定义（<Highlight color="#25c2a0">只适用于 string、vector、deque、array</Highlight>） |
-  | `c.at(n)`   | 返回下标为`n`的元素的引用。下标越界时，抛出`out_of_range`异常（<Highlight color="#25c2a0">只适用于 string、vector、deque、array</Highlight>） |
-
-- 删除元素（<Highlight color="#25c2a0">array 不支持</Highlight>）
-
-  | 操作            | 效果                                                         |
-  | --------------- | ------------------------------------------------------------ |
-  | `c.pop_back()`  | 删除`c`中尾元素。若`c`为空，函数行为未定义。返回`void`（<Highlight color="#25c2a0">forward_list 不支持</Highlight>） |
-  | `c.pop_front()` | 删除`c`中首元素。若`c`为空，函数行为未定义。返回`void`（<Highlight color="#25c2a0">vector、string 不支持</Highlight>） |
-  | `c.erase(p)`    | 删除迭代器`p`所指定的元素，返回一个指向被删元素之后元素的迭代器<br />若`p`指向尾元素，则返回尾后迭代器。<br />若`p`是尾喉迭代器，则函数行为未定义 |
-  | `c.erase(b, e)` | 删除迭代器`b`和`e`所指范围内的元素，返回一个指向最后一个被删元素之后元素的迭代器<br />若`e`本身就是尾后迭代器，则函数也返回尾后迭代器 |
-  | `c.clear()`     | 删除`c`中所有元素。返回`void`                                |
-
-  注：`forward_list`有特殊版本的`erase`，不使用上表中的`erase`
-
-- 改变容器大小（<Highlight color="#25c2a0">array 不支持</Highlight>）
-
-  | 操作             | 效果                                                         |
-  | ---------------- | ------------------------------------------------------------ |
-  | `c.resize(n)`    | 调整`c`的大小为`n`个元素。<br />若`n<c.size()`，则多出的元素被丢弃。若必须添加新元素，对新元素进行值初始化 |
-  | `c.resize(n, t)` | 调整`c`的大小为`n`个元素。<br />任何新添加的元素都初始化为值`t` |
-  
-- 管理容量（<Highlight color="#25c2a0">仅 vector、string、deque 支持</Highlight>）
-
-  | 操作                | 效果                                                         |
-  | ------------------- | ------------------------------------------------------------ |
-  | `c.shrink_to_fit()` | 请求将`capacity()`减少为与`size()`相同的大小，具体实现可以忽略此请求。 |
-  | `c.capacity()`      | 返回当前容器的容量（<Highlight color="#25c2a0">deque 不支持</Highlight>） |
-  | `c.reserve(n)`      | 分配至少能容纳`n`个元素的内存空间，只有当`n>size()`时才重新分配（<Highlight color="#25c2a0">deque 不支持</Highlight>） |
-
-  注：容量管理操作是来源于`vector`、`string`和`deque`的实现方式，由于它们采用动态分配内存的方式实现，所以可以对实际的容量进行管理。
-
-
-
-## 三、迭代器失效
+## 二、迭代器失效
 
 向容器中添加元素和从容器中删除元素的操作可能会使指向容器元素的指针、引用或迭代器失效。一个失效的指针、引用或迭代器将不再表示任何元素。
 
