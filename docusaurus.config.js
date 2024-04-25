@@ -120,8 +120,13 @@ const config = {
             items: [
               {
                 type: 'docSidebar',
-                sidebarId: 'DSA_in_C',
-                label: '数据结构与算法-C语言实现',
+                sidebarId: 'DataStructures',
+                label: '数据结构总结',
+              },
+              {
+                type: 'docSidebar',
+                sidebarId: 'Algorithms',
+                label: '算法总结与分析',
               },
             ],
           },
