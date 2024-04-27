@@ -1,0 +1,48 @@
+## 一、标准库名字
+
+标准库中的大部分名字都属于命名空间`std`，如果要使用这些名字，需要使用作用域操作符（`::`）来使用这些名字，例如：
+
+```cpp
+std::cout << "Hello World" << std::endl;
+```
+
+
+
+## 二、using 声明
+
+如果觉得这样使用名字过于麻烦，而且自己的程序里也不会出现和标准库的名字同名的名字，那么可以使用`using`声明来避免重复使用`std::`这样的前缀。
+
+`using`声明有两种使用方式：
+
+- 声明单个名字
+
+  ```cpp
+  using std::cout;
+  using std::endl;
+  
+  int a;
+  // highlight-start
+  std::cin >> a;					// 未声明的名字仍然要使用 std:: 声明作用域
+  cout << "Hello World" << endl;	// 已声明的名字可以不使用 std:: 声明作用域
+  // highlight-end
+  ```
+
+- 声明整个命名空间
+
+  ```cpp
+  using namespace std;
+  
+  int a;
+  // highlight-start
+  // 所有 std:: 名字都可以不使用作用域声明
+  cin >> a;
+  cout << "Hello World" << endl;
+  // highlight-end
+  ```
+
+
+
+## 三、注意事项
+
+- 头文件中不应该包含`using`声明，因为会包含这个头文件的代码可以会有很多，我们并不能保证每一个使用这个头文件的用户不会使用和标准库中一样的名字。
+
