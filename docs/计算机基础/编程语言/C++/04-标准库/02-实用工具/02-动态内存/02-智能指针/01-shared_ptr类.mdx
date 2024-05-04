@@ -22,6 +22,10 @@
 | `p.use_count()`                                    | 返回与`p`共享对象的智能指针数量；可能很慢，主要用于调试      |
 | `p.reset()`<br />`p.reset(q)`<br />`p.reset(q, d)` | 若`p`是唯一指向其对象的`shared_ptr`，`reset`会释放此对象；<br />若传递了可选的参数内置指针`q`，会令`p`指向`q`，否则会将`p`置为空；<br />若还传递了参数`d`，将会调用`d`而不是`delete`来释放`q` |
 
+除此之外，`shared_ptr`还定义了一个类型转换：
+
+- 从`shared_ptr`到`bool`值的转换，当`shared_ptr`对象指向一个对象时，则为`true`，否则为`false`
+
 
 
 ## 二、shared_ptr 模型

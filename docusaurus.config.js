@@ -101,11 +101,11 @@ const config = {
             position: 'left',
             label: '编程语言',
             items: [
-              // {
-              //   type: 'docSidebar',
-              //   sidebarId: 'C_Language',
-              //   label: 'C 语言',
-              // },
+              {
+                type: 'docSidebar',
+                sidebarId: 'C_Language',
+                label: 'C 语言',
+              },
               {
                 type: 'docSidebar',
                 sidebarId: 'CPP_Language',

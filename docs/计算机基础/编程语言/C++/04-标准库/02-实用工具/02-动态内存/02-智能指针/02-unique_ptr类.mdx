@@ -1,0 +1,97 @@
+## 一、操作
+
+`unique_ptr`和`shared_ptr`不同，某个时刻只能有一个`unique_ptr`指向一个给定对象，当`unique_ptr`被销毁时，它所指向的对象也将被销毁。
+
+从模型上来说，虽然并不清楚其具体的实现，但可以适当假设`unique_ptr`并没有引用计数和弱引用计数，甚至可以没有控制块，而只包含一个指针直接指向分配的动态内存，而其析构函数执行的操作为首先释放动态内存，随后销毁`unique_ptr`本身。
+
+其支持的操作如下表所示：
+
+| 操作                                                  | 效果                                                         |
+| ----------------------------------------------------- | ------------------------------------------------------------ |
+| `unique_ptr<T> up`                                    | 空`unique_ptr`，可以指向类型为`T`的对象                      |
+| `unique_ptr<T, D> up(d)`                              | 空`unique_ptr`，指向类型为`T`的对象，用类型为`D`的对象`d`代替`delete` |
+| `unique_ptr<T> up(p)`                                 | 用内置指针`p`初始化`up`，`explicit`的，不能拷贝              |
+| `unique_ptr<T, D> up(p, d)`                           | 用内置指针`p`初始化`up`，并用类型为`D`的对象`d`代替`delete`  |
+| `*p`                                                  | 解引用`p`，获得它指向的对象                                  |
+| `p->mem`                                              | 等价于`(*p).mem`                                             |
+| `p.get()`                                             | 返回`p`中保存的指针                                          |
+| `swap(p, q)`<br />`p.swap(q)`                         | 交换`p`和`q`中的指针                                         |
+| `u = nullptr`                                         | 释放`u`指向的对象，将`u`置为空                               |
+| `u.release()`                                         | `u`放弃对指针的控制权，返回指针，并将`u`置为空               |
+| `u.reset()`<br />`u.reset(q)`<br />`u.reset(nullptr)` | 释放`u`指向的对象。<br />如果提供了内置指针`q`，令`u`指向这个对象；<br />否则将`u`置为空 |
+
+除此之外，`unique_ptr`还定义了一个类型转换：
+
+- 从`unique_ptr`到`bool`值的转换：当`unique_ptr`对象指向一个对象时，则为`true`，否则为`false`
+
+
+
+
+
+## 二、操作解析
+
+### 1. 初始化
+
+与`shared_ptr`不同，没有类似`make_shared_ptr`的标准库函数返回一个`unique_ptr`，当我们定义一个`unique_ptr`时，需要将其绑定到一个`new`返回的指针上。类似`shared_ptr`，初始化`unique_ptr`必须采用直接初始化形式：
+
+```cpp
+unique_ptr<double> p1;
+unique_ptr<int> p2(new int(42));
+```
+
+由于一个`unique_ptr`拥有它指向的对象，因此`unique_ptr`不支持普通的拷贝或赋值操作，例如：
+
+```cpp
+// error-start
+unique_ptr<int> p3(p2);			// 错误：不能拷贝
+p3 = p2;						// 错误：不允许赋值
+// error-end
+```
+
+当然，即便如此仍然可以使两个`unique_ptr`指向同一块内存：
+
+```cpp
+int *pi = new int(42);
+unique_ptr<int> p1(pi);
+unique_ptr<int> p2(pi);
+```
+
+但和`shared_ptr`一样，如此混用内置指针和智能指针会导致很多问题，最好还是不要这样做。
+
+
+
+### 2. 特殊的拷贝
+
+当传递`unique_ptr`作为参数类型或返回`unique_ptr`作为返回值类型时，此时的拷贝是有效的：
+
+```cpp
+unique_ptr<int> clone(int p) {
+    return unique_ptr<int> (new int(p));
+}
+
+unique_ptr<int> clone(int p) {
+    unique_ptr<int> ret(new int(p));
+    return ret;
+}
+```
+
+在此情况下，编译器执行一种特殊的“拷贝”，即移动拷贝。
+
+
+
+### 3. 传递删除器
+
+和`shared_ptr`不同，`unique_ptr`传递删除器之前需要在实例化步骤显式给出删除器的类型，而`shared_ptr`不需要。
+
+我们必须在尖括号中`unique_ptr`指向类型之后提供删除器类型，在创建或`reset`一个`unique_ptr`类型的对象时，必须提供一个指定类型的可调用对象（删除器）：
+
+```cpp
+void f(destination &d)
+{
+    connection c = connect(&d);
+    unique_ptr<connection, decltype(end_connection)*>
+        p(&c, end_connection);
+}
+```
+
+需要显式提供删除器的场景仍然是在托管一些没有析构函数的类型的对象或管理不能由`delete`释放的内存时有用。
