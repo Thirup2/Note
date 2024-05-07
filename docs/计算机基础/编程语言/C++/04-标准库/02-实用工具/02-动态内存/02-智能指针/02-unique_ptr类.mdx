@@ -1,4 +1,4 @@
-## 一、操作
+## 一、基本操作
 
 `unique_ptr`和`shared_ptr`不同，某个时刻只能有一个`unique_ptr`指向一个给定对象，当`unique_ptr`被销毁时，它所指向的对象也将被销毁。
 
@@ -23,8 +23,6 @@
 除此之外，`unique_ptr`还定义了一个类型转换：
 
 - 从`unique_ptr`到`bool`值的转换：当`unique_ptr`对象指向一个对象时，则为`true`，否则为`false`
-
-
 
 
 

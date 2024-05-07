@@ -1,0 +1,45 @@
+## 一、基本操作
+
+`weak_ptr`类是`shared_ptr`类的伴随类，它指向由一个`shared_ptr`管理的对象，但不控制所指向对象生存期。
+
+如同我们在`shared_ptr`类中所描述的那样，一个`shared_ptr`所指向的控制块包含一个引用计数和一个弱引用计数，前者控制资源内存的生存，后者控制控制块内存的生存，而一个`weak_ptr`只会递增弱引用计数而不会递增引用计数，也就是说当引用计数为 0 时，即使有`weak_ptr`指向对象，对象也还是会被释放，而当弱引用计数为 0 时，控制块内存才会被释放。
+
+它支持的基本操作如下表所示：
+
+| 操作                | 效果                                                         |
+| ------------------- | ------------------------------------------------------------ |
+| `weak_ptr<T> w`     | 空`weak_ptr`可以指向类型为`T`的对象                          |
+| `weak_ptr<T> w(sp)` | 与`shared_ptr sp`指向相同对象的`weak_ptr`。`T`必须能转换为`sp`指向的对象 |
+| `w = p`             | `p`可以是一个`shared_ptr`或一个`weak_ptr`，赋值后`w`与`p`共享对象 |
+| `w.reset()`         | 将`w`置为空                                                  |
+| `w.use_count()`     | 当对象不存在时为 0；当对象存在时，与`w`共享对象的`shared_ptr`的数量 |
+| `w.expired()`       | 若`w.use_count()`为 0，返回`true`，否则返回`false`           |
+| `w.lock()`          | 如果`expired`为`true`，返回一个空`shared_ptr`；否则返回一个指向`w`的对象的`shared_ptr` |
+
+
+
+## 二、操作解析
+
+### 1. 初始化
+
+一个`weak_ptr`只能使用另一个`weak_ptr`对象或`shared_ptr`对象进行初始化，更多情况下使用的是`shared_ptr`进行初始化：
+
+```cpp
+shared_ptr<int> p = make_shared<int>(42);
+weak_ptr<int> wp(p);
+```
+
+
+
+### 2. 访问资源对象
+
+一个`weak_ptr`指向的资源对象可能不存在，所以我们不能直接使用`weak_ptr`直接访问对象，而必须调用`lock`。
+
+它执行的效果是先检查资源对象是否存在，如果存在，`lock`返回一个指向该对象的`shared_ptr`：
+
+```cpp
+if(shared_ptr<int> np = wp.lock()) {	// 如果 np 不为空则条件成立
+    // 在 if 中，np 与 p 共享对象
+}
+```
+
