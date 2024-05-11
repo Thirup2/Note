@@ -1,0 +1,35 @@
+## 一、概述
+
+除了定义拷贝控制成员，管理资源的类通常还定义一个名为`swap`的函数。
+
+对于那些与重排元素顺序的算法一起使用的类，这类算法在需要交换两个元素时会调用`swap`。如果一个类定义了自己的`swap`，那么算法将使用类自定义版本，否则，算法将使用`std::swap`函数。
+
+`swap`函数通常定义为非成员函数，例如：
+
+```cpp
+class HasPtr {
+    friend void swap(HasPtr&, HasPtr&);
+};
+inline void swap(HasPtr &lhs, HasPtr &rhs)
+{
+    using std::swap;
+    swap(lhs.ps, rhs.ps);
+    swap(lhs.i, rhs.i);
+}
+```
+
+
+
+## 二、用于赋值运算符
+
+定义了`swap`的类通常用`swap`来定义它们的赋值运算符，这些运算符使用了一种名为**拷贝并交换**的技术，这种技术将左侧运算对象与右侧运算对象的**一个副本**进行交换：
+
+```cpp
+HasPtr& HasPtr::operator=(HasPtr rhs)
+{
+    swap(*this, rhs);
+    return *this;
+}
+```
+
+> 需要特别注意的是，使用这种技术的拷贝赋值运算符接受的参数不能是一个引用类型。因为这种技术会交换两个运算对象，所以如果是引用，会导致赋值运算符右侧的运算对象也被改变

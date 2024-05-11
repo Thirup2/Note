@@ -1,0 +1,70 @@
+## 一、=default
+
+将构造函数的初始值列表和函数体、赋值运算符的函数体、析构函数的函数体用`=default`代替表示使用编译器生成的合成的版本。
+
+例如：
+
+```cpp
+class Sales_data {
+public:
+    Sales_data() = default;
+    Sales_data(const Sales_data&) = default;
+    Sales_data& operator=(const Sales_data&);
+    ~Sales_data() = default;
+};
+Sales_data& Sales_data::operator=(const Sales_data&) = default;
+```
+
+- `=default`只能用于编译器可合成的函数
+- `=default`的位置在所有的函数定义处
+
+
+
+## 二、阻止函数
+
+对于有些函数，有时我们会想禁用它们例如 IO 库的拷贝操作，特别是编译器可以自动合成的函数，即使不定义它们，它们也能够调用，如果想要禁用它们，需要一些其他的操作。此时有两种解决办法：
+
+### 1. =delete
+
+我们可以将这些函数定义为删除的函数来阻止这些行为，即使用`=delete`代替一个函数的函数体和可能存在的初始值列表。
+
+```cpp
+struct NoCopy {
+    NoCopy() = default;
+    NoCopy(const NoCopy&) = delete;
+    NoCopy &operator=(const NoCopy&) = delete;
+    ~NoCopy() = default;
+};
+```
+
+- `=delete`必须在函数第一次声明处
+- 可以对任何函数指定`=delete`（除了析构函数），其主要用途是禁止拷贝控制成员，但当我们希望引导函数匹配过程时，删除函数有时也是有用的。
+- 析构函数不能是删除的成员
+
+**合成的拷贝控制成员可能是删除的**：
+
+对某些类来说，编译器会将其合成的函数定义为删除的函数：
+
+- 如果类的某个成员的析构函数是删除的或不可访问的，则类的合成析构函数和合成拷贝构造函数被定义为删除的
+- 如果类的某个成员的析构函数是删除的或不可访问的，或是类有一个引用成员没有类内初始化器，或是类有一个`const`成员没有类内初始化器且其类型为显式定义默认构造函数，则该类的默认构造函数被定义为删除的
+
+- 如果类的某个成员的拷贝构造函数是删除的不可访问的，则类的合成拷贝构造函数被定义为删除的。
+- 如果类的某个成员的拷贝赋值运算符是删除的或不可访问的，或是类有一个`const`的或引用成员，则类的合成拷贝赋值运算符被定义为删除的
+
+
+
+### 2. private 函数
+
+可以将想要禁用的函数声明为`private`的来阻止该函数，用户同样无法调用这些函数。
+
+```cpp
+class PrivateCopy {
+    PrivateCopy(const PrivateCopy&);
+    PrivateCopy &operator=(const PrivateCopy&);
+public:
+    PrivateCopy() = default;
+    ~PrivateCopy();
+};
+```
+
+和使用`=delete`的方案不同的是，对于类的友元和成员函数来说，它们仍然可以调用`private`的函数，为了阻止友元和成员函数调用它们，我们将这些函数声明为`private`的，但**并不定义它们**，这样的操作是合法的。
