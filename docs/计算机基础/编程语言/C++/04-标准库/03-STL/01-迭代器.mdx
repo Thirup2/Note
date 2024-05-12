@@ -150,6 +150,36 @@
 
 
 
+#### 移动迭代器
+
+移动迭代器使用的场景比较特殊，使用移动迭代器意味着所有将用移动迭代器指向的内容在进行操作之后对程序来说都应该是有效但可析构的。
+
+通常应用在重新分配容器内存大小时。
+
+**移动迭代器**和插入迭代器一样也是一种迭代器适配器，也就是说需要传入一个普通迭代器然后可以得到一个移动迭代器，通过`make_move_iterator`来获取这个移动迭代器。如：`make_move_iterator(c.begin())`，具体的改变是在解引用操作上，对一个移动迭代器进行解引用操作，将得到一个其指向对象的右值引用。其他操作和原迭代器相同。
+
+移动迭代器通常和`uninitialized_copy`这个泛型算法一起使用，这个函数定义在`<memory>`中。接受一对迭代器参数表示源范围，第三个参数是目标迭代器表示目标位置。其返回值是目标迭代器经过`copy`递增后的值。对于这个算法，如果我们传入普通迭代器也就是解引用为左值引用的迭代器，那么调用的就是对应的拷贝操作，如果传入移动迭代器，那么调用的就是对应的移动操作。
+
+下面是一个例子：
+
+```cpp
+void StrVec::reallocate()
+{
+    auto newcapacity = size() ? 2 * size() : 1;		// 基于当前 size 分配新的 capacity
+    auto first = alloc.allocate(newcapacity);		// 使用 StrVec 的分配器 alloc 分配新的空间并交给指针 first
+    auto last = uninitialized_copy(					// 通过移动迭代器将源空间中的元素“移动”到新空间中并用 last 保存这些元素的末尾位置
+    				make_move_iterator(begin()),
+    				make_move_iterator(end()),
+    				first);
+    free();											// StrVec 的成员函数，释放当前对象管理的内存
+    elements = first;								// 更新管理内存的指针指向新空间
+    first_free = last;								// 更新指向暂未使用的空间的指针
+    cap = elements + newcapacity;					// 使 cap 指向整个空间的尾后位置
+}
+```
+
+
+
 ### 2. 按功能分类
 
 迭代器可以按功能分为 5 类，分别是输入迭代器、输出迭代器、前向迭代器、双向迭代器和随机访问迭代器。
