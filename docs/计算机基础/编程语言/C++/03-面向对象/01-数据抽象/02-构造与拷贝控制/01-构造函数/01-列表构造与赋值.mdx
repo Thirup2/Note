@@ -1,0 +1,57 @@
+## 一、概述
+
+构造函数定义了类类型对象初始化的方式，对于接受单个参数的且非`explicit`的构造函数，它们可以调用`=`进行**拷贝初始化**；而默认构造函数支持其可以进行**默认初始化**；除了默认初始化之外的其他构造函数都接受以`()`的形式进行**直接初始化**（包括可以进行拷贝初始化的构造函数）。
+
+除了以上初始化形式之外，还可以定义**列表初始化**对应的构造函数。
+
+
+
+## 二、列表构造函数
+
+如果定义了一个接受`initializer_list`参数的构造函数，那么这个类型就可以使用列表初始化。
+
+```cpp
+class list_ini {
+    vector<int> ivec;
+public:
+    list_ini(initializer_list<int> il)
+    {
+        auto beg = il.begin();
+        auto end = il.end();
+        while(beg != end) {
+            ivec.push_back(*beg);
+            ++beg;
+        }
+    }
+};
+```
+
+这样，我们就能够在这个类型上使用列表初始化了：
+
+```cpp
+list_ini li{1, 2, 3, 4};
+list_ini li = {1, 2, 3, 4};
+```
+
+列表初始化的拷贝形式和其他构造函数的拷贝形式不太一样，列表初始化的拷贝形式并不调用拷贝或移动构造函数进行，即使将拷贝构造函数和移动构造函数都定义为`=delete`，以上两种初始化形式仍然可用，这对其他的单参数构造函数是不可行的。
+
+当然，仍然可以将这个构造函数定义为`explicit`的从而阻止使用拷贝形式的初始化方式。
+
+
+
+## 三、列表赋值运算符 {#list_assign}
+
+除了拷贝和移动赋值运算符之外，还可以定义其他赋值运算符，其中之一就是列表赋值运算符，它接受一个`initializer_list`类型的参数，并返回其左侧运算对象的引用：
+
+```cpp
+StrVec &StrVec::operator=(initializer_list<string> il)
+{
+    auto data = alloc_n_copy(il.begin(), il.end());
+    free();
+    elements = data.first;
+    first_free = cap = data.second;
+    return *this;
+}
+```
+
+和另外两个赋值运算符不同的是，列表赋值运算符不用检查自赋值的情况。
