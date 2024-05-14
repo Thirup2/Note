@@ -1,0 +1,136 @@
+---
+title: function 类型
+---
+
+## 一、简介
+
+C++ 中有几种可调用对象：函数、函数指针、lambda 表达式、bind 创建的对象以及重载了函数调用运算符的类。
+
+而每种可调用对象的类型可能都不同。例如，每个 lambda 表达式有它自己唯一的（未命名）类类型；函数即函数指针的类型则由其返回值类型和实参类型决定，等等。
+
+虽然可调用对象的类型可能不同，但它们的调用形式很有可能相同。假设我现在就有一批调用形式相同但类型不同的可调用对象，它们执行整数之间的`+`、`-`、`*`、`/`和`%`操作，假设其中某些操作定义如下：
+
+```cpp
+// 普通函数
+int add(int i, int j) { return i + j; }
+// lambda
+auto mod = [](int i, int j) { return i % j; };
+// 重载了函数调用运算符的类
+struct divide {
+    int operator() (int denominator, int divisor) {
+        return denominator / divisor;
+    }
+};
+```
+
+它们的调用形式都是`int(int, int)`，现在如果我想做一个计算器应用，首先需要将这些可调用对象做成一个函数表，根据用户输入的运算匹配对应的可调用对象。假设通过`map`构建这样的函数表，对于普通函数`add`，我们可以建立下面这样的`map`对象：
+
+```cpp
+map<string, int(*)(int, int)> binops;
+```
+
+我们可以将`add`插入到这个表里：
+
+```cpp
+binops.insert({"+", add});
+```
+
+但我们却不能将除了`add`之外的其他可调用对象传入这个`map`表中，因为它们的类型并不是`int(*)(int, int)`，这是一个函数指针类型。
+
+为了解决这种现象，标准库提供了一个名为`function`的标准库类型作为中间层，`function`类型将所有调用形式相同的可调用对象转换成同一种`function`类型，从而实现**可调用对象类型的统一**。
+
+
+
+## 二、function 与基本操作
+
+`function`类型定义在头文件`<functional>`中，它是一个类模板，实例化需要提供函数的调用形式，例如：
+
+```cpp
+function<int(int, int)> f;
+```
+
+其支持的具体操作如下表所示：
+
+### 1. 类型成员
+
+当一个`function`类型定义为`function<T>`时类型成员如下：
+
+| 类型                                                         | 含义                                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `result_type`                                                | 该`function`类型的可调用对象返回的类型                       |
+| `argument_type`<br />`first_argument_type`<br />`second_argument_type` | 当`T`有一个或两个实参时定义的类型。<br />如果`T`只有一个实参，则`argument_type`是该类型的同义词；<br />如果`T`有两个实参，则`first_argument_type`和`second_argument_type`分别代表两个实参的类型 |
+
+
+
+### 2. 基本操作
+
+| 操作                      | 效果                                                         |
+| ------------------------- | ------------------------------------------------------------ |
+| `function<T> f;`          | `f`是一个用来存储可调用对象的空`function`。<br />这些可调用对象的调用形式应该与函数类型`T`相同 |
+| `function<T> f(nullptr);` | 显式地构造一个空`function`                                   |
+| `function<T> f(obj);`     | 在`f`中存储可调用对象`obj`的副本                             |
+| `f(args)`                 | 调用`f`中的对象，参数是`args`                                |
+
+
+
+### 3. 类型转换
+
+`function`定义了一个`function<T>`类型对象到`bool`类型的转换：
+
+| 转换类型       | 描述                                    |
+| -------------- | --------------------------------------- |
+| `bool`（隐式） | 当`f`含有一个可调用对象时为真；否则为假 |
+
+
+
+### 案例
+
+在有了`function`之后，我们想要的`map`就可以像下面这样定义了：
+
+```cpp
+map<string, function<int(int, int)>> binops;
+```
+
+所有调用形式为`int(int, int)`的可调用对象现在都可以添加到这个`map`中了：
+
+```cpp
+map<string, function<int(int, int)>> binops {
+    {"+", add},									// 函数指针
+    {"-", std::minus<int>()},					// 标准库函数对象
+    {"*", [](int i, int j) { return i * j; }},	// 未命名 lambda
+    {"/", divide()},							// 用户定义的函数对象
+    {"%", mod}									// 已命名 lambda
+};
+```
+
+
+
+## 三、function 与重载函数
+
+当我们有一组重载函数时，此时如果要将其中一个存入`function`类型的对象中时：
+
+```cpp
+int add(int i, int j) { return i + j; }
+double add(double b, double c) { return b + c; }
+
+// error-next-line
+function<int(int, int)> f(add);		// 错误：无法直接传入
+```
+
+此时，`add`无法直接传入`function<int(int, int)>`对象`f`，因为在存入之前`function`并不会进行函数匹配，也就无法判断初始化使用的函数是哪一个`add`，从而造成**二义性**的问题。
+
+**解决方案**：
+
+解决该问题的方法之一是使用函数指针：
+
+```cpp
+int (*fp)(int, int) = add;
+function<int(int, int)> f(fp);
+```
+
+第二种方法是使用 lambda：
+
+```cpp
+function<int(int, int)> f([](int a, int b) { return add(a, b); });
+```
+

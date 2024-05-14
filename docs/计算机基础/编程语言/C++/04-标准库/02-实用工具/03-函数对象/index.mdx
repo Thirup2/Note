@@ -1,0 +1,44 @@
+---
+title: 函数对象
+---
+
+## 一、标准库函数对象
+
+标准库定义了一组表示算术运算符、关系运算符和逻辑运算符的类，每个类分别定义了一个执行命名操作的调用运算符。
+
+例如，`plus`类定义了一个函数调用运算符用于对一对运算对象执行`+`的操作；`modules`类定义了一个调用运算符执行二元的`%`操作；`equal_to`类执行`==`，等等。
+
+这些类型定义在头文件`<functional>`中，如下表所示：
+
+| 算术               | 关系                  | 逻辑                |
+| ------------------ | --------------------- | ------------------- |
+| `plus<Type>`       | `equal_to<Type>`      | `logical_and<Type>` |
+| `minus<Type>`      | `not_equal_to<Type>`  | `logical_or<Type>`  |
+| `multiplies<Type>` | `greater<Type>`       | `logical_not<Type>` |
+| `divides<Type>`    | `greater_equal<Type>` |                     |
+| `modules<Type>`    | `less<Type>`          |                     |
+| `negate<Type>`     | `less_equal<Type>`    |                     |
+
+它们都是函数对象的类型，如果要调用对应的功能，需要先创建对应类型的对象：
+
+```cpp
+plus<int> plusTwoInt;
+int a = plusTwoInt(1, 2);
+// 或者直接使用临时对象
+int b = plus<int>()(1, 2);	// plus<int>()部分是创建临时对象的部分，()不能忘掉
+```
+
+
+
+## 二、在算法中使用标准库函数对象
+
+这些定义好的函数对象一大用途就是作为可调用对象传递给算法，而无需再对这些简单操作每次都将具体实现写出来。
+
+例如，默认情况下排序算法使用`operator<`将序列按照升序排列。如果要执行降序排列，如果不使用标准库函数对象，我们几乎都需要重新写一份函数再传入。而使用标准库函数对象就可以简化这些步骤：
+
+```cpp
+vector<string> svec{/* 初始化 */};
+sort(svec.begin(), svec.end(), greater<string>());		// 传入一个 greater<string>类型的未命名对象，()不能少
+```
+
+需要注意的是，标准库规定其函数对象对于指针也同样适用。
