@@ -60,7 +60,7 @@ const config = {
       }),
     ],
   ],
-  
+
   stylesheets: [
     {
       href: 'https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css',
@@ -133,16 +133,38 @@ const config = {
           {
             type: 'dropdown',
             position: 'left',
+            label: '计算机基础',
+            items: [
+              {
+                type: 'docSidebar',
+                sidebarId: 'Arch',
+                label: '计算机组成原理',
+              },
+            ],
+          },
+          {
+            type: 'dropdown',
+            position: 'left',
             label: 'Web',
             items: [
               {
                 type: 'docSidebar',
-                sidebarId: 'Web_Basic',
-                label: 'Web 基础',
+                sidebarId: 'HTML',
+                label: 'HTML',
+              },
+              {
+                type: 'docSidebar',
+                sidebarId: 'CSS',
+                label: 'CSS',
+              },
+              {
+                type: 'docSidebar',
+                sidebarId: 'JS',
+                label: 'JavaScript',
               },
             ],
           },
-          
+
           {
             href: 'https://github.com/Thirup2/Note',
             label: 'Github',
@@ -236,7 +258,7 @@ const config = {
           {
             className: 'code-block-error-line',
             line: 'error-next-line',
-            block: { start: 'error-start', end: 'error-end'},
+            block: { start: 'error-start', end: 'error-end' },
           },
         ],
       },
