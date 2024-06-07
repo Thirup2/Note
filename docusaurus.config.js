@@ -137,6 +137,11 @@ const config = {
             items: [
               {
                 type: 'docSidebar',
+                sidebarId: 'RISC_V',
+                label: 'RISC-V 汇编语言',
+              },
+              {
+                type: 'docSidebar',
                 sidebarId: 'Arch',
                 label: '计算机组成原理',
               },
